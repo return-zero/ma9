@@ -80,6 +80,8 @@ Vagrant.configure("2") do |config|
     chef.roles_path = "./chef-repo/roles"
     chef.data_bags_path = "./chef-repo/data_bags"
     chef.add_role "web"
+  end
+
   #
   #   # You may also specify custom JSON attributes:
   #   chef.json = { :mysql_password => "foo" }
