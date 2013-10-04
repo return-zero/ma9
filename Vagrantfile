@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -31,7 +31,9 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "./edison", "/vagrant_data"
+  config.vm.synced_folder "./edison", "/edison", \
+    :create => true, :owner => 'vagrant', :group => 'vagrant', \
+    :extra => 'dmode=777,fmode=666'
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -79,8 +81,18 @@ Vagrant.configure("2") do |config|
     chef.cookbooks_path = "./chef-repo/cookbooks"
     chef.roles_path = "./chef-repo/roles"
     chef.data_bags_path = "./chef-repo/data_bags"
+    chef.add_recipe "yum::remi"
     chef.add_role "web"
   end
+
+  config.vm.provision :shell, inline: <<-EOT
+    #
+    # composer
+    #
+    cd /edison/
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar install
+  EOT
 
   #
   #   # You may also specify custom JSON attributes:
