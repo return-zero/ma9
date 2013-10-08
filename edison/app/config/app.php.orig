@@ -65,7 +65,11 @@ return array(
 	|
 	*/
 
+<<<<<<< HEAD
+	'key' => 'bd9W2ZPVbGQR4zXHcDCyH0t7vpB9aUiF',
+=======
 	'key' => 'ZxoC9LKyo2tgXq0rwWlmdX77PwyWPuB0',
+>>>>>>> d3c3337e4f80d701ae19d0d98527c4e132362c15
 
 	/*
 	|--------------------------------------------------------------------------
