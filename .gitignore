@@ -2,3 +2,4 @@ chef-repo
 ma9
 .vagrant
 .gitignore
+*.orig
