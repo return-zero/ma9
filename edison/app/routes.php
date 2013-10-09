@@ -14,3 +14,4 @@
 Route::get('/', 'HomeController@showIndex');
 Route::get('new', 'HomeController@showNew');
 Route::post('new', 'HomeController@create');
+Route::get('items/{id}', 'ItemController@showItem');

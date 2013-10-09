@@ -5,34 +5,27 @@
 @section('content')
 <div class="container hero-unit">
   <h1>投稿する</h1>
-  <form role="form" method="POST" action="">
+  {{ Form::open(array('url' => '/new')) }}
     <div class="form-group">
-      <label for="title">title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+      {{ Form::label('title', 'title') }}
+      {{ Form::text('title', '', array('class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter title')) }}
     </div>
     <div class="form-group">
-      <label for="content">content</label>
-      <textarea class="form-control" rows="5" id="content" name="content" placeholder="Enter content"></textarea>
+      {{ Form::label('content', 'content') }}
+      {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '5', 'id' => 'content', 'placeholder' => 'Enter content')) }}
     </div>
     Category
-    <select class="form-control" name="category">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+    <select class="form-control" name="category_id">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
     </select>
     Tags
-    <input type="text" class="form-control">
-    <label class="checkbox-inline">
-      <input type="checkbox" name="tags[]"> ロックする
-    </label>
-    <input type="text" class="form-control">
-    <label class="checkbox-inline">
-      <input type="checkbox" name="tags[]"> ロックする
-    </label>
+    {{ Form::text('tags[]', '', array('class' => 'form-control')) }}
+    {{ Form::text('tags[]', '', array('class' => 'form-control')) }}
     <br />
     <button type="submit" class="btn btn-default">Submit</button>
-  </form>
+  {{ Form::close() }}
 </div>
 @stop
