@@ -28,7 +28,7 @@ class HomeController extends BaseController {
   public function create()
   {
     $data = Input::all();
-    DB::table('items')->insert(
+    $item_id = DB::table('items')->insertGetId(
       array(
         'category_id' => $data['category_id'],
         'title' => $data['title'],
@@ -37,5 +37,21 @@ class HomeController extends BaseController {
         'updated_at' => date("Y-m-d H:i:s"),
       )
     );
+    foreach ($data['tags'] as $tag) {
+      $result = DB::table('tags')->where('content', $tag)->get();
+      if (empty($result)) {
+        $tag_id = DB::table('tags')->insertGetId(
+          array(
+            'content' => $tag
+          )
+        );
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $tag_id
+          )
+        );
+      }
+    }
   }
 }

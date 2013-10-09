@@ -9,5 +9,8 @@
   <p>content: {{ $content }}</p>
   <p>created_at: {{ $created_at }}</p>
   <p>updated_at: {{ $updated_at }}</p>
+  @foreach ($tags as $tag)
+    <p>tags: {{ $tag }}</p>
+  @endforeach
 </div>
 @stop
