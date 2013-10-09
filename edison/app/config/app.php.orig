@@ -65,7 +65,11 @@ return array(
 	|
 	*/
 
+<<<<<<< HEAD
+	'key' => 'bd9W2ZPVbGQR4zXHcDCyH0t7vpB9aUiF',
+=======
 	'key' => 'ZxoC9LKyo2tgXq0rwWlmdX77PwyWPuB0',
+>>>>>>> d3c3337e4f80d701ae19d0d98527c4e132362c15
 
 	/*
 	|--------------------------------------------------------------------------
@@ -113,7 +117,6 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Philo\Twitter\TwitterServiceProvider',
 
 	),
 
@@ -179,7 +182,6 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Twitter' => 'Philo\Twitter\Facades\Twitter',
 
 	),
 
