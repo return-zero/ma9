@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@showIndex');
+Route::get('new', 'HomeController@showNew');
+Route::post('new', 'HomeController@create');

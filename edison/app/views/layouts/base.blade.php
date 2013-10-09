@@ -22,7 +22,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          {{ HTML::link('#', 'えじそん', array('class'=>'navbar-brand')) }}
+          {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
