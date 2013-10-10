@@ -11,9 +11,12 @@
 |
 */
 
+Route::group(array('before' => 'auth') ,function() {
+  Route::get('new', 'HomeController@showNew');
+  Route::post('new', 'HomeController@create');
+});
+
 Route::get('/', 'HomeController@showIndex');
-Route::get('new', 'HomeController@showNew');
-Route::post('new', 'HomeController@create');
 Route::get('items/{id}', 'ItemController@showItem');
 Route::get('login', function() {
 	if (Auth::check()) {
@@ -52,4 +55,8 @@ Route::get('login/callback', function() {
 Route::get('logout', function() {
    Auth::logout();
    return Redirect::to('/')->with('message', 'ログアウトしました。');
+});
+
+Route::filter('auth', function() {
+  if (!Auth::check()) return Redirect::to('/');
 });
