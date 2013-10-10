@@ -31,6 +31,7 @@ class HomeController extends BaseController {
     $item_id = DB::table('items')->insertGetId(
       array(
         'category_id' => $data['category_id'],
+        'user_id' => Auth::user()->id,
         'title' => $data['title'],
         'content' => $data['content'],
         'created_at' => date("Y-m-d H:i:s"),

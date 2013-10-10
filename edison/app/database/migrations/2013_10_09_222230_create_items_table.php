@@ -15,6 +15,7 @@ class CreateItemsTable extends Migration {
       Schema::create('items', function($table) {
         $table->increments('id');
         $table->integer('category_id');
+        $table->integer('user_id');
         $table->string('title', 120);
         $table->string('content', 255);
         $table->datetime('created_at');
