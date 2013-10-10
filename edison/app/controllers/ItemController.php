@@ -2,9 +2,10 @@
 
 class ItemController extends BaseController {
 
-  public function showItem($id)
+  public function showItem($screen_name, $id)
   {
-    $data = DB::table('items')->where('id', '=', $id)->get();
+    $user = DB::table('users')->where('screen_name', '=', $screen_name)->get();
+    $data = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user[0]->id)->get();
     $tagmaps = DB::table('tagmaps')->where('item_id', $data[0]->id)->get();
     $tags = array();
     foreach ($tagmaps as $tagmap) {
