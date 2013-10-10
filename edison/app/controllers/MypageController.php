@@ -1,13 +1,11 @@
 <?php
 
-class UserController extends BaseController {
+class MypageController extends BaseController {
 
-  public function showUser($screen_name)
+  public function showMypage()
   {
-    
-    $user = User::where('screen_name', '=', $screen_name)->get();
-
-    
+    /*
+    $user = DB::table('users')->where('screen_name', '=', $screen_name)->get();
     $twitter_id = $user[0]->id;
 
     try{
@@ -22,21 +20,12 @@ class UserController extends BaseController {
         'desc' => $timeline[0]["user"]["description"]
       );
 
-      return View::make('user', $twitter_profile);
 
     }  catch(Exception $e) {
       echo $e->getMessage();
     }
+    */
     
-    
-    //$twitter_profile = User::getTwitterInfo($screen_name);
-    //var_dump($twitter_profile);exit;
-    return View::make('user', $twitter_profile);
-  }
-
-  public function showMypage()
-  {
-    echo "hogeeeeee";
   }
 
 

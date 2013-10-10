@@ -19,6 +19,8 @@ Route::group(array('before' => 'auth') ,function() {
 Route::get('/', 'HomeController@showIndex');
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
 Route::get('{screen_name}', 'UserController@showUser');
+Route::get('mypage', 'UserController@showMypage');
+
 Route::get('login', function() {
 	if (Auth::check()) {
 		return Redirect::to('/')->with('message', 'ログイン済みです。');
