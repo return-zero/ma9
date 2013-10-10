@@ -49,6 +49,8 @@ Route::get('login/callback', function() {
 
 		Auth::login($user);
 
+		//Session::put('screen_name', $user->screen_name);
+
 		return Redirect::to('/');
 	} else {
 		return Redirect::to('login')->with('message', 'Twitter認証できませんでした。');
