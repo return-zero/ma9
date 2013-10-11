@@ -4,7 +4,7 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
-    $user = DB::table('users')->where('screen_name', '=', $screen_name)->get();
+    $user = User::where('users')->where('screen_name', '=', $screen_name)->get();
 
     //if (isset($user[0])) {
     $twitter_id = $user[0]->id;
@@ -64,6 +64,12 @@ class UserController extends BaseController {
     } else {
       return Redirect::to('login')->with('message', 'Twitter認証できませんでした。');
     }
+  }
+
+  public function getLogout()
+  {
+    Auth::logout();
+    return Redirect::to('/')->with('message', 'ログアウトしました。');
   }
 
 }

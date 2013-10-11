@@ -29,6 +29,7 @@ Route::get('login', 'UserController@getLogin');
 // 		return Redirect::to('/')->with('message', 'ログイン済みです。');
 // 	}
 // 	$tokens = Twitter::oAuthRequestToken();
+//   var_dump($tokens);exit;
 // 	Twitter::oAuthAuthorize(array_get($tokens, 'oauth_token'));
 // 	die;
 // });
@@ -60,11 +61,12 @@ Route::get('login/callback', 'UserController@getCallback');
 // 	}
 // });
 
+Route::get('logout', 'UserController@getLogout');
 
-Route::get('logout', function() {
-   Auth::logout();
-   return Redirect::to('/')->with('message', 'ログアウトしました。');
-});
+// Route::get('logout', function() {
+//    Auth::logout();
+//    return Redirect::to('/')->with('message', 'ログアウトしました。');
+// });
 
 Route::get('{screen_name}', 'UserController@showUser');
 
