@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('header')
   <title>
-    @if {{ Auth::user()->screen_name === $screen_name }}
+    @if ({{ Auth::user()->screen_name === $screen_name }})
       My Page
     @else
       About {{ $screen_name }}
