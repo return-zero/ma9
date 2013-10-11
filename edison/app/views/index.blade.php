@@ -8,12 +8,13 @@
   <p>これはapp/views/hello.blade.phpファイルです</p>
 </div>
 
-@if (Auth::check())
+ @if (Auth::check())
   {{ Auth::user()->screen_name }}ログイン中
   <a href="/logout">ログアウト</a>
+  <a href="/{{ Auth::user()->screen_name }}">マイページやで</a>
 @else
   ログインしてまへん
   <a href="/login">ログイン</a>
 @endif
-  <a href="/{{ Auth::user()->screen_name }}">マイページやで</a>
+  
 @stop
