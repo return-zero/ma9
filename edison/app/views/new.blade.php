@@ -22,10 +22,11 @@
       <option value="4">4</option>
     </select>
     <h3>Tags</h3>
-    <div class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></div>
-    <div class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></div>
-    {{ Form::text('tags[]', '', array('class' => 'form-control')) }}
-    {{ Form::text('tags[]', '', array('class' => 'form-control')) }}
+    <div id="tag-form-wrap">
+	    <div>{{ Form::text('tags[]', '', array('class' => 'form-control')) }}</div>
+	    <div>{{ Form::text('tags[]', '', array('class' => 'form-control')) }}</div>
+	    <div class="btn btn-default" id="tag-plus"><span class="glyphicon glyphicon-plus"></span> タグを追加する</div>
+    </div>
     <br />
     <button type="submit" class="btn btn-default">Submit</button>
   {{ Form::close() }}
