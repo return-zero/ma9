@@ -1,10 +1,16 @@
 @extends('layouts.base')
 @section('header')
-  <title></title>
+  <title>
+    @if {{ Auth::user()->screen_name === $screen_name }}
+      My Page
+    @else
+      About {{ $screen_name }}
+    @endif
+  </title>
 @stop
 @section('content')
 <div class="container hero-unit">
-  <h1>About {{ $screen_name }}</h1>
+  <h1>My Page</h1>
   <p>screen_name: {{ $screen_name }}</p>
   <p>name: {{ $name }}</p>
   <p>description: {{ $desc }}</p>

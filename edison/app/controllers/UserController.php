@@ -19,13 +19,10 @@ class UserController extends BaseController {
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
         'desc' => $timeline[0]["user"]["description"]
-        );
+      );
 
-      if (Auth::user()->screen_name === $screen_name) {
-        return View::make('me', $twitter_profile);
-      } else {
-        return View::make('other', $twitter_profile); 
-      }
+      return View::make('user', $twitter_profile); 
+      
 
     }  catch(Exception $e) {
       echo $e->getMessage();
@@ -48,7 +45,7 @@ class UserController extends BaseController {
     $token = Input::get('oauth_token');
     $verifier = Input::get('oauth_verifier');
     $accessToken = Twitter::oAuthAccessToken($token, $verifier);
-    
+
     if (isset($accessToken['user_id'])) {
       $user_id = $accessToken['user_id'];
       $user = User::find($user_id);
