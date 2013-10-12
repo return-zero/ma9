@@ -74,8 +74,6 @@
     </div>
   </div>
 </div>
-
 <button type="submit" class="btn btn-default">Submit</button>
 {{ Form::close() }}
-
 @stop

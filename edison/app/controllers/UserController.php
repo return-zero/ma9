@@ -4,9 +4,8 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
-    $user = User::where('users')->where('screen_name', '=', $screen_name)->get();
+    $user = User::where('screen_name', '=', $screen_name)->get();
 
-    //if (isset($user[0])) {
     $twitter_id = $user[0]->id;
 
     try {
@@ -27,7 +26,6 @@ class UserController extends BaseController {
     }  catch(Exception $e) {
       echo $e->getMessage();
     }
-    // }
   }
 
   public function getLogin()
