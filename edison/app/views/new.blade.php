@@ -5,7 +5,7 @@
 @section('content')
 <div class="container hero-unit">
   <h1>投稿する</h1>
-  {{ Form::open(array('url' => '/new')) }}
+  {{ Form::open(array('url' => 'new', 'method' => 'GET')) }}
     <div class="form-group">
       <h3>{{ Form::label('title', 'title') }}</h3>
       {{ Form::text('title', '', array('class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter title')) }}

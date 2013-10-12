@@ -13,4 +13,8 @@
     <p>tags: {{ $tag }}</p>
   @endforeach
 </div>
+{{ Form::open(array('url' => "$screen_name/items/$id/favorite", 'method' => 'POST')) }}
+  {{ Form::hidden('id', $id) }}
+  <button type="submit" class="btn btn-default">Fav</button>
+{{ Form::close() }}
 @stop
