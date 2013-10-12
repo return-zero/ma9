@@ -15,11 +15,12 @@ class UserController extends BaseController {
       $timeline = Twitter::statusesUserTimeline($twitter_id);
       
       $items = $this->showUserItems($screen_name);
-      
+            
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
         'desc' => $timeline[0]["user"]["description"],
+        'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items
       );
 
