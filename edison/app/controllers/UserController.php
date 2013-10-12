@@ -14,10 +14,13 @@ class UserController extends BaseController {
 
       $timeline = Twitter::statusesUserTimeline($twitter_id);
       
+      $items = $this->showUserItems($screen_name);
+      
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
-        'desc' => $timeline[0]["user"]["description"]
+        'desc' => $timeline[0]["user"]["description"],
+        'items' => $items
       );
 
       return View::make('user', $twitter_profile); 
@@ -26,6 +29,22 @@ class UserController extends BaseController {
     }  catch(Exception $e) {
       echo $e->getMessage();
     }
+  }
+  
+  public function showUserItems($screen_name)
+  {
+    $user = User::where('screen_name','=',$screen_name)->first();
+    $items = Item::where('user_id','=',$user->id)->get();
+    $results = array();
+    foreach ($items as $item) {
+      $results[] = array(
+        'title' => $item->title,
+        'content' => $item->content,
+        'created_at' => $item->created_at,
+        'updated_at' => $item->updated_at
+      );
+    }
+    return $results;
   }
 
   public function getLogin()

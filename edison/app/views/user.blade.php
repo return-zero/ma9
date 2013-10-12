@@ -14,5 +14,8 @@
   <p>screen_name: {{ $screen_name }}</p>
   <p>name: {{ $name }}</p>
   <p>description: {{ $desc }}</p>
+  @foreach ($items as $item)
+    <p>items: {{ $item['title'] }}</p>
+  @endforeach
 </div>
 @stop
