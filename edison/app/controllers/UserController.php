@@ -4,13 +4,13 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
-    $user = User::where('screen_name', '=', $screen_name)->get();
+    $user = User::where('screen_name', '=', $screen_name)->first();
 
-    $twitter_id = $user[0]->id;
+    $twitter_id = $user->id;
 
     try {
-      Twitter::setOAuthToken($user[0]->oauth_token);
-      Twitter::setOAuthTokenSecret($user[0]->oauth_token_secret);
+      Twitter::setOAuthToken($user->oauth_token);
+      Twitter::setOAuthTokenSecret($user->oauth_token_secret);
 
       $timeline = Twitter::statusesUserTimeline($twitter_id);
       
