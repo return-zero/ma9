@@ -74,13 +74,6 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-<script src="js/add_tagform.js"></script>
-=======
-
 <button type="submit" class="btn btn-default">Submit</button>
 {{ Form::close() }}
-
->>>>>>> d7e6ab7c86c19c1763d9872983d3a59bf7b36a75
 @stop
-
