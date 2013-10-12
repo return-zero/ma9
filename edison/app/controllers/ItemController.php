@@ -20,4 +20,15 @@ class ItemController extends BaseController {
     );
     return View::make('item', $item);
   }
+
+  public function delete($name,$id) {
+    $user = User::where('screen_name', '=', $name)->first();
+    $item = Item::find($id);
+
+    if ($user->id == $item->user_id) {
+      Item::destroy($id);
+    } else {
+      return Redirect::to('/');      
+    }
+  }
 }
