@@ -11,14 +11,14 @@
 |
 */
 
-Route::group(array('before' => 'auth') ,function() {
+//Route::group(array('before' => 'auth') ,function() {
   Route::get('new', 'HomeController@showNew');
   Route::post('new', 'HomeController@create');
 
-  Route::post('{screen_name}/{id}/delete', 'ItemController@delete');
+  Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
   //Route::get('{screen_name}', 'UserController@showUser');
 
-});
+//});
 
 Route::get('/', 'HomeController@showIndex');
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
@@ -71,9 +71,3 @@ Route::get('logout', 'UserController@getLogout');
 // });
 
 Route::get('{screen_name}', 'UserController@showUser');
-
-
-
-Route::filter('auth', function() {
-  if (!Auth::check()) return Redirect::to('/');
-});
