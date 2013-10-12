@@ -48,6 +48,29 @@
 </div>
 
 <div class="row">
+	{{ Form::open(array('url' => "items/$id/comment/new", 'method'=>'post')) }}
+		<div class="row">
+		  <div class="col-lg-3">
+		    <h3>Comment</h3>
+		  </div>
+		  <div class="col-lg-9">
+		    <div class="form-group">
+		      {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5', 'placeholder' => 'Enter comment')) }}
+		    </div>
+		  </div>
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	{{ Form::close() }}
+	<h3>コメント</h3>
+	<div class="comments">
+		@foreach ($comments as $comment)
+			<div class="comment">
+				<div class="col-lg-12">{{ $comment->created_at}}</div>
+				<div class="col-lg-4">{{ $comment->user_id }}</div>
+				<div class="col-lg-8">{{ $comment->comment }}</div>
+			</div>
+		@endforeach
+	</div>
   <h3>コメント</h3>
   <div class="comment">
   </div>
