@@ -42,4 +42,13 @@ class ItemController extends BaseController {
       )
     );
   }
+
+  public function stargazers($screen_name, $id) {
+    $stargazers = Favmap::where('item_id', '=', 2)->get();
+    $users = array();
+    foreach ($stargazers as $stargazer) {
+      $users['ids'][] = $stargazer->user_id;
+    }
+    return View::make('stargazers', $users);
+  }
 }
