@@ -52,6 +52,13 @@ class HomeController extends BaseController {
             'tag_id' => $tag_id
           )
         );
+      } else {
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $result[0]->id
+          )
+        );
       }
     }
   }

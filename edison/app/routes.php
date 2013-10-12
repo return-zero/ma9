@@ -16,14 +16,12 @@
   Route::post('new', 'HomeController@create');
 
   Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
-  //Route::get('{screen_name}', 'UserController@showUser');
+  Route::post('{screen_name}/items/{id}/favorite', 'ItemController@favorite');
 
 //});
 
 Route::get('/', 'HomeController@showIndex');
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
-//Route::get('{screen_name}', 'UserController@showUser');
-
 Route::get('login', 'UserController@getLogin');
 
 // Route::get('login', function() {

@@ -3,9 +3,7 @@
   <title>new</title>
 @stop
 @section('content')
-
-
-{{ Form::open(array('url' => '/new')) }}
+{{ Form::open(array('url' => 'new', 'method' => 'GET')) }}
 
 <div class="row">
   <div class="col-lg-3">

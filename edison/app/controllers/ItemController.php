@@ -12,16 +12,18 @@ class ItemController extends BaseController {
       $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
     }
     $item = array(
+      'id' => $data[0]->id,
       'title' => $data[0]->title,
       'content' => $data[0]->content,
       'created_at' => $data[0]->created_at,
       'updated_at' => $data[0]->updated_at,
-      'tags' => $tags
+      'tags' => $tags,
+      'screen_name' => $screen_name
     );
     return View::make('item', $item);
   }
 
-  public function delete($name,$id) {
+  public function delete($name, $id) {
     $user = User::where('screen_name', '=', $name)->first();
     $item = Item::find($id);
 
@@ -30,5 +32,14 @@ class ItemController extends BaseController {
     } else {
       return Redirect::to('/');      
     }
+  }
+
+  public function favorite($screen_name, $id) {
+    DB::table('favmaps')->insert(
+      array(
+        'item_id' => $id,
+        'user_id' => Auth::user()->id
+      )
+    );
   }
 }
