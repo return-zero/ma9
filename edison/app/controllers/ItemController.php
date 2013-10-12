@@ -15,18 +15,19 @@ class ItemController extends BaseController {
     $comments = Comment::where('item_id', '=', $id)->get();
 
     $item = array(
-      'id' => $id,
+      'id' => $data[0]->id,
       'title' => $data[0]->title,
       'content' => $data[0]->content,
       'created_at' => $data[0]->created_at,
       'updated_at' => $data[0]->updated_at,
       'comments' => $comments,
       'tags' => $tags
+      'screen_name' => $screen_name
     );
     return View::make('item', $item);
   }
 
-  public function delete($name,$id) {
+  public function delete($name, $id) {
     $user = User::where('screen_name', '=', $name)->first();
     $item = Item::find($id);
 
@@ -51,5 +52,23 @@ class ItemController extends BaseController {
     $comment->save();
 
     return Redirect::to('/');
+  }
+
+  public function favorite($screen_name, $id) {
+    DB::table('favmaps')->insert(
+      array(
+        'item_id' => $id,
+        'user_id' => Auth::user()->id
+      )
+    );
+  }
+
+  public function stargazers($screen_name, $id) {
+    $stargazers = Favmap::where('item_id', '=', 2)->get();
+    $users = array();
+    foreach ($stargazers as $stargazer) {
+      $users['ids'][] = $stargazer->user_id;
+    }
+    return View::make('stargazers', $users);
   }
 }

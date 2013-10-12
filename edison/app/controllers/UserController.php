@@ -4,20 +4,23 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
-    $user = User::where('screen_name', '=', $screen_name)->get();
+    $user = User::where('screen_name', '=', $screen_name)->first();
 
-    $twitter_id = $user[0]->id;
+    $twitter_id = $user->id;
 
     try {
-      Twitter::setOAuthToken($user[0]->oauth_token);
-      Twitter::setOAuthTokenSecret($user[0]->oauth_token_secret);
+      Twitter::setOAuthToken($user->oauth_token);
+      Twitter::setOAuthTokenSecret($user->oauth_token_secret);
 
       $timeline = Twitter::statusesUserTimeline($twitter_id);
+      
+      $items = $this->showUserItems($screen_name);
       
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
-        'desc' => $timeline[0]["user"]["description"]
+        'desc' => $timeline[0]["user"]["description"],
+        'items' => $items
       );
 
       return View::make('user', $twitter_profile); 
@@ -26,6 +29,22 @@ class UserController extends BaseController {
     }  catch(Exception $e) {
       echo $e->getMessage();
     }
+  }
+  
+  public function showUserItems($screen_name)
+  {
+    $user = User::where('screen_name','=',$screen_name)->first();
+    $items = Item::where('user_id','=',$user->id)->get();
+    $results = array();
+    foreach ($items as $item) {
+      $results[] = array(
+        'title' => $item->title,
+        'content' => $item->content,
+        'created_at' => $item->created_at,
+        'updated_at' => $item->updated_at
+      );
+    }
+    return $results;
   }
 
   public function getLogin()

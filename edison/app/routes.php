@@ -20,13 +20,13 @@
   Route::post('items/{id}/comment/new', 'ItemController@createComment');
   
   //Route::get('{screen_name}', 'UserController@showUser');
+  Route::post('{screen_name}/items/{id}/favorite', 'ItemController@favorite');
 
 //});
 
 Route::get('/', 'HomeController@showIndex');
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
-//Route::get('{screen_name}', 'UserController@showUser');
-
+Route::get('{screen_name}/items/{id}/stargazers', 'ItemController@stargazers');
 Route::get('login', 'UserController@getLogin');
 
 // Route::get('login', function() {
