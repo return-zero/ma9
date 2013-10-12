@@ -16,6 +16,9 @@
   Route::post('new', 'HomeController@create');
 
   Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
+
+  Route::post('items/{id}/comment/new', 'ItemController@createComment');
+  
   //Route::get('{screen_name}', 'UserController@showUser');
 
 //});
