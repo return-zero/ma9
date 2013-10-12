@@ -113,8 +113,7 @@ return array(
     'Illuminate\Validation\ValidationServiceProvider',
     'Illuminate\View\ViewServiceProvider',
     'Illuminate\Workbench\WorkbenchServiceProvider',
-    'Philo\Twitter\TwitterServiceProvider',
-
+	'Philo\Twitter\TwitterServiceProvider',
   ),
 
   /*
@@ -179,7 +178,7 @@ return array(
     'URL'             => 'Illuminate\Support\Facades\URL',
     'Validator'       => 'Illuminate\Support\Facades\Validator',
     'View'            => 'Illuminate\Support\Facades\View',
-    'Twitter' => 'Philo\Twitter\Facades\Twitter',
+	'Twitter' => 'Philo\Twitter\Facades\Twitter',
   ),
 
 );

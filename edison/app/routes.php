@@ -14,6 +14,8 @@
 Route::group(array('before' => 'auth') ,function() {
   Route::get('new', 'HomeController@showNew');
   Route::post('new', 'HomeController@create');
+
+  Route::post('{screen_name}/{id}/delete', 'ItemController@delete');
   //Route::get('{screen_name}', 'UserController@showUser');
 
 });
