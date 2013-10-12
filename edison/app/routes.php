@@ -22,6 +22,7 @@
 
 Route::get('/', 'HomeController@showIndex');
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
+Route::get('{screen_name}/items/{id}/stargazers', 'ItemController@stargazers');
 Route::get('login', 'UserController@getLogin');
 
 // Route::get('login', function() {
