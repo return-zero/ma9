@@ -1,6 +1,8 @@
 chef-repo
 ma9
 edison/public/css
+node_modules
+.sass-cache
 .vagrant
 .gitignore
 *.orig
