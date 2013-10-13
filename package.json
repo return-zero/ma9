@@ -1,0 +1,12 @@
+{
+  "name": "edison",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tsuwatch/ma9.git"
+  },
+  "author": "Wakayama Hyper Creators",
+  "license": "BSD",
+  "gitHead": "57e608c4207bbcfbf4d4ecaf1a1d9dcf96165371",
+  "readmeFilename": "README.md"
+}
