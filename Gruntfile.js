@@ -21,10 +21,21 @@ module.exports = function(grunt) {
       }  
     },
 
+    coffee: {
+      files: {
+          //'edison/public/dev-js/*.js': ['edison/public/coffee/*.coffee']
+          expand: true,
+          flatten: true,
+          src: ['edison/public/coffee/*.coffee'],
+          dest: 'edison/public/dev-js/',
+          ext: '.js'
+        }
+      },
+
     uglify: {
       my_target: {
         files: {
-          'edison/public/js/script.js': ['edison/public/dev-js/*.js']
+          'edison/public/js/app.min.js': ['edison/public/dev-js/*.js']
         }
       }
     },
@@ -35,9 +46,9 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
 
-      javascripts: {
-        files: ['edison/public/dev-js/*.js'],
-        tasks: ['uglify']
+      coffeescript: {
+        files: ['edison/public/coffee/*.coffee'],
+        tasks: ['coffee', 'uglify']
       }
     }
   });
@@ -45,6 +56,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-coffee');  
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
 };
