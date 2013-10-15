@@ -39,9 +39,9 @@
       <h4>ma9</h4>
     </footer>
     @section('js')
-    {{ HTML::script('http://code.jquery.com/jquery-1.9.1.min.js') }}
+    {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
-    {{ HTML::script('js/script.js') }}
+    {{ HTML::script('js/app.min.js') }}
     @show
   </body>
 </html>
