@@ -9,18 +9,18 @@ class UserController extends BaseController {
     $twitter_id = $user->id;
 
     try {
-      //Twitter::setOAuthToken($user->oauth_token);
-      //Twitter::setOAuthTokenSecret($user->oauth_token_secret);
+      Twitter::setOAuthToken($user->oauth_token);
+      Twitter::setOAuthTokenSecret($user->oauth_token_secret);
 
-      //$timeline = Twitter::statusesUserTimeline($twitter_id);
+      $timeline = Twitter::statusesUserTimeline($twitter_id);
       
       $items = $this->showUserItems($screen_name);
             
       $twitter_profile = array(
         'screen_name' => $screen_name,
-        //'name' => $timeline[0]["user"]["name"],
-        //'desc' => $timeline[0]["user"]["description"],
-        //'icon' => $timeline[0]["user"]["profile_image_url"],
+        'name' => $timeline[0]["user"]["name"],
+        'desc' => $timeline[0]["user"]["description"],
+        'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items
       );
 
