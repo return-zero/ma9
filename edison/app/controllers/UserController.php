@@ -49,6 +49,24 @@ class UserController extends BaseController {
     return $results;
   }
 
+  public function showUserStars($screen_name)
+  {
+    $user = User::where('screen_name','=',$screen_name)->first();
+    $star_items_id = array();
+    $fav_lists = Favmap::where('user_id', '=', $user->id)->get();
+    foreach($fav_lists as $fav_list) {
+      $star_items_id[] = $fav_list->item_id; 
+    }
+
+    $star_items = array();
+    foreach($star_items_id as $star_item_id) {
+      $item = Item::where('id', '=', $star_item_id)->first();
+      $star_items[] = $item;
+    }
+    
+    return View::make('stars', $star_items);
+  }
+
   public function getLogin()
   {
     if (Auth::check()) {
