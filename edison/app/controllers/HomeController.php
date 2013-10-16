@@ -22,7 +22,44 @@ class HomeController extends BaseController {
 
   public function showNew()
   {
-    return View::make('new');
+    $categories = Category::all();
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'toho',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18'
+    );
+    $data = array(
+      'categories' => $categories,
+      'names' => $category_names
+    );
+    return View::make('new', $data);
   }
 
   public function create()
@@ -34,6 +71,7 @@ class HomeController extends BaseController {
         'user_id' => Auth::user()->id,
         'title' => $data['title'],
         'content' => $data['content'],
+        'type' => $data['type'],
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s"),
       )

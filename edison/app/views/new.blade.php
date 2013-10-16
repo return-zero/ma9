@@ -32,16 +32,14 @@
     <h3>Type</h3>
   </div>
   <div class="col-lg-9">
-    <div class="checkbox-inline">
-      <label>
-        <input type="checkbox" name="type" value="movie">動画
-      </lavel>
-    </div>
-    <div class="checkbox-inline">
-      <label>
-        <input type="checkbox" name="type" value="illut">イラスト
-      </lavel>
-    </div>
+    <label class="radio-inline">
+      <input type="radio" name="type" id="movie" value="movie">
+      動画
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="type" id="illust" value="illust">
+      イラスト
+    </label>
   </div>
 </div>
 
@@ -51,10 +49,9 @@
   </div>
   <div class="col-lg-9">
     <select class="form-control" name="category_id">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
+      @foreach ($categories as $category)
+        <option value="{{ $category['id'] }}">{{ $names[$category['content']] }}</option>
+      @endforeach
     </select>
   </div>
 </div>

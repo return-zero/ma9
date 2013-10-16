@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration {
         $table->integer('user_id');
         $table->string('title', 120);
         $table->string('content', 255);
+        $table->enum('type', array('movie', 'illust'));
         $table->datetime('created_at');
         $table->datetime('updated_at');
       });

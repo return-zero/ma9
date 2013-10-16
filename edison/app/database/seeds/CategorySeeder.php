@@ -21,7 +21,7 @@ class CategoryTableSeeder extends Seeder {
       array( 'group_category_id' => 2, 'name' => 'lecture'),
       array( 'group_category_id' => 2, 'name' => 'drive'),
       array( 'group_category_id' => 2, 'name' => 'history'),
-      array( 'group_category_id' => 3, 'name' => 'g_politics'),
+      array( 'group_category_id' => 3, 'name' => 'politics'),
       array( 'group_category_id' => 4, 'name' => 'science'),
       array( 'group_category_id' => 4, 'name' => 'tech'),
       array( 'group_category_id' => 4, 'name' => 'handcraft'),
@@ -35,7 +35,7 @@ class CategoryTableSeeder extends Seeder {
       array( 'group_category_id' => 6, 'name' => 'are'),
       array( 'group_category_id' => 6, 'name' => 'diary'),
       array( 'group_category_id' => 6, 'name' => 'other'),
-      array( 'group_category_id' => 7, 'name' => 'g_r18'),
+      array( 'group_category_id' => 7, 'name' => 'r18'),
     );
     $now = date('Y-m-d H:i:s');
     
