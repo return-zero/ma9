@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFavmapsTable extends Migration {
+class CreateStarmapsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,8 +11,8 @@ class CreateFavmapsTable extends Migration {
 	 */
 	public function up()
 	{
-    if (!Schema::hasTable('favmaps')) {
-      Schema::create('favmaps', function ($table) {
+    if (!Schema::hasTable('starmaps')) {
+      Schema::create('starmaps', function ($table) {
         $table->increments('id');
         $table->integer('user_id');
         $table->integer('item_id');
@@ -28,7 +28,7 @@ class CreateFavmapsTable extends Migration {
 	 */
 	public function down()
 	{
-    Schema::dropIfExists('favmaps');
+    Schema::dropIfExists('starmaps');
 	}
 
 }
