@@ -21,8 +21,8 @@ class ItemController extends BaseController {
       'created_at' => $data[0]->created_at,
       'updated_at' => $data[0]->updated_at,
       'comments' => $comments,
-      'tags' => $tags
-      'screen_name' => $screen_name
+      'tags' => $tags,
+      'screen_name' => $screen_name,
     );
     return View::make('item', $item);
   }
