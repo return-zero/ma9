@@ -16,9 +16,9 @@ class ApiController extends BaseController {
     echo json_encode($json_val);
   }
 
-  public function watched()
-  {
-    $login_user_id = Auth::user()->id;
-  }
+  // public function watched()
+  // {
+  //   $login_user_id = Auth::user()->id;
+  // }
 
 }
