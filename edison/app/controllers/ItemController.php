@@ -58,7 +58,8 @@ class ItemController extends BaseController {
     DB::table('favmaps')->insert(
       array(
         'item_id' => $id,
-        'user_id' => Auth::user()->id
+        'user_id' => Auth::user()->id,
+        'watched_flag' => 0
       )
     );
   }
