@@ -12,70 +12,45 @@
 */
 
 //Route::group(array('before' => 'auth') ,function() {
+	
+	/* --------------
+   HomeController
+   -------------- */
   Route::get('new', 'HomeController@showNew');
   Route::post('new', 'HomeController@create');
-
+	
+	/* --------------
+   ItemController
+   -------------- */
   Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
-
   Route::post('/{screen_name}/items/{id}/comment/new', 'ItemController@createComment');
   Route::post('/{screen_name}/items/{id}/comment/delete', 'ItemController@deleteComment');
-
-  Route::post('api/get/notice/num', 'ApiController@getNoticeNum');
-  
-  //Route::get('{screen_name}', 'UserController@showUser');
   Route::post('{screen_name}/items/{id}/favorite', 'ItemController@favorite');
 
 //});
 
+/* --------------
+   ApiController
+   -------------- */
+Route::post('api/get/notice/num', 'ApiController@getNoticeNum');
+
+/* --------------
+   HomeController
+   -------------- */
 Route::get('/', 'HomeController@showIndex');
+
+/* --------------
+   ItemController
+   -------------- */
 Route::get('{screen_name}/items/{id}', 'ItemController@showItem');
 Route::get('{screen_name}/items/{id}/stargazers', 'ItemController@stargazers');
+
+/* --------------
+   UserController
+   -------------- */
 Route::get('login', 'UserController@getLogin');
-
-// Route::get('login', function() {
-// 	if (Auth::check()) {
-// 		return Redirect::to('/')->with('message', 'ログイン済みです。');
-// 	}
-// 	$tokens = Twitter::oAuthRequestToken();
-//   var_dump($tokens);exit;
-// 	Twitter::oAuthAuthorize(array_get($tokens, 'oauth_token'));
-// 	die;
-// });
-
 Route::get('login/callback', 'UserController@getCallback');
-
-// Route::get('login/callback', function() {
-// 	$token = Input::get('oauth_token');
-// 	$verifier = Input::get('oauth_verifier');
-// 	$accessToken = Twitter::oAuthAccessToken($token, $verifier);
-	
-// 	if (isset($accessToken['user_id'])) {
-// 		$user_id = $accessToken['user_id'];
-// 		$user = User::find($user_id);
-// 		if (empty($user)) {
-// 			$user = new User;
-// 			$user->id = $user_id;
-// 		}
-// 		$user->screen_name = $accessToken['screen_name'];
-// 		$user->oauth_token = $accessToken['oauth_token'];
-// 		$user->oauth_token_secret = $accessToken['oauth_token_secret'];
-// 		$user->save();
-
-// 		Auth::login($user);
-
-// 		return Redirect::to('/');
-// 	} else {
-// 		return Redirect::to('login')->with('message', 'Twitter認証できませんでした。');
-// 	}
-// });
-
 Route::get('logout', 'UserController@getLogout');
-
-// Route::get('logout', function() {
-//    Auth::logout();
-//    return Redirect::to('/')->with('message', 'ログアウトしました。');
-// });
-
 Route::get('{screen_name}', 'UserController@showUser');
 Route::get('{screen_name}/stars', 'UserController@showUserStars');
 
