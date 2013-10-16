@@ -18,6 +18,9 @@
   Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
 
   Route::post('items/{id}/comment/new', 'ItemController@createComment');
+
+
+  Route::post('api/get/notice/num', 'ApiController@getNoticeNum');
   
   //Route::get('{screen_name}', 'UserController@showUser');
   Route::post('{screen_name}/items/{id}/favorite', 'ItemController@favorite');
