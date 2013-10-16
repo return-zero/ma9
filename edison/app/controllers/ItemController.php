@@ -74,8 +74,8 @@ class ItemController extends BaseController {
     }
   }
 
-  public function favorite($screen_name, $id) {
-    DB::table('favmaps')->insert(
+  public function star($screen_name, $id) {
+    DB::table('starmaps')->insert(
       array(
         'item_id' => $id,
         'user_id' => Auth::user()->id,
@@ -85,7 +85,7 @@ class ItemController extends BaseController {
   }
 
   public function stargazers($screen_name, $id) {
-    $stargazers = Favmap::where('item_id', '=', 2)->get();
+    $stargazers = Starmap::where('item_id', '=', 2)->get();
     $users = array();
     foreach ($stargazers as $stargazer) {
       $users['ids'][] = $stargazer->user_id;
