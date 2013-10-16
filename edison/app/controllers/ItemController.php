@@ -11,6 +11,8 @@ class ItemController extends BaseController {
     foreach ($tagmaps as $tagmap) {
       $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
     }
+    
+    $comments = array();
 
     $cs = Comment::where('item_id', '=', $id)->get();
     foreach ($cs as $comment) {
@@ -39,7 +41,7 @@ class ItemController extends BaseController {
     if ($user->id == $item->user_id) {
       Item::destroy($id);
     } else {
-      return Redirect::to('/');      
+      return Redirect::to("/");      
     }
   }
 
@@ -58,7 +60,7 @@ class ItemController extends BaseController {
 
     $comment->save();
 
-    return Redirect::to('/');
+    return Redirect::to("/$screen_name/items/$id");
   }
 
   public function deleteComment($screen_name, $id) {

@@ -3,7 +3,7 @@
   <title>new</title>
 @stop
 @section('content')
-{{ Form::open(array('url' => 'new', 'method' => 'GET')) }}
+{{ Form::open(array('url' => 'new', 'method' => 'POST')) }}
 
 <div class="row">
   <div class="col-lg-3">
@@ -38,7 +38,7 @@
       </lavel>
     </div>
     <div class="checkbox-inline">
-  　  <label>
+      <label>
         <input type="checkbox" name="type" value="illut">イラスト
       </lavel>
     </div>
