@@ -53,9 +53,9 @@ class UserController extends BaseController {
   {
     $user = User::where('screen_name','=',$screen_name)->first();
     $star_items_id = array();
-    $fav_lists = Favmap::where('user_id', '=', $user->id)->get();
-    foreach($fav_lists as $fav_list) {
-      $star_items_id[] = $fav_list->item_id; 
+    $star_lists = Starmap::where('user_id', '=', $user->id)->get();
+    foreach($star_lists as $star_list) {
+      $star_items_id[] = $star_list->item_id; 
     }
 
     $star_items = array();
