@@ -12,7 +12,12 @@ class ItemController extends BaseController {
       $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
     }
 
-    $comments = Comment::where('item_id', '=', $id)->get();
+    $cs = Comment::where('item_id', '=', $id)->get();
+    foreach ($cs as $comment) {
+      $name = User::where('id', '=', $comment->user_id)->first();
+      $comment['name'] = $name;
+      $comments[] = $comment;
+    }
 
     $item = array(
       'id' => $data[0]->id,
@@ -27,8 +32,8 @@ class ItemController extends BaseController {
     return View::make('item', $item);
   }
 
-  public function delete($name, $id) {
-    $user = User::where('screen_name', '=', $name)->first();
+  public function delete($screen_name, $id) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
     $item = Item::find($id);
 
     if ($user->id == $item->user_id) {
@@ -38,12 +43,14 @@ class ItemController extends BaseController {
     }
   }
 
-  public function createComment($id) {
+  public function createComment($screen_name, $id) {
     $data = Input::all();
+
+    $user = User::where('screen_name', '=', $screen_name)->first();    
 
     $comment = new Comment;
     
-    $comment->user_id = 111;
+    $comment->user_id = $user->id;
     $comment->item_id = $id;
     $comment->comment = $data['comment'];
     $comment->created_at = date("Y-m-d H:i:s");
@@ -52,6 +59,17 @@ class ItemController extends BaseController {
     $comment->save();
 
     return Redirect::to('/');
+  }
+
+  public function deleteComment($screen_name, $id) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    $comment = Comment::find($id);
+
+    if ($user->id == $comment->user_id) {
+      Comment::destroy($id);
+    } else {
+      return Redirect::to('/');      
+    }
   }
 
   public function favorite($screen_name, $id) {

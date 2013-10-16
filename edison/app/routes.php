@@ -17,8 +17,8 @@
 
   Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
 
-  Route::post('items/{id}/comment/new', 'ItemController@createComment');
-
+  Route::post('/{screen_name}/items/{id}/comment/new', 'ItemController@createComment');
+  Route::post('/{screen_name}/items/{id}/comment/delete', 'ItemController@deleteComment');
 
   Route::post('api/get/notice/num', 'ApiController@getNoticeNum');
   
