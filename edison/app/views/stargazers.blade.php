@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('header')
-  <title>startgazers</title>
+@parent
 @stop
 @section('content')
 @foreach ($ids as $id)

@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('header')
-<title>item</title>
+@parent
 @stop
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('header')
-  <title>new</title>
+@parent
 @stop
 @section('content')
 {{ Form::open(array('url' => 'new', 'method' => 'POST')) }}

@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 
   public function showIndex()
   {
-    return View::make('index');
+    return View::make('index', array('title' => 'TOP'));
   }
 
   public function showNew()
@@ -56,6 +56,7 @@ class HomeController extends BaseController {
       'r18' => 'R-18'
     );
     $data = array(
+      'title' => '新規投稿',
       'categories' => $categories,
       'names' => $category_names
     );
