@@ -3,12 +3,12 @@
 <title>item</title>
 @stop
 @section('content')
-<h1>{{ $title }}</h1>
 
 <div class="row">
   <div class="col-lg-9">
-    <p>作成日 : {{ $created_at }}</p>
-    <p>更新日	 : {{ $updated_at }}</p>			
+    <h1>{{ $title }}</h1>
+    <span>作成日 : {{ $created_at }}</span>
+    <span>更新日 : {{ $updated_at }}</span>
   </div>
   <div class="col-lg-3">
     <div class="profile">
@@ -37,10 +37,8 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12">
-    content: {{ $content }}
-  </div>	
+<div class="jumbotron">
+  {{ $content }}
 </div>
 
 <div class="row">
