@@ -37,6 +37,14 @@
 </div>
 
 <div class="row">
+	<div class="col-lg-12">
+		{{ Form::open(array('url' => "Auth::user()->screen_name/items/$id/star", 'method'=>'post')) }}
+		<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i></button>
+		{{ Form::close() }}
+	</div>	
+</div>
+
+<div class="row">
 	<h2>投稿作品</h2>
 	<div class="job">
 	</div>
