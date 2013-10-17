@@ -41,10 +41,9 @@ class ItemController extends BaseController {
   }
 
   public function delete($screen_name, $id) {
-    $user = User::where('screen_name', '=', $screen_name)->first();
     $item = Item::find($id);
 
-    if ($user->id == $item->user_id) {
+    if (Auth::user()->id == $item->user_id) {
       Item::destroy($id);
     } else {
       return Redirect::to("/");      
