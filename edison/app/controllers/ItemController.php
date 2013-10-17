@@ -84,6 +84,13 @@ class ItemController extends BaseController {
     );
   }
 
+  public function unstar($screen_name, $item_id) {
+    $stramap = Starmap::where('screen_name', '=', $screen_name)->where('item_id', '=', $item_id)->get();
+    if (Auth::user()->id === $starmap->user_id) {
+      $stramap->delete();
+    }
+  }
+
   public function stargazers($screen_name, $id) {
     $stargazers = Starmap::where('item_id', '=', 2)->get();
     $users = array();
