@@ -8,7 +8,7 @@
     <h3>ほしいものをお願いしてみよう。</h3>
     <a class="btn btn-primary" href="new">ほしいもの・アイデアを投稿する</a>
   </div>
-  <ul class="nav nav-tabs">
+  <ul id="stream-tab" class="nav nav-tabs">
     <li class="active"><a href="#">すべての投稿</a></li>
     <li><a href="#">最近の作品</a></li>
   </ul>
@@ -41,9 +41,9 @@
 </div>
 <div class="col-lg-3">
   @if (Auth::check())
-    <img src="{{ Auth::user()->profile_image_url }}" />
+    <img src="" />
     {{ Auth::user()->screen_name }}
+  <p><a href="{{ Auth::user()->screen_name }}/stars">stared</a></p>
   @endif
-  <p><a href="stars">stared</a></p>
 </div>
 @stop
