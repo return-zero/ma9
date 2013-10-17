@@ -7,7 +7,8 @@
   <h3>ほしいものをお願いしてみよう。</h3>
   <a class="btn btn-primary" href="new">アイデアを投稿する</a>
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#">すべての投稿</a>
+    <li class="active"><a href="#">すべての投稿</a></li>
+    <li><a href="#">最近の作品</a></li>
   </ul>
 </div>
 <div class="col-lg-3">
