@@ -26,6 +26,7 @@
   Route::post('/{screen_name}/items/{id}/comment/new', 'ItemController@createComment');
   Route::post('/{screen_name}/items/{id}/comment/delete', 'ItemController@deleteComment');
   Route::post('{screen_name}/items/{id}/star', 'ItemController@star');
+  Route::post('{screen_name}/items/{id}/unstar', 'ItemController@unstar');
 
 //});
 
