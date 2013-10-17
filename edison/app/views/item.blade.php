@@ -28,11 +28,20 @@
       @endforeach
     </div>
     <div class="col-lg-2">
-      {{ Form::open(array('url' => "$screen_name/items/$id/star", 'method' => 'post')) }}
+    @if ($star_status == true)
+      {{ Form::open(array('url' => "$screen_name/items/$id/unstar", 'method' => 'post')) }}
         <button type="submit" class="btn btn-warning">
           <i class="glyphicon glyphicon-star"></i>
         </button>
       {{ Form::close() }}
+    @else
+      {{ Form::open(array('url' => "$screen_name/items/$id/star", 'method' => 'post')) }}
+        <button type="submit" class="btn btn-default">
+          <i class="glyphicon glyphicon-star"></i>
+        </button>
+      {{ Form::close() }}
+    @endif
+      
     </div>
   </div>
 </div>
