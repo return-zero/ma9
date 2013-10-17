@@ -119,7 +119,7 @@ class ItemController extends BaseController {
     return View::make('stargazers', $data);
   }
   
-  public function getStarStatus($auth_id, $item_id) {
+  private function getStarStatus($auth_id, $item_id) {
     if(Starmap::where('user_id', '=', $auth_id)->where('item_id', '=', $item_id)->first() != NULL) { 
 	    return true;
     }
