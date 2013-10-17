@@ -22,7 +22,7 @@ class ItemController extends BaseController {
     
     $star_status = false;
     if (Auth::check()) {
-      $star_status = $this->showStarStatus($screen_name,$id);
+      $star_status = $this->getStarStatus($user[0]->id,$id);
     }
 
     $item = array(
@@ -79,6 +79,11 @@ class ItemController extends BaseController {
     }
   }
   
+  public function getUserIdByScreenName($screen_name) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    return $user->id;
+  }
+  
   /* ----------------------
      Star Logic
      ---------------------- */
@@ -109,11 +114,15 @@ class ItemController extends BaseController {
     return View::make('stargazers', $users);
   }
   
-  public function showStarStatus($screen_name, $item_id) {
-    $stramap = Starmap::where('screen_name', '=', $screen_name)->where('item_id', '=', $item_id)->get();
-    if (Auth::user()->id === $starmap->user_id) {
-      return true;
-    }
+  public function getStarStatus($user_id, $item_id) {
+    $stramap = Starmap::where('user_id', '=', $user_id)->where('item_id', '=', $item_id)->get();
+/*
+    if (Auth::check()) {
+	    if (Auth::user()->id === $starmap->user_id) {
+	      return true;
+	    }
+    }    
+*/
     return false;
   }
   
