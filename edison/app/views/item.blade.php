@@ -42,7 +42,6 @@
 </div>
 
 <div class="row">
-<<<<<<< HEAD
 	<div class="col-lg-12">
 		{{ Form::open(array('url' => "Auth::user()->screen_name/items/$id/star", 'method'=>'post')) }}
 		<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i></button>
@@ -54,11 +53,6 @@
 	<h2>投稿作品</h2>
 	<div class="job">
 	</div>
-=======
-  <h2>投稿作品</h2>
-  <div class="job">
-  </div>
->>>>>>> 1fd43c2f22629f8dbbf5c2e9b7b215df1a3040be
 </div>
 
 <div class="row">
