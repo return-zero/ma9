@@ -17,7 +17,50 @@ class HomeController extends BaseController {
 
   public function showIndex()
   {
-    return View::make('index', array('title' => 'TOP'));
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'toho',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18'
+    );
+
+    $items = Item::take(10)->get();
+    foreach ($items as &$item) {
+      $item['screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
+      $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+    }
+    $data = array(
+      'title' => 'トップ',
+      'items' => $items,
+      'categories' => $category_names
+    );
+    return View::make('index', $data);
   }
 
   public function showNew()
