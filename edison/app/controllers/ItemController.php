@@ -13,12 +13,17 @@ class ItemController extends BaseController {
     }
     
     $comments = array();
-
     $cs = Comment::where('item_id', '=', $id)->get();
     foreach ($cs as $comment) {
       $name = User::where('id', '=', $comment->user_id)->first();
       $comment['name'] = $name;
       $comments[] = $comment;
+    }
+    
+    $star_status = false;
+    if (Auth::check()) {
+    	$auth_id = Auth::user()->id;
+      $star_status = $this->getStarStatus($auth_id,$id);
     }
 
     $item = array(
@@ -30,6 +35,7 @@ class ItemController extends BaseController {
       'comments' => $comments,
       'tags' => $tags,
       'screen_name' => $screen_name,
+      'star_status' => $star_status,
     );
     return View::make('item', $item);
   }
@@ -73,6 +79,15 @@ class ItemController extends BaseController {
       return Redirect::to('/');      
     }
   }
+  
+  public function getUserIdByScreenName($screen_name) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    return $user->id;
+  }
+  
+  /* ----------------------
+     Star
+     ---------------------- */
 
   public function star($screen_name, $id) {
     DB::table('starmaps')->insert(
@@ -85,9 +100,10 @@ class ItemController extends BaseController {
   }
 
   public function unstar($screen_name, $item_id) {
-    $stramap = Starmap::where('screen_name', '=', $screen_name)->where('item_id', '=', $item_id)->get();
+  	$user_id = $this->getUserIdByScreenName($screen_name);
+    $starmap = Starmap::where('user_id', '=', $user_id)->where('item_id', '=', $item_id)->first();
     if (Auth::user()->id === $starmap->user_id) {
-      $stramap->delete();
+      Starmap::destroy($starmap->id);
     }
   }
 
@@ -103,4 +119,13 @@ class ItemController extends BaseController {
     );
     return View::make('stargazers', $data);
   }
+  
+  public function getStarStatus($auth_id, $item_id) {
+    if(Starmap::where('user_id', '=', $auth_id)->where('item_id', '=', $item_id)->first() != NULL) { 
+	    return true;
+    }
+    return false;
+  }
+  
+  
 }
