@@ -37,6 +37,8 @@
   </div>
 </div>
 
+{{ $star_status }}
+
 
 
 <div class="jumbotron">

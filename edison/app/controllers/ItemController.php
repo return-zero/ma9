@@ -22,7 +22,8 @@ class ItemController extends BaseController {
     
     $star_status = false;
     if (Auth::check()) {
-      $star_status = $this->getStarStatus($user[0]->id,$id);
+    	$auth_id = Auth::user()->id;
+      $star_status = $this->getStarStatus($auth_id,$id);
     }
 
     $item = array(
@@ -85,7 +86,7 @@ class ItemController extends BaseController {
   }
   
   /* ----------------------
-     Star Logic
+     Star
      ---------------------- */
 
   public function star($screen_name, $id) {
@@ -114,15 +115,10 @@ class ItemController extends BaseController {
     return View::make('stargazers', $users);
   }
   
-  public function getStarStatus($user_id, $item_id) {
-    $stramap = Starmap::where('user_id', '=', $user_id)->where('item_id', '=', $item_id)->get();
-/*
-    if (Auth::check()) {
-	    if (Auth::user()->id === $starmap->user_id) {
-	      return true;
-	    }
-    }    
-*/
+  public function getStarStatus($auth_id, $item_id) {
+    if(Starmap::where('user_id', '=', $auth_id)->where('item_id', '=', $item_id)->first() != NULL) { 
+	    return true;
+    }
     return false;
   }
   
