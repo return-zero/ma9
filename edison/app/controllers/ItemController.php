@@ -13,12 +13,16 @@ class ItemController extends BaseController {
     }
     
     $comments = array();
-
     $cs = Comment::where('item_id', '=', $id)->get();
     foreach ($cs as $comment) {
       $name = User::where('id', '=', $comment->user_id)->first();
       $comment['name'] = $name;
       $comments[] = $comment;
+    }
+    
+    $star_status = false;
+    if (Auth::check()) {
+      $star_status = $this->showStarStatus($screen_name,$id);
     }
 
     $item = array(
@@ -30,6 +34,7 @@ class ItemController extends BaseController {
       'comments' => $comments,
       'tags' => $tags,
       'screen_name' => $screen_name,
+      'star_status' => $star_status,
     );
     return View::make('item', $item);
   }
@@ -73,6 +78,10 @@ class ItemController extends BaseController {
       return Redirect::to('/');      
     }
   }
+  
+  /* ----------------------
+     Star Logic
+     ---------------------- */
 
   public function star($screen_name, $id) {
     DB::table('starmaps')->insert(
@@ -99,4 +108,14 @@ class ItemController extends BaseController {
     }
     return View::make('stargazers', $users);
   }
+  
+  public function showStarStatus($screen_name, $item_id) {
+    $stramap = Starmap::where('screen_name', '=', $screen_name)->where('item_id', '=', $item_id)->get();
+    if (Auth::user()->id === $starmap->user_id) {
+      return true;
+    }
+    return false;
+  }
+  
+  
 }
