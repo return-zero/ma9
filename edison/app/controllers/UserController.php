@@ -16,12 +16,20 @@ class UserController extends BaseController {
       
       $items = $this->showUserItems($screen_name);
             
+
+      if (Auth::user()->screen_name === $screen_name) {
+        $title = "Mypage";
+      } else {
+        $title = 'About ' + $screen_name;
+      }
+
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
         'desc' => $timeline[0]["user"]["description"],
         'icon' => $timeline[0]["user"]["profile_image_url"],
-        'items' => $items
+        'items' => $items,
+        'title' => $title,
       );
 
       return View::make('user', $twitter_profile); 
@@ -49,14 +57,25 @@ class UserController extends BaseController {
     return $results;
   }
 
+  private function debug($val)
+  {
+    echo "<pre>";
+    var_dump($val);
+    echo "</pre>";
+    exit;
+  }
+
   public function showUserStars($screen_name)
   {
     $user = User::where('screen_name','=',$screen_name)->first();
+    //$this->debug($user->id);
     $star_items_id = array();
     $star_lists = Starmap::where('user_id', '=', $user->id)->get();
+    $this->debug($star_lists);
     foreach($star_lists as $star_list) {
       $star_items_id[] = $star_list->item_id; 
     }
+
 
     $star_items = array();
     foreach($star_items_id as $star_item_id) {
