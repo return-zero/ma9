@@ -11,45 +11,45 @@
     {{ HTML::style('css\base.css') }}
     @show
     @section('header')
-    <title>edison</title>
+    <title>{{ $title }} - edison</title>
     @show
   </head>
   <body>
     <div id="wrap">
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active">{{ HTML::link('#', 'Home') }}</li>
-            <li>{{ HTML::link('#about', 'About') }}</li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li id="fat-menu" class="dropdown">
-              <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
-                <li role="presenattion"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-              </ul>
-            </li>
-            @if (Auth::check())
-              <li><a href="logout">ログアウト</a></li>
-            @else
-              <li><a href="login">ログイン</a></li>
-            @endif
-          </ul>
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active">{{ HTML::link('/', 'TOP') }}</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li id="fat-menu" class="dropdown">
+                <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+                  <li role="presenattion"><a role="menuitem" tabindex="-1" href="{{ Auth::user()->screen_name }}">マイページ</a></li>
+                </ul>
+              </li>
+              @if (Auth::check())
+                <li><a href="logout">ログアウト</a></li>
+              @else
+                <li><a href="login">ログイン</a></li>
+              @endif
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      @yield('content')
-    </div>
+      <div class="container">
+        @yield('content')
+      </div>
+      </div>
     </div>
     <div id="footer">
       <div class="container">

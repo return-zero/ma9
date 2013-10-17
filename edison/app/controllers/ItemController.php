@@ -95,8 +95,12 @@ class ItemController extends BaseController {
     $stargazers = Starmap::where('item_id', '=', 2)->get();
     $users = array();
     foreach ($stargazers as $stargazer) {
-      $users['ids'][] = $stargazer->user_id;
+      $users[] = $stargazer->user_id;
     }
-    return View::make('stargazers', $users);
+    $data = array(
+      'title' => 'スターゲイザー',
+      'ids' => $users
+    );
+    return View::make('stargazers', $data);
   }
 }
