@@ -89,11 +89,15 @@ class ItemController extends BaseController {
      ---------------------- */
 
   public function star($screen_name, $id) {
+    $now = date('Y-m-d H:i:s');
+    
     DB::table('starmaps')->insert(
       array(
         'item_id' => $id,
         'user_id' => Auth::user()->id,
-        'watched_flag' => 0
+        'watched_flag' => 0,
+        'created_at' => $now,
+        'updated_at' => $now,
       )
     );
   }
