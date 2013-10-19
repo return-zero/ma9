@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('GroupCategoryTableSeeder');
 		$this->call('CategoryTableSeeder');
+		$this->call('UserTableSeeder');
+		$this->call('ItemTableSeeder');
+		$this->call('StarmapTableSeeder');
+		$this->call('CommentTableSeeder');
 
 		$this->command->info('seed できたでっ！！');
 	}
