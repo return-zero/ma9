@@ -30,8 +30,10 @@
             <ul class="nav navbar-nav">
               <li class="active">{{ HTML::link('/', 'TOP') }}</li>
             </ul>
+      
             <ul class="nav navbar-nav navbar-right">
               @if (Auth::check())
+              <li class="active notice">{{ HTML::link('/', '')}}</li>
               <li><a href="new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" id="drop" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
@@ -61,6 +63,7 @@
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
+
     @show
   </body>
 </html>
