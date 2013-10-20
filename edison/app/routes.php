@@ -33,7 +33,7 @@
 /* --------------
    ApiController
    -------------- */
-Route::post('api/get/notice/num', 'ApiController@getNoticeNum');
+Route::get('api/get/notice/num', 'ApiController@getNoticeNum');
 
 /* --------------
    HomeController
