@@ -68,22 +68,34 @@ class UserController extends BaseController {
   public function showUserStars($screen_name)
   {
     $user = User::where('screen_name','=',$screen_name)->first();
-    //$this->debug($user->id);
+    
     $star_items_id = array();
     $star_lists = Starmap::where('user_id', '=', $user->id)->get();
-    $this->debug($star_lists);
+ 
     foreach($star_lists as $star_list) {
-      $star_items_id[] = $star_list->item_id; 
+      $star_items_id[] = $star_list["attributes"]["item_id"]; 
     }
 
 
     $star_items = array();
+    $res = array();
     foreach($star_items_id as $star_item_id) {
       $item = Item::where('id', '=', $star_item_id)->first();
-      $star_items[] = $item;
+      $category_id = $item["attributes"]["category_id"];
+      $category_name = Category::where('id', '=', $category_id)->first()["attributes"]["content"];
+      $star_items[] = array(
+        'category' => $category_name,
+        'content' => $item["attributes"]["content"],
+        'title' => $item["attributes"]["title"],
+        'type' => $item["attributes"]["type"],
+      );
     }
+    $res = array("star_items" => $star_items,
+                 "title" => "Stars"
+           );
+
     
-    return View::make('stars', $star_items);
+    return View::make('stars', $res);
   }
 
   public function getLogin()
