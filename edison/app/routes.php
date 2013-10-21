@@ -28,6 +28,13 @@
   Route::post('{screen_name}/items/{id}/star', 'ItemController@star');
   Route::post('{screen_name}/items/{id}/unstar', 'ItemController@unstar');
 
+  /* --------------
+   WorkController
+   -------------- */
+  Route::get('work/new', 'WorkController@new');
+  Route::post('work/create/{item_id}', 'WorkController@create');
+  Route::post('work/delete/{item_id}', 'WorkController@delete');
+
 //});
 
 /* --------------
