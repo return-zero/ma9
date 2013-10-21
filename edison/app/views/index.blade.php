@@ -25,7 +25,7 @@
                 <a href="{{ $item->screen_name }}">{{ $item->screen_name }}</a> が{{ $item->created_at }}に投稿しました
               </div>
               <div class="item-title">
-                <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory"><a href="tag/{{ $categories["$item->category"] }}">{{ $categories["$item->category"]}}</a></span>
+                <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory"><a href="tag/{{ $item->category }}">{{ $categories["$item->category"]}}</a></span>
               </div>
             </div>
           </div>
