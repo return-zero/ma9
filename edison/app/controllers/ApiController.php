@@ -9,6 +9,7 @@ class ApiController extends BaseController {
 
     $json_val = array(
       'user_id' => $login_user_id,
+      'screen_name' => Auth::user()->screen_name,
       'notice_num' => $not_watched_num,
     );
 
