@@ -72,10 +72,10 @@ class ItemController extends BaseController {
     $user = User::where('screen_name', '=', $screen_name)->first();
     $comment = Comment::find($id);
 
-    if ($user->id == $comment->user_id) {
+    if (Auth::user()->id === $comment->user_id) {
       Comment::destroy($id);
     } else {
-      return Redirect::to('/');      
+      return Redirect::to("/$screen_name/item/$id");      
     }
   }
   
