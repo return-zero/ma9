@@ -57,7 +57,7 @@ class ItemController extends BaseController {
 
     $comment = new Comment;
     
-    $comment->user_id = $user->id;
+    $comment->user_id = Auth::user()->id;
     $comment->item_id = $id;
     $comment->comment = $data['comment'];
     $comment->created_at = date("Y-m-d H:i:s");
