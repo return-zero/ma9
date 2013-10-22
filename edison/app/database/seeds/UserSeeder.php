@@ -1,6 +1,6 @@
 <?php
 
-class CommentTableSeeder extends Seeder {
+class UserTableSeeder extends Seeder {
 
   public function run()
   {
@@ -17,7 +17,7 @@ class CommentTableSeeder extends Seeder {
     $oauth_token_secret = "fugapoyo";
     
     foreach($screen_name as $s) {
-      Comment::create(array(
+      User::create(array(
         'id' => $id,
         'screen_name' => $s
         'oauth_token' => $oauth_token, 
