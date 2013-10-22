@@ -9,12 +9,12 @@
     <a class="btn btn-primary" href="new">ほしいもの・アイデアを投稿する</a>
   </div>
   <ul id="stream-tab" class="nav nav-tabs">
-    <li class="active"><a href="#">すべての投稿</a></li>
-    <li><a href="#">最近の作品</a></li>
+    <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
+    <li><a href="#works" data-toggle="tab">最近の作品</a></li>
   </ul>
-  <div id="item-content" class="streams">
-    <div class="public-stream">
-      @foreach ($items as $item)
+  <div id="item-content" class="streams tab-content">
+    <div class="item-stream tab-pane fade in active" id="items">
+      @foreach ($all_items as $item)
         <div class="items">
           <div class="item-inner">
             <div class="icon">
@@ -31,11 +31,28 @@
           </div>
         </div>
       @endforeach
-      <div class="more">
+      <!--<div class="more">
         <div class="more-button btn btn-default btn-block">もっと見る</div>
-      </div>
+      </div>-->
     </div>
-    <div class="recent-works">
+    <div class="recent-stream tab-pane fade" id="works">
+      @foreach ($recent_works as $work)
+        <div class="works">
+          <div class="work-inner">
+            <div class="icon">
+              <img src="">
+            </div>
+            <div class="work-content">
+              <div class="action">
+                <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が{{ $work->created_at }}に投稿しました
+              </div>
+              <div class="work-title">
+                <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory"><a href="tag/{{ $work->item_category }}">{{ $categories["$work->item_category"] }}</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
   </div>
 </div>

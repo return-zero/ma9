@@ -63,6 +63,7 @@
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
+    {{ HTML::script('js/tab.js') }}
 
     @show
   </body>
