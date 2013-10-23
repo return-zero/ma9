@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder {
     foreach($screen_name as $s) {
       User::create(array(
         'id' => $id,
-        'screen_name' => $s
+        'screen_name' => $s,
         'oauth_token' => $oauth_token, 
         'oauth_token_secret' => $oauth_token_secret,
         'created_at' => $now,
