@@ -103,7 +103,6 @@ class ItemController extends BaseController {
   }
 
   public function unstar($screen_name, $item_id) {
-  	//$user_id = $this->getUserIdByScreenName($screen_name);
     $starmap = Starmap::where('user_id', '=', Auth::user()->id)->where('item_id', '=', $item_id)->first();
     if (Auth::user()->id === $starmap->user_id) {
       Starmap::destroy($starmap->id);
