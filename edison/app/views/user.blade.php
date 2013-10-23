@@ -25,6 +25,7 @@
 </div>
 <!-- /.row -->
 <hr>
+<p>star_num: {{ $star_num }}</p>
 <p>screen_name: {{ $screen_name }}</p>
 <p>name: {{ $name }}</p>
 <p>description: {{ $desc }}</p>
