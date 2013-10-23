@@ -104,8 +104,9 @@ class UserController extends BaseController {
       return Redirect::to('/')->with('message', 'ログイン済みです。');
     }
     $tokens = Twitter::oAuthRequestToken();
-    Twitter::oAuthAuthorize(array_get($tokens, 'oauth_token'));
-    die;
+    //var_dump($tokens);exit;
+    Twitter::oAuthAuthorize($tokens['oauth_token']);
+    exit;
   }
 
   public function getCallback()
@@ -129,8 +130,10 @@ class UserController extends BaseController {
       Auth::login($user);
 
       return Redirect::to('/');
+      exit;
     } else {
       return Redirect::to('login')->with('message', 'Twitter認証できませんでした。');
+      exit;
     }
   }
 
