@@ -1,1 +1,0 @@
-$(function(){$("#tag-plus").click(function(){var a=$("<div>").addClass("input-group");a.append('<input class="form-control" name="tags[]">','<span class="input-group-addon btn tag-minus">×</span>'),$(this).before(a)}),$("#tag-form-wrap").on("click",".tag-minus",function(){$(this).parent().remove()})});
