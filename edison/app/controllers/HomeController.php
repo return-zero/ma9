@@ -50,14 +50,21 @@ class HomeController extends BaseController {
       'r18' => 'R-18'
     );
 
-    $items = Item::take(10)->get();
-    foreach ($items as &$item) {
+    $all_items = Item::take(10)->get();
+    foreach ($all_items as &$item) {
       $item['screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
+    $recent_works = Work::orderBy('created_at', 'desc')->take(10)->get();
+    foreach ($recent_works as &$work) {
+      $item = Item::where('id', '=', $work->item_id)->get()[0];
+      $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
+      $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+    }
     $data = array(
       'title' => 'トップ',
-      'items' => $items,
+      'all_items' => $all_items,
+      'recent_works' => $recent_works,
       'categories' => $category_names
     );
     return View::make('index', $data);

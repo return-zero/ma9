@@ -41,7 +41,7 @@
         </button>
       {{ Form::close() }}
     @endif
-      
+
     </div>
   </div>
 </div>
@@ -57,9 +57,13 @@
 
 
 <div class="row">
-	<h2>投稿作品</h2>
-	<div class="job">
-	</div>
+  <h2>投稿作品</h2>
+  <div class="job">
+  </div>
+</div>
+
+<div class="row">
+  <h3>関連作品</h3>
 </div>
 
 <div class="row">
