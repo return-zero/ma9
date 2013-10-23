@@ -64,6 +64,17 @@ class UserController extends BaseController {
     echo "</pre>";
     exit;
   }
+  
+  public function getStarNum($screen_name)
+  {
+    $user_id = $this->getUserIdByScreenName($screen_name);
+    return Starmap::where('user_id', '=', $user_id)->count();
+  }
+  
+  public function getUserIdByScreenName($screen_name) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    return $user->id;
+  }
 
   public function showUserStars($screen_name)
   {
