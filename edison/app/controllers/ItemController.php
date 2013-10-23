@@ -28,7 +28,7 @@ class ItemController extends BaseController {
 
     $nico = new NicoSugoiSearch();
     $query = implode(' | ', $tags);
-    $ret = $nico->search($item->type, $query);
+    $ret = $nico->search($item[0]->type, $query);
     $related_works = array();
     if (isset($ret->values)) {
       foreach ($ret->values as $value) {

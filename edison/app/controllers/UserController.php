@@ -5,7 +5,8 @@ class UserController extends BaseController {
   public function showUser($screen_name)
   {
     $user = User::where('screen_name', '=', $screen_name)->first();
-
+    $star_num = $this->getStarNum($screen_name);
+    
     $twitter_id = $user->id;
 
     try {
@@ -30,6 +31,7 @@ class UserController extends BaseController {
         'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items,
         'title' => $title,
+        'star_num' => $star_num,
       );
 
       return View::make('user', $twitter_profile); 
@@ -63,6 +65,17 @@ class UserController extends BaseController {
     var_dump($val);
     echo "</pre>";
     exit;
+  }
+  
+  public function getStarNum($screen_name)
+  {
+    $user_id = $this->getUserIdByScreenName($screen_name);
+    return Starmap::where('user_id', '=', $user_id)->count();
+  }
+  
+  public function getUserIdByScreenName($screen_name) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    return $user->id;
   }
 
   public function showUserStars($screen_name)

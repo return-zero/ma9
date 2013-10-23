@@ -11,7 +11,7 @@
 |
 */
 
-//Route::group(array('before' => 'auth') ,function() {
+Route::group(array('before' => 'auth') ,function() {
 	
 	/* --------------
    HomeController
@@ -35,7 +35,7 @@
   Route::post('work/create/{item_id}', 'WorkController@create');
   Route::post('work/delete/{item_id}', 'WorkController@delete');
 
-//});
+});
 
 /* --------------
    ApiController

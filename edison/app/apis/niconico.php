@@ -36,6 +36,9 @@ class NicoSugoiSearch {
     $ret = curl_exec($curl);
     $ret = explode("\n", $ret);
     curl_close($curl);
+    if (!isset($ret[2])) {
+      return false;
+    }
     return json_decode($ret[2]);
   }
 }
