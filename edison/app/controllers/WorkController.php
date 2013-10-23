@@ -4,39 +4,42 @@ class WorkController extends BaseController {
 
   public function create($item_id) {
     $data = Input::all();
+    $user_id = Item::where('id', '=', $item_id)->first()['attributes']['user_id'];
+    $screen_name = User::where('id', '=', $user_id)->first()['attributes']['screen_name'];
     
     $now = date("Y-m-d H:i:s");
 
-    $nico_video = "/http:¥/¥/www¥.nicovideo¥.jp¥/watch¥/(sm[0-9]+)/";
-    $nico_seiga = "/http:¥/¥/seiga¥.nicovideo¥.jp¥/watch¥/(im[0-9]+).+/";
-    $pixiv = "/http:¥/¥/www¥.pixiv¥.net/member_illust¥.php¥?mode=medium¥&illust_id=([0-9]+)/";
-
+    $reg_nico_video = '/^http:\/\/www\.nicovideo\.jp\/watch\/(sm[0-9]+)/';
+    $reg_nico_seiga = "/^http:\/\/seiga\.nicovideo\.jp\/seiga\/(im[0-9]+)\?.*/";
+    $reg_pixiv = "/^http:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium\&illust_id=([0-9]+)/";
+    
     $not_found = false;
-    if (!fopen($data['url'])) {
+    if (fopen($data['url'], 'r')) {
       $not_found = true;
     }
-    var_dump($not_found);exit;
+    
+    preg_match($reg_nico_video, $data['url'], $match_video);
+    $nico_video = $match_video ? $match_video[1] : 0;
 
-    if (
-        (
-          preg_match($nico_video, $data['url']) || 
-          preg_match($nico_seiga, $data['url']) ||
-          preg_match($pixiv, $data['url'])
-        ) && $not_found === true
-       ) {
-      echo "通ったで";exit;
+    preg_match($reg_nico_seiga, $data['url'], $match_seiga);
+    $nico_seiga = $match_seiga ? $match_seiga[1] : 0;
+
+    preg_match($reg_pixiv, $data['url'], $match_pixiv);
+    $pixiv = $match_pixiv ? $match_pixiv[1] : 0;
+
+    if ( ($nico_video || $nico_seiga || $pixiv) && $not_found ) {
       $work = new Work;
     
       $work->item_id = $item_id;
       $work->user_id = Auth::user()->id;
-      $work->url = $data['url']
+      $work->url = $data['url'];
       $work->comment = $data['comment'];
       $work->created_at = date("Y-m-d H:i:s");
       $work->updated_at = date("Y-m-d H:i:s");
 
       $work->save();
 
-      return Redirect::to("/$screen_name/items/$id");
+      return Redirect::to("/$screen_name/items/$item_id");
 
     } else {
       echo "その作品はあかん";

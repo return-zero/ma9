@@ -29,17 +29,13 @@
     </div>
     <div class="col-lg-2">
     @if ($star_status == true)
-      {{ Form::open(array('url' => "$screen_name/items/$id/unstar", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-warning">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-warning" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @else
-      {{ Form::open(array('url' => "$screen_name/items/$id/star", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-default">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-default" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @endif
 
     </div>
@@ -138,7 +134,12 @@
       <div class="comment">
         <div class="col-lg-12">{{ $comment->created_at}}</div>
         <div class="col-lg-4">{{ $comment->name->screen_name}}</div>
-        <div class="col-lg-8">{{ $comment->comment }}</div>
+        <div class="col-lg-8">{{{ $comment->comment }}}</div>
+        @if ($comment->name->screen_name == Auth::user()->screen_name)
+          {{ Form::open(array('url' => "{$comment->name->screen_name}/items/{$id}/comments/{$comment->id}/delete", 'method'=>'post')) }}
+            <button type="submit">delete</button>
+          {{ Form::close() }}
+        @endif
       </div>
     @endforeach
   </div>
