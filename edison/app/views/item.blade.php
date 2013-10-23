@@ -53,6 +53,8 @@
 <div class="jumbotron">
   {{ $content }}
 </div>
+<a href="/content/new" class="btn btn-primary">作品を投稿する</a>
+
 
 <div class="row">
 	<h2>投稿作品</h2>
