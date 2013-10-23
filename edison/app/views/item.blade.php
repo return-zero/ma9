@@ -101,6 +101,17 @@
 
 <div class="row">
   <h3>関連作品</h3>
+    @if ($related_works)
+      @foreach ($related_works as $related_work)
+        <div>
+          <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+          <img src="{{ $related_work['thumbnail_url'] }}" />
+          {{ $related_work['title'] }}</a>
+        </div>
+      @endforeach
+    @else
+      <p>関連作品はありません</p>
+    @endif
 </div>
 
 <div class="row">
