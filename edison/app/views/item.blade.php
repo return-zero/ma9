@@ -29,17 +29,13 @@
     </div>
     <div class="col-lg-2">
     @if ($star_status == true)
-      {{ Form::open(array('url' => "$screen_name/items/$id/unstar", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-warning">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-warning" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @else
-      {{ Form::open(array('url' => "$screen_name/items/$id/star", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-default">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-default" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @endif
 
     </div>
