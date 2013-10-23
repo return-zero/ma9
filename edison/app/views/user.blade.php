@@ -32,6 +32,13 @@
 @foreach ($items as $item)
 	<p>items: {{ $item['item_id'] }}</p>
   <p>items: {{ $item['title'] }}</p>
+  @if ($screen_name == Auth::user()->screen_name)
+    <div>
+      {{ Form::open(array('url' => "/{$screen_name}/items/{$item['item_id']}/delete", 'method' => 'post')) }}
+        <button type="submit">delete</buton>
+      {{ Form::close() }}
+    </div>
+  @endif
 @endforeach
 
 @stop
