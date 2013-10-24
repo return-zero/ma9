@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('ItemTableSeeder');
 		$this->call('StarmapTableSeeder');
 		$this->call('CommentTableSeeder');
+		$this->call('WorkTableSeeder');
 
 		$this->command->info('seed できたでっ！！');
 	}

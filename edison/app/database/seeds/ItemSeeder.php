@@ -16,7 +16,7 @@ class ItemTableSeeder extends Seeder {
     );
 
     $now = date('Y-m-d H:i:s');
-    $type = 'movie';
+    $type = 'video';
     
     foreach($title as $t) {
       Item::create(array(
