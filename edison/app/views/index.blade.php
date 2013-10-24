@@ -61,12 +61,22 @@
   </div>
 </div>
 <div class="col-lg-3">
-  <div id="profile" class="highlight">
+  <div id="profile" class="well">
     @if (Auth::check())
-      <img src="" />
-      {{ Auth::user()->screen_name }}
-      <p><a href="{{ Auth::user()->screen_name }}/stars">stars</a></p>
+      <div class="left">
+        <img alt="{{ Auth::user()->screen_name }}" src="{{ $icon }}" title="{{ Auth::user()->screen_name }}">
+      </div>
+      <div class="right">
+        <div class="screen_name">
+          <a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a>
+        </div>
+        <div class="starts">
+          <a href="{{ Auth::user()->screen_name }}/stars">{{ $star_count }} stars</a>
+        </div>
+      </div>
     @endif
   </div>
+  <a class="twitter-timeline" href="https://twitter.com/edi_soso" data-widget-id="393429954483855360">@edi_soso からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 @stop
