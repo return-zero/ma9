@@ -18,7 +18,7 @@ class WorkTableSeeder extends Seeder {
     $now = date('Y-m-d H:i:s');
     
     foreach($urls as $url) {
-      Item::create(array(
+      Work::create(array(
         'item_id' => mt_rand(1, 8),
         'user_id' => mt_rand(1, 4),
         'url' => $url,
