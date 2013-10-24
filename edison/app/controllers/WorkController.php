@@ -37,7 +37,9 @@ class WorkController extends BaseController {
       $work->created_at = date("Y-m-d H:i:s");
       $work->updated_at = date("Y-m-d H:i:s");
 
-      $work->save();
+      $work->save();      
+
+      Starmap::where('item_id', '=', $item_id)->update(array('notice_flag' => 1));
 
       return Redirect::to("/$screen_name/items/$item_id");
 
