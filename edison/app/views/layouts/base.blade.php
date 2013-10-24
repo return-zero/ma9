@@ -6,7 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     @section('css')
-    {{ HTML::style('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css') }}
+    <!-- {{ HTML::style('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css') }} -->
+    {{ HTML::style('css/edison-bootstrap-min.css') }}
     {{ HTML::style('http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css') }}
     {{ HTML::style('css\base.css') }}
     @show
@@ -27,12 +28,6 @@
             {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
           </div>
           <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active">{{ HTML::link('/', 'TOP') }}</li>
-            </ul>
-            </ul>
-
-      
             <ul class="nav navbar-nav navbar-right">
               @if (Auth::check())
               <li class="active" id="js-notice" data-toggle="dropdown"><a href=""></a></li>
@@ -59,11 +54,12 @@
         @yield('content')
       </div>
     </div>
+    
     <div id="footer">
-      <div class="container">
-        <p class="text-muted credit">WHC <a href="http://ma9.mashupaward.jp">Mashup Awards 9</a></p>
+    	<div class="container">
+      	<p class="text-muted credit">WHC <a href="http://ma9.mashupaward.jp">Mashup Awards 9</a></p>
       </div>
-    </div>
+		</div>
     @section('js')
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}

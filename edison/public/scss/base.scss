@@ -2,7 +2,6 @@
     Import
    --------------- */
 @import "compass";
-@import "compass/reset/";
 @import "config";
 @import "style";
 
@@ -11,12 +10,31 @@
    --------------- */
 
 body {
-	background-color: #fff;
+	background-color: $background_color;
 	word-wrap: break-word;	
 }
 
+.my-panel {
+	//border-color: $border_color;
+	.panel-heading {
+	  color: #fff;
+		background-color: $main_color;
+		//border-color: $border_color;
+	}
+}
+
+
+.p-h-title { 
+	font-size: large; 
+}
+
 .content-wrapper {
-	padding :40px;
-	@include box-shadow(0 1px 3px #666);
-	@include border-radius(3px);
+	margin :20px 0px;
+	//padding :10px 20px;
+	@include box-shadow(0 0 3px #999);
+	//@include border-radius(3px);
+}
+
+.posistion-right {
+	margin :40px;
 }
