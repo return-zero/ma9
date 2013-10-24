@@ -1,8 +1,6 @@
 chef-repo
 ma9
-edison/public/css
 edison/public/dev-js
-edison/public/js
 node_modules
 .sass-cache
 .vagrant
