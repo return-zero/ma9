@@ -3,51 +3,56 @@
 @parent
 @stop
 @section('content')
-<h1>{{ $screen_name }} さんのページ</h1>
-<div class="row">
-	<div class="col-lg-9" style="background:skyblue;">
-	  @foreach ($items as $item)
-	    <h3><a href="/{{ $screen_name }}/items/{{ $item['item_id'] }}">{{ $item['title'] }}</a></h3>
-	  @endforeach
-	</div>
-	<div class="col-lg-3" style="background:blue;">
-		<img src="{{ $icon }}">
-		<div class="row">
-			<div class="col-lg-3" style="background:yellow;">
-				<p>NAME:</p>
-			</div>
-			<div class="col-lg-9" style="background:orange;">
-				<p>{{ $name }}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-6" style="background:yellow;">
-				<p><a href="/{{ $screen_name }}/stars">スター数：{{ $star_num }}</a></p>
-			</div>
-			<div class="col-lg-6" style="background:orange;">
-				hoge
-			</div>
-		</div>
-		
-	</div>
-</div>
-<!-- /.row -->
-<hr>
-<p>star_num: {{ $star_num }}</p>
-<p>screen_name: {{ $screen_name }}</p>
-<p>name: {{ $name }}</p>
-<p>description: {{ $desc }}</p>
 <img src="{{ $icon }}">
-@foreach ($items as $item)
-	<p>items: {{ $item['item_id'] }}</p>
-  <p>items: {{ $item['title'] }}</p>
-  @if ($screen_name == Auth::user()->screen_name)
-    <div>
-      {{ Form::open(array('url' => "/{$screen_name}/items/{$item['item_id']}/delete", 'method' => 'post')) }}
-        <button type="submit">delete</buton>
-      {{ Form::close() }}
-    </div>
-  @endif
-@endforeach
-
+<h3>{{ $screen_name }}</h3>
+<hr>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
+  <li><a href="#works" data-toggle="tab">最近の作品</a></li>
+  <li><a href="#stars" data-toggle="tab">スターした投稿</a></li>
+</ul>
+<div id="stream-tab" class="streams tab-content">
+  <div class="tab-pane fade in active" id="items">
+    @foreach ($items as $item)
+      <div class="items">
+        <div class="item-inner">
+          <div class="icon">
+            <img src="">
+          </div>
+          <div class="item-content">
+            <div class="item-title">
+              <a href="{{ $screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+  </div>
+  <div class="tab-pane fade" id="works">
+    @foreach ($works as $work)
+      <div class="works">
+        <div class="work-inner">
+          <div class="work-content">
+            <div class="work-title">
+              <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+  </div>
+  <div class="tab-pane fade" id="stars">
+    <!--@foreach ($works as $work)
+      <div class="stars">
+        <div class="star-inner">
+          <div class="star-content">
+            <div class="star-title">
+              <a href="{{ $star->item_poster_screen_name }}/items/{{ $star->item_id }}">{{ $star->item_title }}</a><span class="catgory label label-default">{{ $categories["$star->item_category"] }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach-->
+  </div>
+</div>
 @stop

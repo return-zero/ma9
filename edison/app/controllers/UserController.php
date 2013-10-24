@@ -4,6 +4,42 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'ゲーム',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18',
+      'original' => 'オリジナル',
+      'portrait' => '似顔絵',
+      'character' => 'キャラクター'
+    );
+
     $user = User::where('screen_name', '=', $screen_name)->first();
     $star_num = $this->getStarNum($screen_name);
     
@@ -12,26 +48,22 @@ class UserController extends BaseController {
     try {
       Twitter::setOAuthToken($user->oauth_token);
       Twitter::setOAuthTokenSecret($user->oauth_token_secret);
-
       $timeline = Twitter::statusesUserTimeline($twitter_id);
-      
-      $items = $this->showUserItems($screen_name);
-            
-
-      if (Auth::user()->screen_name === $screen_name) {
-        $title = "Mypage";
-      } else {
-        $title = 'About ' + $screen_name;
+      $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
+      foreach ($items as &$item) {
+        $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }
-
+      $works = Work::where('user_id', '=', $user->id)->get();
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
         'desc' => $timeline[0]["user"]["description"],
         'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items,
-        'title' => $title,
+        'title' => $screen_name,
         'star_num' => $star_num,
+        'works' => $works,
+        'categories' => $category_names
       );
 
       return View::make('user', $twitter_profile); 
