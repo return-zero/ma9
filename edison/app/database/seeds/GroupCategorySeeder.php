@@ -16,6 +16,7 @@ class GroupCategoryTableSeeder extends Seeder {
       'g_creation',
       'g_fanart',
       'g_popular',
+      'g_adult'
     );
     
     foreach($group_categories as $group_category) {

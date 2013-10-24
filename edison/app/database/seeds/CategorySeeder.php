@@ -43,10 +43,13 @@ class CategoryTableSeeder extends Seeder {
       array( 'type' => 'illust', 'group_category_id' => 9, 'name' => 'character'),
       array( 'type' => 'illust', 'group_category_id' => 10, 'name' => 'toho'),
       array( 'type' => 'illust', 'group_category_id' => 10, 'name' => 'vocaloid'),
+      array( 'type' => 'illust', 'group_category_id' => 11, 'name' => 'r15'),
+      array( 'type' => 'illust', 'group_category_id' => 11, 'name' => 'gro'),
     );
     
     foreach($categories as $category) {
       Category::create(array(
+        'type' => $category['type'],
         'group_category_id' => $category['group_category_id'],
         'content' => $category['name']
       ));
