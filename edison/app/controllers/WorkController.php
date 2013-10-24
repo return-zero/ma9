@@ -27,12 +27,18 @@ class WorkController extends BaseController {
     preg_match($reg_pixiv, $data['url'], $match_pixiv);
     $pixiv = $match_pixiv ? $match_pixiv[1] : 0;
 
+
     if ( ($nico_video || $nico_seiga || $pixiv) && $not_found ) {
+
+      if ($nico_video) $url = $nico_video;
+      if ($nico_seiga) $url = $nico_seiga;
+      if ($pixiv) $url = $pixiv;
+
       $work = new Work;
     
       $work->item_id = $item_id;
       $work->user_id = Auth::user()->id;
-      $work->url = $data['url'];
+      $work->url = $url;
       $work->comment = $data['comment'];
       $work->created_at = date("Y-m-d H:i:s");
       $work->updated_at = date("Y-m-d H:i:s");
