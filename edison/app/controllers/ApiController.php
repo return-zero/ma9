@@ -5,11 +5,11 @@ class ApiController extends BaseController {
   public function getNoticeNum()
   {
     $login_user_id = Auth::user()->id;
-    $notice_num = Starmap::where('user_id', '=', $login_user_id)->where('watched_flag', '=', 0)
-                                                                ->where('notice_flag', '=', 1)
-                                                                ->count();
+    $notice_num = Starmap::where('user_id', '=', $login_user_id)
+                         ->where('watched_flag', '=', 0)
+                         ->where('notice_flag', '=', 1)
+                         ->count();
     
-
     $json_val = array(
       'user_id' => $login_user_id,
       'screen_name' => Auth::user()->screen_name,
@@ -36,9 +36,11 @@ class ApiController extends BaseController {
   public function getNoticeContents()
   {
     $login_user_id = Auth::user()->id;
-    $notice = Starmap::where('user_id', '=', $login_user_id)->where('watched_flag', '=', 0)
-                                                            ->where('notice_flag', '=', 1)
-                                                            ->get();
+    $notice = Starmap::where('user_id', '=', $login_user_id)
+                     ->where('watched_flag', '=', 0)
+                     ->where('notice_flag', '=', 1)
+                     ->get();
+
     $notice_item_ids = array();
     foreach ($notice as $n) {
       $notice_item_ids[] = $n["item_id"];
@@ -65,6 +67,7 @@ class ApiController extends BaseController {
     echo json_encode($json_val);
   }
 
+
   public function debug($val)
   {
     echo "<pre>";
@@ -73,9 +76,13 @@ class ApiController extends BaseController {
     exit;
   }
 
-  // public function watched()
-  // {
-  //   $login_user_id = Auth::user()->id;
-  // }
+
+  public function postWatched()
+  {
+    $login_user_id = Auth::user()->id;
+    Starmap::where('user_id', '=', $login_user_id)
+           ->where('item_id', '=', $_POST['item_id'])
+           ->update(array('watched_flag' => 1));
+  }
 
 }

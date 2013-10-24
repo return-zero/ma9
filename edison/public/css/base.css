@@ -10,3 +10,21 @@
 /* ---------------
     Scss
    --------------- */
+/* line 12, ../scss/base.scss */
+body {
+  background-color: #f7f3e8;
+  word-wrap: break-word;
+}
+
+/* line 17, ../scss/base.scss */
+.p-h-title {
+  font-size: large;
+}
+
+/* line 21, ../scss/base.scss */
+.content-wrapper {
+  margin: 20px 0px;
+  -webkit-box-shadow: 0 0 3px #999999;
+  -moz-box-shadow: 0 0 3px #999999;
+  box-shadow: 0 0 3px #999999;
+}

@@ -8,3 +8,18 @@
 /* ---------------
     Scss
    --------------- */
+
+body {
+	background-color: $background_color;
+	word-wrap: break-word;	
+}
+
+.p-h-title { 
+	font-size: large; 
+}
+
+.content-wrapper {
+	margin :20px 0px;
+	@include box-shadow(0 0 3px #999);
+}
+
