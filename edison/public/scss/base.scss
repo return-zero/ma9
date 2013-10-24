@@ -2,7 +2,8 @@
     Import
    --------------- */
 @import "compass";
-//@import "compass/reset/";
+@import "compass/reset/";
+@import "config";
 
 /* ---------------
     Mixin
@@ -65,4 +66,10 @@
 body {
 	background-color: #fff;
 	word-wrap: break-word;	
+}
+
+.content-wrapper {
+	padding :40px;
+	@include box-shadow(0 1px 3px #666);
+	@include border-radius(3px);
 }

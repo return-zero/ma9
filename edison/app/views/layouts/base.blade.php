@@ -58,7 +58,6 @@
       <div class="container">
         @yield('content')
       </div>
-      </div>
     </div>
     <div id="footer">
       <div class="container">
