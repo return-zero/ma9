@@ -40,12 +40,12 @@
               <li role="presentation" class="notice-content"></li>
             
               </ul>
-              <li><a href="new">投稿する</a></li>
+              <li><a href="/new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
-                    <li role="presenattion"><a role="menuitem" tabindex="-1" href="{{ Auth::user()->screen_name }}">マイページ</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="logout">ログアウト</a></li>
+                    <li role="presenattion"><a role="menuitem" tabindex="-1" href="/{{ Auth::user()->screen_name }}">マイページ</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">ログアウト</a></li>
                   </ul>
                 </li>
               @else
