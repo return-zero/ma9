@@ -1,9 +1,11 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     compass: {
-      dev: {
+	    compile: {
         options: {
-          config: 'edison/public/config.rb'
+          sassDir: 'edison/public/scss',
+          cssDir: 'edison/public/css',
+          specify: 'edison/public/scss/*.scss'
         }
       }
     },
@@ -43,7 +45,7 @@ module.exports = function(grunt) {
     watch: {
       stylesheets: {
         files: ['edison/public/scss/*.scss'],
-        tasks: ['sass']
+        tasks: ['compass']
       },
 
       coffeescript: {

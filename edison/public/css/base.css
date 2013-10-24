@@ -1,1 +1,14 @@
-body{}
+/* ---------------
+    Import
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* ---------------
+    Scss
+   --------------- */
+/* line 65, ../scss/base.scss */
+body {
+  background-color: #fff;
+  word-wrap: break-word;
+}
