@@ -39,7 +39,7 @@ class HomeController extends BaseController {
       'handcraft' => 'ニコニコ手芸部',
       'make' => '作ってみた',
       'anime' => 'アニメ',
-      'game' => 'toho',
+      'game' => 'ゲーム',
       'toho' => '東方',
       'imas' => 'アイドルマスター',
       'radio' => 'ラジオ',
