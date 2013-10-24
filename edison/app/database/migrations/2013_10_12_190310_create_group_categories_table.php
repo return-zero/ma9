@@ -15,7 +15,7 @@ class CreateGroupCategoriesTable extends Migration {
 			$table->increments('id');
 			$table->string('content');
 			$table->datetime('created_at');
-			$table->datetime('updated_at');
+			$table->string('updated_at');
 		});
 	}
 

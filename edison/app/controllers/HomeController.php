@@ -47,7 +47,10 @@ class HomeController extends BaseController {
       'are' => '例のアレ',
       'diary' => '日記',
       'other' => 'その他',
-      'r18' => 'R-18'
+      'r18' => 'R-18',
+      'original' => 'オリジナル',
+      'portrait' => '似顔絵',
+      'character' => 'キャラクター'
     );
 
     $all_items = Item::take(10)->get();
@@ -103,7 +106,10 @@ class HomeController extends BaseController {
       'are' => '例のアレ',
       'diary' => '日記',
       'other' => 'その他',
-      'r18' => 'R-18'
+      'r18' => 'R-18',
+      'original' => 'オリジナル',
+      'portrait' => '似顔絵',
+      'character' => 'キャラクター'
     );
     $data = array(
       'title' => '新規投稿',
