@@ -1,5 +1,7 @@
 chef-repo
 ma9
+.idea
+edison/public/css
 edison/public/dev-js
 node_modules
 .sass-cache
