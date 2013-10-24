@@ -75,7 +75,7 @@ class HomeController extends BaseController {
 
   public function showNew()
   {
-    $categories = Category::all();
+    $categories = Category::where('type', '=', 'video')->get();
     $category_names = array(
       'ent' => 'エンターテイメント',
       'music' => '音楽',
@@ -107,9 +107,6 @@ class HomeController extends BaseController {
       'diary' => '日記',
       'other' => 'その他',
       'r18' => 'R-18',
-      'original' => 'オリジナル',
-      'portrait' => '似顔絵',
-      'character' => 'キャラクター'
     );
     $data = array(
       'title' => '新規投稿',

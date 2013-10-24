@@ -4,36 +4,37 @@
 @stop
 @section('content')
 {{ Form::open(array('url' => 'new', 'method' => 'POST')) }}
-
+<h4>アイデアを投稿する</h4>
+<hr>
 <div class="row">
   <div class="col-lg-3">
-    <h3>Title</h3>
+    <p>本文</p>
   </div>
   <div class="col-lg-9">
     <div class="form-group">
-      {{ Form::text('title', '', array('class' => 'form-control', 'placeholder' => 'Enter title')) }}
+      {{ Form::textarea('title', '', array('class' => 'form-control', 'rows' => '3')) }}
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-lg-3">
-    <h3>Content</h3>
+    <p>追記欄</p>
   </div>
   <div class="col-lg-9">
     <div class="form-group">
-      {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '5', 'placeholder' => 'Enter content')) }}
+      {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '5')) }}
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-lg-3">
-    <h3>Type</h3>
+    <p>タイプ</p>
   </div>
   <div class="col-lg-9">
     <label class="radio-inline">
-      <input type="radio" name="type" id="movie" value="movie">
+      <input type="radio" name="type" id="video" value="video" checked>
       動画
     </label>
     <label class="radio-inline">
@@ -45,10 +46,11 @@
 
 <div class="row">
   <div class="col-lg-3">
-    <h3>Category</h3>
+    <p>カテゴリー</p>
   </div>
   <div class="col-lg-9">
-    <select class="form-control" name="category_id">
+    <select class="form-control" name="category_id" id="category">
+        <option value="0">未選択</option>
       @foreach ($categories as $category)
         <option value="{{ $category['id'] }}">{{ $names[$category['content']] }}</option>
       @endforeach
@@ -58,7 +60,7 @@
 
 <div class="row">
   <div class="col-lg-3">
-    <h3>Tags</h3>
+    <p>タグ</p>
   </div>
   <div class="col-lg-9">
     <div id="tag-form-wrap">
@@ -69,6 +71,6 @@
     </div>
   </div>
 </div>
-<button type="submit" class="btn btn-default">Submit</button>
+<button type="submit" class="btn btn-primary">投稿する</button>
 {{ Form::close() }}
 @stop

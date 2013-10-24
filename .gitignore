@@ -3,8 +3,6 @@ ma9
 .idea
 edison/public/css
 edison/public/dev-js
-edison/public/js/*.js
-edison/public/coffee/*.js
 node_modules
 .sass-cache
 .vagrant

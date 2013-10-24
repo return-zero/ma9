@@ -1,4 +1,8 @@
 @extends('layouts.base')
+@section('css')
+@parent
+{{ HTML::style('css\index.css') }}
+@stop
 @section('header')
 @parent
 @stop
@@ -25,7 +29,7 @@
                 <a href="{{ $item->screen_name }}">{{ $item->screen_name }}</a> が{{ $item->created_at }}に投稿しました
               </div>
               <div class="item-title">
-                <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory"><a href="tag/{{ $item->category }}">{{ $categories["$item->category"]}}</a></span>
+                <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
               </div>
             </div>
           </div>
@@ -47,7 +51,7 @@
                 <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が{{ $work->created_at }}に投稿しました
               </div>
               <div class="work-title">
-                <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory"><a href="tag/{{ $work->item_category }}">{{ $categories["$work->item_category"] }}</a></span>
+                <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
               </div>
             </div>
           </div>
@@ -57,10 +61,12 @@
   </div>
 </div>
 <div class="col-lg-3">
-  @if (Auth::check())
-    <img src="" />
-    {{ Auth::user()->screen_name }}
-  <p><a href="{{ Auth::user()->screen_name }}/stars">stared</a></p>
-  @endif
+  <div id="profile" class="highlight">
+    @if (Auth::check())
+      <img src="" />
+      {{ Auth::user()->screen_name }}
+      <p><a href="{{ Auth::user()->screen_name }}/stars">stars</a></p>
+    @endif
+  </div>
 </div>
 @stop
