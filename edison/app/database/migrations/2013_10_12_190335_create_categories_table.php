@@ -13,6 +13,7 @@ class CreateCategoriesTable extends Migration {
 	{
 		Schema::create('categories', function($table) {
 			$table->increments('id');
+			$table->enum('type', array('video', 'illust'));
 			$table->integer('group_category_id');
 			$table->string('content');
 			$table->datetime('created_at');
