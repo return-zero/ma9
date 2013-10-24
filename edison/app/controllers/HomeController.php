@@ -64,11 +64,20 @@ class HomeController extends BaseController {
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
+
+    $user = User::where('screen_name', '=', Auth::user()->screen_name)->get()[0];
+    Twitter::setOAuthToken($user->oauth_token);
+    Twitter::setOAuthTokenSecret($user->oauth_token_secret);
+    $timeline = Twitter::statusesUserTimeline($user->id);
+
+    $star_count = Starmap::where('user_id', '=', $user->id)->count();
     $data = array(
       'title' => 'トップ',
       'all_items' => $all_items,
       'recent_works' => $recent_works,
-      'categories' => $category_names
+      'categories' => $category_names,
+      'icon' => $timeline[0]['user']['profile_image_url'],
+      'star_count' => $star_count
     );
     return View::make('index', $data);
   }

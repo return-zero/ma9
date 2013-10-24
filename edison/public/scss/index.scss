@@ -1,5 +1,4 @@
 @import "compass";
-@import "compass/reset";
 @import "config";
 @import "style";
 
@@ -9,4 +8,21 @@ ul#stream-tab {
 
 .item-title span {
   margin-left: 10px
+}
+
+.item-title a {
+  font-size: 16px;
+}
+
+#profile {
+  margin-top: 20px;
+}
+.left {
+  display: inline-block;
+  float: left;
+}
+
+.right {
+  display: inline-block;
+  margin-left: 10px;
 }

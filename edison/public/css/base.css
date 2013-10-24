@@ -16,26 +16,15 @@ body {
   word-wrap: break-word;
 }
 
-/* line 19, ../scss/base.scss */
-.my-panel .panel-heading {
-  color: #fff;
-  background-color: #fad67a;
-}
-
-/* line 27, ../scss/base.scss */
+/* line 17, ../scss/base.scss */
 .p-h-title {
   font-size: large;
 }
 
-/* line 31, ../scss/base.scss */
+/* line 21, ../scss/base.scss */
 .content-wrapper {
   margin: 20px 0px;
   -webkit-box-shadow: 0 0 3px #999999;
   -moz-box-shadow: 0 0 3px #999999;
   box-shadow: 0 0 3px #999999;
-}
-
-/* line 38, ../scss/base.scss */
-.posistion-right {
-  margin: 40px;
 }
