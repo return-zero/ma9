@@ -37,7 +37,7 @@
               @if (Auth::check())
               <li class="active" id="js-notice" data-toggle="dropdown"><a href=""></a></li>
               <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
-              <li role="presentation" class="notice-content"><a href="#"></a></li>
+              <li role="presentation" class="notice-content"></li>
             
               </ul>
               <li><a href="new">投稿する</a></li>
@@ -69,8 +69,7 @@
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
-    {{ HTML::script('js/get_notice.js') }}
-
+    
     @show
   </body>
 </html>
