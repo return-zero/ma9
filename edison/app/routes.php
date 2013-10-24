@@ -41,6 +41,7 @@ Route::group(array('before' => 'auth') ,function() {
    ApiController
    -------------- */
 Route::get('api/get/notice/num', 'ApiController@getNoticeNum');
+Route::get('api/getcategories/{type}', 'ApiController@getCategories');
 
 /* --------------
    HomeController

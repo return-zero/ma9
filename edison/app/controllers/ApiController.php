@@ -17,6 +17,19 @@ class ApiController extends BaseController {
     echo json_encode($json_val);
   }
 
+  public function getCategories($type)
+  {
+    $categories = Category::where('type', '=', $type)->get();
+    $ret = array();
+    foreach ($categories as $category) {
+      $ret['category'][] = array(
+        'category_id' => $category->id,
+        'content' => $category->content
+      );
+    }
+    return json_encode($ret);
+  }
+
   // public function watched()
   // {
   //   $login_user_id = Auth::user()->id;

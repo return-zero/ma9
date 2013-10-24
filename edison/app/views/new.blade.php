@@ -33,7 +33,7 @@
   </div>
   <div class="col-lg-9">
     <label class="radio-inline">
-      <input type="radio" name="type" id="movie" value="movie">
+      <input type="radio" name="type" id="video" value="video" checked>
       動画
     </label>
     <label class="radio-inline">
@@ -48,7 +48,8 @@
     <h3>Category</h3>
   </div>
   <div class="col-lg-9">
-    <select class="form-control" name="category_id">
+    <select class="form-control" name="category_id" id="category">
+        <option value="0">未選択</option>
       @foreach ($categories as $category)
         <option value="{{ $category['id'] }}">{{ $names[$category['content']] }}</option>
       @endforeach
