@@ -41,7 +41,6 @@ class UserController extends BaseController {
     );
 
     $user = User::where('screen_name', '=', $screen_name)->first();
-    $star_num = $this->getStarNum($screen_name);
     $star_items = $this->getStars($screen_name);
     
     $twitter_id = $user->id;
@@ -55,6 +54,12 @@ class UserController extends BaseController {
         $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }
       $works = Work::where('user_id', '=', $user->id)->get();
+      foreach ($works as &$work) {
+        $work['item_poster_screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
+        $item = Item::where('id', '=', $work->item_id)->get()[0];
+        $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+        $work['item_title'] = $item->title;
+      }
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
@@ -62,7 +67,6 @@ class UserController extends BaseController {
         'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items,
         'title' => $screen_name,
-        'star_num' => $star_num,
         'stars' => $star_items,
         'works' => $works,
         'categories' => $category_names,
