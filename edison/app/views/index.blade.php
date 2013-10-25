@@ -9,7 +9,7 @@
 @section('content')
 <div class="col-lg-9 content-wrapper">
   <div class="header">
-    <h3>ほしいものをお願いしてみよう。</h3>
+    <h3>ほしい動画、絵をお願いしてみよう。</h3>
     <a class="btn btn-primary" href="new">ほしいもの・アイデアを投稿する</a>
   </div>
   <ul id="stream-tab" class="nav nav-tabs">
