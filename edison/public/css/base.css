@@ -18,7 +18,7 @@ body {
 
 /* line 17, ../scss/base.scss */
 .content-wrapper {
-  margin: 20px 0px;
+  margin: 20px 0;
   padding: 20px;
   -webkit-box-shadow: 0 0 3px #999999;
   -moz-box-shadow: 0 0 3px #999999;

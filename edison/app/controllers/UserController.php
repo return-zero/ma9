@@ -42,6 +42,7 @@ class UserController extends BaseController {
 
     $user = User::where('screen_name', '=', $screen_name)->first();
     $star_num = $this->getStarNum($screen_name);
+    $star_items = $this->getStars($screen_name);
     
     $twitter_id = $user->id;
 
@@ -62,8 +63,9 @@ class UserController extends BaseController {
         'items' => $items,
         'title' => $screen_name,
         'star_num' => $star_num,
+        'stars' => $star_items,
         'works' => $works,
-        'categories' => $category_names
+        'categories' => $category_names,
       );
 
       return View::make('user', $twitter_profile); 
@@ -112,6 +114,40 @@ class UserController extends BaseController {
 
   public function showUserStars($screen_name)
   {
+    $star_items = $this->getStars($screen_name);
+    $res = array("star_items" => $star_items,
+                 "title" => "Stars"
+           );
+    return View::make('stars', $res);
+  }
+  
+  public function getStars($screen_name)
+  {
+    $user = User::where('screen_name','=',$screen_name)->first();
+    $star_lists = Starmap::where('user_id', '=', $user->id)->get();
+    $star_items = array();
+    foreach($star_lists as $star_list) {
+    	$poster_user_id = Item::where('id', '=', $star_list["attributes"]["item_id"])->get()[0]->user_id;
+    	$poster_screen_name = User::where('id', '=', $poster_user_id)->get()[0]->screen_name;
+      $item = Item::where('id', '=', $star_list["attributes"]["item_id"])->first();
+      $category_id = $item["attributes"]["category_id"];
+      $category_name = Category::where('id', '=', $category_id)->first()["attributes"]["content"];
+      $star_items[] = array(
+      	'poster_screen_name' => $poster_screen_name,
+        'category' => $category_name,
+        'content' => $item["attributes"]["content"],
+        'title' => $item["attributes"]["title"],
+        'type' => $item["attributes"]["type"],
+        'item_id' => $item["attributes"]["id"],
+      );
+    }
+    
+    return $star_items; 
+  }
+  
+  /*
+  public function showUserStars($screen_name)
+  {
     $user = User::where('screen_name','=',$screen_name)->first();
     
     $star_items_id = array();
@@ -142,6 +178,7 @@ class UserController extends BaseController {
     
     return View::make('stars', $res);
   }
+  */
 
   public function getLogin()
   {
