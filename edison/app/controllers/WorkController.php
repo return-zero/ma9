@@ -9,7 +9,7 @@ class WorkController extends BaseController {
     
     $now = date("Y-m-d H:i:s");
 
-    if ($type == 'video') {
+    if ($item['type'] == 'video') {
       $reg = '/^http:\/\/www\.nicovideo\.jp\/watch\/(sm[0-9]+)/';
     } else {
       $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/(im[0-9]+)\?.*/';
@@ -21,9 +21,10 @@ class WorkController extends BaseController {
     }
     
     preg_match($reg, $data['url'], $match);
-    $nico_video = $match_video ? $match_video[1] : 0;
+    $nico_content = $match ? $match[1] : 0;
 
-    if ( preg_match($reg, $data['url'], $match) && $not_found ) {
+
+    if ( $nico_content && $not_found ) {
       $work = new Work;
     
       $work->item_id = $item_id;
@@ -45,8 +46,10 @@ class WorkController extends BaseController {
 
   }
 
-  public function delete($item_id) {
-
+  public function delete($work_id) {
+    var_dump($work_id);exit;
+    $work = Work::where('id', '=', $work_id);
+    var_dump($work);exit;
   }
 
 }
