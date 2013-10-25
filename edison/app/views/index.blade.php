@@ -61,20 +61,17 @@
   </div>
 </div>
 <div class="col-lg-3">
-  <div class="profile well">
-    @if (Auth::check())
-      <div class="left">
-        <img alt="{{ Auth::user()->screen_name }}" src="{{ $icon }}" title="{{ Auth::user()->screen_name }}">
-      </div>
-      <div class="right">
-        <div class="screen_name">
-          <a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a>
+  <div class="content-wrapper">
+    <div class="row">
+      @if (Auth::check())
+        <div class="col-lg-4">
+          <img class="pull-left" alt="{{ Auth::user()->screen_name }}" src="{{ $icon }}" title="{{ Auth::user()->screen_name }}">
         </div>
-        <div class="starts">
-          <a href="{{ Auth::user()->screen_name }}/stars">{{ $star_count }} stars</a>
+        <div class="col-lg-8">
+            <p><a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a></p>
         </div>
-      </div>
-    @endif
+      @endif
+    </div>
   </div>
   <a class="twitter-timeline" href="https://twitter.com/edi_soso" data-widget-id="393429954483855360">@edi_soso からのツイート</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
