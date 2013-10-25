@@ -30,3 +30,20 @@ body {
   border-radius: 3px;
   background-color: #fff;
 }
+
+/* line 25, ../scss/base.scss */
+#profile {
+  margin-top: 20px;
+}
+
+/* line 28, ../scss/base.scss */
+.left {
+  display: inline-block;
+  float: left;
+}
+
+/* line 33, ../scss/base.scss */
+.right {
+  display: inline-block;
+  margin-left: 10px;
+}

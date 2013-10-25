@@ -36,6 +36,7 @@ class ItemController extends BaseController {
           'cmsid' => $value->cmsid,
           'title' => $value->title,
           'thumbnail_url' => $value->thumbnail_url,
+          'start_time' => $value->start_time,
           'view_counter' => $value->view_counter,
           'comment_counter' => $value->comment_counter,
           'mylist_counter' => $value->mylist_counter
@@ -44,11 +45,8 @@ class ItemController extends BaseController {
     }
 
     $data = array(
-      'id' => $item[0]->id,
+      'item' => $item[0],
       'title' => $item[0]->title,
-      'content' => $item[0]->content,
-      'created_at' => $item[0]->created_at,
-      'updated_at' => $item[0]->updated_at,
       'comments' => $comments,
       'tags' => $tags,
       'screen_name' => $screen_name,
