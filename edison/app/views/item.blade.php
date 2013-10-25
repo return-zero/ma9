@@ -14,16 +14,13 @@
     </div>
   </div>
   <div class="col-lg-3">
-    <div class="well profile">
-      <div class="left">
-        <img src="http://api.osae.me/retwipi/{{ $screen_name }}">
-      </div>
-      <div class="right">
-        <div class="screen_name">
-          <a hre="/{{ $screen_name }}">{{ $screen_name }}</a>
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-lg-4">
+          <img src="http://api.osae.me/retwipi/{{ $screen_name }}">
         </div>
-        <div class="works">
-          <a>works</a>
+        <div class="col-lg-8">
+          <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
         </div>
       </div>
     </div>
@@ -58,7 +55,11 @@
   </div>
 </div>
 
-<a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">動画・絵を投稿する</a>
+@if ($item->type == 'video')
+  <a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">動画を投稿する</a>
+@else
+  <a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">絵を投稿する</a>
+@endif
 
 <!-- Work Form Modal -->
   <div class="modal fade" id="work-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
