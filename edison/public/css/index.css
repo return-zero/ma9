@@ -35,3 +35,9 @@ ul#stream-tab {
   display: inline-block;
   margin-left: 10px;
 }
+
+/* line 30, ../scss/index.scss */
+.items {
+  border-bottom: thin dotted;
+  padding-bottom: 10px;
+}
