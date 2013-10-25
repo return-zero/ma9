@@ -44,7 +44,7 @@
                   </ul>
                 </li>
               @else
-                <li><a href="login">ログイン</a></li>
+                <li><a href="/login">ログイン</a></li>
               @endif
             </ul>
           </div>
