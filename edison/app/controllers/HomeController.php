@@ -53,7 +53,7 @@ class HomeController extends BaseController {
       'character' => 'キャラクター'
     );
 
-    $all_items = Item::take(10)->get();
+    $all_items = Item::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($all_items as &$item) {
       $item['screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;

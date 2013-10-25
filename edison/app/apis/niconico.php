@@ -10,7 +10,7 @@ class NicoSugoiSearch {
     $post_data = array(
       'query' => $query,
       'service' => array($service),
-      'search' => array('title'),
+      'search' => array('title', 'description', 'tags'),
       'join' => array('cmsid', 'title', 'description', 'thumbnail_url', 'view_counter', 'comment_counter', 'mylist_counter'),
       'filters' => array(array(
         'type' => 'equal',
