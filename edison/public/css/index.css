@@ -19,24 +19,7 @@ ul#stream-tab {
   font-size: 16px;
 }
 
-/* line 17, ../scss/index.scss */
-#profile {
-  margin-top: 20px;
-}
-
-/* line 20, ../scss/index.scss */
-.left {
-  display: inline-block;
-  float: left;
-}
-
-/* line 25, ../scss/index.scss */
-.right {
-  display: inline-block;
-  margin-left: 10px;
-}
-
-/* line 30, ../scss/index.scss */
+/* line 18, ../scss/index.scss */
 .items {
   border-bottom: thin dotted;
   padding-bottom: 10px;

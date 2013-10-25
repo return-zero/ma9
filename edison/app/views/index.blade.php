@@ -61,7 +61,7 @@
   </div>
 </div>
 <div class="col-lg-3">
-  <div id="profile" class="well">
+  <div class="profile well">
     @if (Auth::check())
       <div class="left">
         <img alt="{{ Auth::user()->screen_name }}" src="{{ $icon }}" title="{{ Auth::user()->screen_name }}">

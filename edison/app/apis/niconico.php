@@ -11,7 +11,7 @@ class NicoSugoiSearch {
       'query' => $query,
       'service' => array($service),
       'search' => array('title', 'description', 'tags'),
-      'join' => array('cmsid', 'title', 'description', 'thumbnail_url', 'view_counter', 'comment_counter', 'mylist_counter'),
+      'join' => array('cmsid', 'title', 'description', 'thumbnail_url', 'start_time', 'view_counter', 'comment_counter', 'mylist_counter'),
       'filters' => array(array(
         'type' => 'equal',
         'field' => 'ss_adult',
