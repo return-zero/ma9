@@ -151,14 +151,16 @@
   @endforeach
 </div>
 <div class="row">
-  {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
   <div class="comment_header">
     コメントを書く
   </div>
-  <div class="form-group">
-    {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
+  {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
+    <div class="form-group">
+      {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
+    </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-primary">コメントする</button>
-    {{ Form::close() }}
-  </div>
+    </div>
+  {{ Form::close() }}
 </div>
 @stop
