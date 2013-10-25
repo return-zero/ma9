@@ -47,9 +47,9 @@ class WorkController extends BaseController {
   }
 
   public function delete($work_id) {
-    var_dump($work_id);exit;
-    $work = Work::where('id', '=', $work_id);
-    var_dump($work);exit;
+    $work = Work::find($work_id);
+    $work->delete();
+    return Redirect::to("/$screen_name");
   }
 
 }

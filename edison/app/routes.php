@@ -33,7 +33,7 @@ Route::group(array('before' => 'auth') ,function() {
    -------------- */
   Route::get('work/new', 'WorkController@new');
   Route::post('work/create/{item_id}', 'WorkController@create');
-  Route::post('work/delete/{item_id}', 'WorkController@delete');
+  Route::post('work/delete/{work_id}', 'WorkController@delete');
 
 });
 
