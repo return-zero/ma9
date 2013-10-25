@@ -63,7 +63,7 @@ class UserController extends BaseController {
         'items' => $items,
         'title' => $screen_name,
         'star_num' => $star_num,
-        'star_items' => $star_items,
+        'stars' => $star_items,
         'works' => $works,
         'categories' => $category_names,
       );
@@ -127,16 +127,21 @@ class UserController extends BaseController {
     $star_lists = Starmap::where('user_id', '=', $user->id)->get();
     $star_items = array();
     foreach($star_lists as $star_list) {
+    	$poster_user_id = Item::where('id', '=', $star_list["attributes"]["item_id"])->get()[0]->user_id;
+    	$poster_screen_name = User::where('id', '=', $poster_user_id)->get()[0]->screen_name;
       $item = Item::where('id', '=', $star_list["attributes"]["item_id"])->first();
       $category_id = $item["attributes"]["category_id"];
       $category_name = Category::where('id', '=', $category_id)->first()["attributes"]["content"];
       $star_items[] = array(
+      	'poster_screen_name' => $poster_screen_name,
         'category' => $category_name,
         'content' => $item["attributes"]["content"],
         'title' => $item["attributes"]["title"],
         'type' => $item["attributes"]["type"],
+        'item_id' => $item["attributes"]["id"],
       );
     }
+    
     return $star_items; 
   }
   
