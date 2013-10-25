@@ -1,13 +1,14 @@
 @extends('layouts.base')
 @section('header')
 @parent
+{{ HTML::style('css\new.css') }}
 @stop
 @section('content')
 {{ Form::open(array('url' => 'new', 'method' => 'POST')) }}
 <div class="row">
   <div class="col-lg-2"></div>
   <div class="col-lg-8">
-    <div class="panel panel-primary content-wrapper">
+    <div class="panel panel-primary panel-wrapper">
       <div class="panel-heading"><span class="p-h-title">アイデアを投稿する</span></div>
       <div class="panel-body">
         <div class="row">
