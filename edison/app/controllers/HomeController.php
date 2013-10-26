@@ -61,6 +61,8 @@ class HomeController extends BaseController {
     $recent_works = Work::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($recent_works as &$work) {
       $item = Item::where('id', '=', $work->item_id)->get()[0];
+      $work['item'] = $item;
+      $work['screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
@@ -70,14 +72,14 @@ class HomeController extends BaseController {
     Twitter::setOAuthTokenSecret($user->oauth_token_secret);
     $timeline = Twitter::statusesUserTimeline($user->id);
 
-    $star_count = Starmap::where('user_id', '=', $user->id)->count();
     $data = array(
       'title' => 'トップ',
       'all_items' => $all_items,
       'recent_works' => $recent_works,
       'categories' => $category_names,
       'icon' => $timeline[0]['user']['profile_image_url'],
-      'star_count' => $star_count
+      'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
+      'work_count' => Starmap::where('user_id', '=', Auth::user()->id)->count(),
     );
     return View::make('index', $data);
   }

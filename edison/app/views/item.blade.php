@@ -21,6 +21,9 @@
         </div>
         <div class="col-lg-8">
           <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+          <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+          <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+
         </div>
       </div>
     </div>
@@ -132,7 +135,7 @@
 
 <div class="row" id="comment_area">
   <div class="comment_header">
-    <h3><span class="glyphicon glyphicon-chevron-right">コメント</span></h3>
+    <h3><span class="glyphicon glyphicon-comment"></span> コメント</h3>
   </div>
   @foreach ($comments as $comment)
     <div class="comment">
@@ -153,7 +156,7 @@
 </div>
 <div class="row">
   <div class="comment_header">
-    コメントを書く
+    <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
   </div>
   {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
     <div class="form-group">
