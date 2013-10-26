@@ -137,8 +137,8 @@
     <h3><span class="glyphicon glyphicon-comment"></span> コメント</h3>
   </div>
   @foreach ($comments as $comment)
-    <div class="comment">
-      <div class="user_data">
+    <div class="comment row">
+      <div class="user_data pull-left col-lg-1">
         <div class="user_icon">
           <img src="http://api.osae.me/retwipi/{{ $comment->name->screen_name}}">
         </div>
@@ -146,7 +146,7 @@
           <a href="/{{ $comment->name->screen_name }}">{{ $comment->name->screen_name }}</a>
         </div>
       </div>
-      <div class="comment_box well">
+      <div class="comment_box well col-lg-11">
         <div class="comment_text">{{{ $comment->comment }}}</div>
         <div class="comment_status">{{ $comment->created_at }}</div>
       </div>
