@@ -23,7 +23,6 @@
           <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
           <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
           <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
-
         </div>
       </div>
     </div>
@@ -39,7 +38,7 @@
       <div id="tags">
         <p>
           @foreach ($tags as $tag)
-            <nobr>{{ $tag }}</nobr>
+            <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
           @endforeach
         </p>
       </div>

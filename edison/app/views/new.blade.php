@@ -13,7 +13,8 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-3">
-            <p>本文</p>
+            <p>本文（全角150文字）</p>
+            <span class="help-box">150文字以上必要な方は、以下の追記欄を使用して下さい</span>
           </div>
           <div class="col-lg-9">
             <div class="form-group">
@@ -25,7 +26,7 @@
         
         <div class="row">
           <div class="col-lg-3">
-            <p>追記欄</p>
+            <p>追記欄（全角2000文字）</p>
           </div>
           <div class="col-lg-9">
             <div class="form-group">
