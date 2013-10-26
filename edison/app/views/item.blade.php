@@ -39,7 +39,7 @@
       <div id="tags">
         <p>
           @foreach ($tags as $tag)
-            <nobr>{{ $tag }}/nobr>
+            <nobr>{{ $tag }}</nobr>
           @endforeach
         </p>
       </div>
