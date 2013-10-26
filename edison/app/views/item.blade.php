@@ -39,7 +39,11 @@
       <div id="tags">
         <p>
           @foreach ($tags as $tag)
-            <nobr>{{ $tag }}</nobr>
+            @if ($item->type == 'video')
+              <nobr><a href="http://www.nicovideo.jp/tag/{{ $tag }}" target="_blank">{{ $tag }}</a></nobr>
+            @else
+              <nobr><a href="http://seiga.nicovideo.jp/tag{{ $tag }}" target="_blank">{{ $tag }}</a></nobr>
+            @endif
           @endforeach
         </p>
       </div>
