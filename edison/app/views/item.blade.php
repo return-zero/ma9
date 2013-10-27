@@ -171,12 +171,12 @@
   <div class="comment_header">
     <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
   </div>
-  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
+  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post', 'name' => 'commentInfo')) }}
     <div class="form-group">
-      {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
+      <textarea name="comment" class="form-control" rows="5" ng-model="comment" ng-minlength="1" required></textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">コメントする</button>
+      <button type="submit" class="btn btn-primary" ng-disabled="commentInfo.comment.$invalid">コメントする</button>
     </div>
   {{ Form::close() }}
 </div>
