@@ -23,6 +23,9 @@ Route::group(array('before' => 'auth') ,function() {
   Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
   Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');
   Route::post('{screen_name}/items/{item_id}/unstar', 'ItemController@unstar');
+  Route::get('{screen_name}/items/{item_id}/edit', 'ItemController@edit');
+  Route::post('{screen_name}/items/{item_id}/update','ItemController@update');
+
 
   /* --------------
    WorkController
