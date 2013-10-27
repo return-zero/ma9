@@ -45,7 +45,7 @@ Route::post('api/post/watched', 'ApiController@postWatched');
    HomeController
    -------------- */
 Route::get('/', 'HomeController@showIndex');
-Route::get('404','HomeController@show404');
+Route::get('login', 'HomeController@showLogin');
 
 /* --------------
    ItemController

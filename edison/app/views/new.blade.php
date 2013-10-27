@@ -19,7 +19,7 @@
           <div class="col-lg-9">
             <div class="form-group">
               <textarea name="title" class="form-control" rows="3" ng-model="title" ng-minlength="1" ng-maxlength="150" required></textarea>
-              <p ng-show="itemInfo.title.$error.maxlength"><ng-show="itemInfo.title.$error.maxlength" class="error">150文字以内で入力して下さい</p>
+              <p class="text-danger" ng-show="itemInfo.title.$error.maxlength"><ng-show="itemInfo.title.$error.maxlength" class="error">150文字以内で入力して下さい</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="col-lg-9">
             <div class="form-group">
               {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '10', 'ng-model' => 'content', 'ng-minlength' => '0', 'ng-maxlength' => '2000')) }}
-              <p ng-show="itemInfo.content.$error.maxlength"><ng-show="itemInfo.content.$error.maxlength" class="error">20000文字以内で入力して下さい</p>
+              <p class="text-danger" ng-show="itemInfo.content.$error.maxlength"><ng-show="itemInfo.content.$error.maxlength" class="error">20000文字以内で入力して下さい</p>
             </div>
           </div>
         </div>
