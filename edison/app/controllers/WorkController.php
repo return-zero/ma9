@@ -30,7 +30,7 @@ class WorkController extends BaseController {
       $thumbnail_url = $ret->thumbnail_url;
     } else {
       $title = '';
-      $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}i";
+      $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}q";
     }
 
     if ( $nico_content && $not_found ) {
