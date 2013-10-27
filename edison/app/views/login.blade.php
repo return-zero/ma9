@@ -7,7 +7,7 @@
 <div class="content-wrapper">
   <div class="row">
     <div class="col-lg-8">
-      <h2>edisonは、非クリエイターとクリエイター結び，アイデアを実現するプラットフォームです。</h2>
+      <h2>edisonは、非クリエイターとクリエイターを結び、アイデアを実現するプラットフォームです。</h2>
     </div>
     <div class="col-lg-4">
       <p><strong>Twitterでアカウント登録（無料）</strong></p>
