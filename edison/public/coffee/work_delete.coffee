@@ -4,6 +4,6 @@ $(".js-delete-work").on "click", ->
     work_id = $(".js-delete-work").data('work-id')
     $.ajax
       type: "post"
-      url: location.href + "/work/" + comment_id + "/delete"
+      url: location.href + "/work/" + work_id + "/delete"
       success: (data) ->
     location.href = "/"
