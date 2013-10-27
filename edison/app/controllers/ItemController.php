@@ -5,8 +5,8 @@ class ItemController extends BaseController {
   public function showItem($screen_name, $id)
   {
     $user = DB::table('users')->where('screen_name', '=', $screen_name)->get()[0];
-    $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user->id)->get();
-    $tagmaps = DB::table('tagmaps')->where('item_id', $item[0]->id)->get();
+    $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user->id)->get()[0];
+    $tagmaps = DB::table('tagmaps')->where('item_id', $item->id)->get();
     $tags = array();
     foreach ($tagmaps as $tagmap) {
       $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
@@ -28,7 +28,7 @@ class ItemController extends BaseController {
 
     $Niconico = new Niconico();
     $query = implode(' | ', $tags);
-    $ret = $Niconico->sugoiSearch($item[0]->type, $query);
+    $ret = $Niconico->sugoiSearch($item->type, $query);
     $related_works = array();
     if (isset($ret->values)) {
       foreach ($ret->values as $value) {
@@ -45,16 +45,16 @@ class ItemController extends BaseController {
     }
 
     $data = array(
-      'item' => $item[0],
-      'works' => Work::where('item_id', '=', $item[0]->id)->get(),
-      'title' => $item[0]->title,
+      'item' => $item,
+      'user' => $user,
+      'works' => Work::where('item_id', '=', $item->id)->get(),
+      'title' => $item->title,
       'comments' => $comments,
       'tags' => $tags,
-      'screen_name' => $screen_name,
       'star_status' => $star_status,
       'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
       'work_count' => Work::where('user_id', '=', $user->id)->count(),
-      'star_gazers_num' => Starmap::where('item_id', '=', $item[0]->id)->count()[0],
+      'star_gazers_num' => Starmap::where('item_id', '=', $item->id)->count()[0],
       'related_works' => $related_works
     );
 

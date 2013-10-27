@@ -17,10 +17,10 @@
     <div class="content-wrapper">
       <div class="row">
         <div class="col-lg-4">
-          <img src="http://api.osae.me/retwipi/{{ $screen_name }}">
+          <img src="{{ $user->profile_image_url }}">
         </div>
         <div class="col-lg-8">
-          <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+          <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
           <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       </div>
@@ -48,12 +48,12 @@
         <button class="btn btn-warning" id="star">
           <i class="glyphicon glyphicon-star"></i>
         </button>
-        <a href="/{{ $screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
+        <a href="/{{ $user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
       @else
         <button class="btn btn-default" id="star">
           <i class="glyphicon glyphicon-star"></i>
         </button>
-        <a href="/{{ $screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
+        <a href="/{{ $user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
       @endif
     @else
       <a href="/">
@@ -169,7 +169,7 @@
   <div class="comment_header">
     <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
   </div>
-  {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
+  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
     <div class="form-group">
       {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
     </div>
