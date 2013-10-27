@@ -8,7 +8,14 @@
 <div class="row">
   <div class="col-lg-9">
     <p id="item_date"><strong>{{ $item->created_at }} 投稿</strong></p>
-    <p id="item_title">{{ $item->title }}</p>
+    <div class="title-delete">
+      <div id="item_title">
+        {{ $item->title }}
+        @if (Auth::user()->screen_name === $user->screen_name)
+          <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
+        @endif
+      </div>
+    </div>
     <div id="content" class="well">
       {{ $item->content }}
     </div>
