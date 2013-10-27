@@ -14,14 +14,10 @@
 Route::group(array('before' => 'auth') ,function() {
 	
 	/* --------------
-   HomeController
-   -------------- */
-  Route::get('new', 'HomeController@showNew');
-  Route::post('new', 'HomeController@create');
-	
-	/* --------------
    ItemController
    -------------- */
+  Route::get('/item/new', 'ItemController@showNew');
+  Route::post('/item/new', 'ItemController@create');
   Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
   Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
   Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');

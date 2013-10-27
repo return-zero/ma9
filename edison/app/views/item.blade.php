@@ -81,11 +81,13 @@
           <h4 class="modal-title">作品投稿</h4>
         </div>
         <div class="modal-body">
-          {{ Form::open(array('url' => "work/create/$item->id", 'method'=>'post', 'role' => 'form')) }}
+          {{ Form::open(array('url' => "work/create/$item->id", 'method'=>'post', 'role' => 'form', 'name' => 'workInfo')) }}
             <div class="form-group">
               <label>作品のURL</label>
-              {{ Form::text('url', '', array('class' => 'form-control')) }}
-              <p class="help-box">投稿するニコニコ動画または静画のURLを入力して下さい</p>
+              <input type="text" name="url" class="form-control" ng-model="url" ng-pattern="{{ $pattern }}" required>
+              <p class="help-block">投稿するニコニコ動画または静画のURLを入力して下さい</p>
+              <p class="help-block">http://www.nicovideo.jp/watch/sm***</p>
+              <p class="help-block">http://seiga.nicovideo.jp/seiga/im***</p>
             </div>
             <div class="form-group">
               <label>コメント</label>
@@ -93,7 +95,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">投稿する</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="workInfo.$invalid">投稿する</button>
           </div>
         {{ Form::close() }}
       </div><!-- /.modal-content -->

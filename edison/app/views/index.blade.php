@@ -10,7 +10,7 @@
 <div class="col-lg-9 content-wrapper">
   <div class="header">
     <h3>ほしい動画、絵をお願いしてみよう。</h3>
-    <a class="btn btn-primary" href="new">ほしいもの・アイデアを投稿する</a>
+    <a class="btn btn-primary" href="/item/new">ほしいもの・アイデアを投稿する</a>
   </div>
   <ul id="stream-tab" class="nav nav-tabs">
     <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
