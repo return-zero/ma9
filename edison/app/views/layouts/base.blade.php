@@ -32,12 +32,14 @@
           <div class="collapse navbar-collapse">
             @if (Auth::check())
               <ul class="nav navbar-nav navbar-right">
+                <!--
                 <li id="js-notice" class="dropdown active">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
                     <li role="presentation" class="notice-content"></li>
                   </ul>
                 </li>
+                -->
                 <li><a href="/item/new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
