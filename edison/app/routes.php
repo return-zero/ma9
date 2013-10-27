@@ -64,4 +64,4 @@ Route::post('login', 'UserController@getLogin');
 Route::get('login/callback', 'UserController@getCallback');
 Route::get('logout', 'UserController@getLogout');
 Route::get('{screen_name}', 'UserController@showUser');
-Route::get('{screen_name}/stars', 'UserController@showUserStars');
+//Route::get('{screen_name}/stars', 'UserController@showUserStars');

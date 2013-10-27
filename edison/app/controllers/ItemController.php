@@ -4,6 +4,13 @@ class ItemController extends BaseController {
 
   public function showItem($screen_name, $id)
   {
+    if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    if (Item::where('id', '=', $id)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    
     $user = DB::table('users')->where('screen_name', '=', $screen_name)->get()[0];
     $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user->id)->get()[0];
     $tagmaps = DB::table('tagmaps')->where('item_id', $item->id)->get();
@@ -130,6 +137,12 @@ class ItemController extends BaseController {
   }
 
   public function stargazers($screen_name, $id) {
+    if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    if (Item::where('id', '=', $id)->first() == NULL) {
+      return Redirect::to('/404');
+    }
     $stargazers = Starmap::where('item_id', '=', $id)->get();
     $users = array();
     foreach ($stargazers as $stargazer) {
