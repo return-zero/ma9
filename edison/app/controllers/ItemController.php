@@ -301,6 +301,7 @@ class ItemController extends BaseController {
     foreach ($tagmaps as $tagmap) {
       $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
     }
+    
     $data = array(
       'title' => '投稿編集',
       'tags' => $tags,
@@ -310,18 +311,18 @@ class ItemController extends BaseController {
       'screen_name' => $screen_name,
       'item_id' => $item_id
     );
+
     return View::make('update', $data);
   }
 
   public function update($screen_name, $item_id) {
     $data = Input::all();
     $item = Item::find($item_id);
-    //var_dump($data);
-    //var_dump($item);
-    //exit();
+
     if (Auth::user()->id !== $item->user_id) {
       return Redirect::to("/$screen_name/items/$item_id");
     }
+
     $item->category_id = $data['category_id'];
     $item->title = $data['title'];
     $item->content = $data['content'];
@@ -331,36 +332,33 @@ class ItemController extends BaseController {
 
     Tagmaps::where('item_id', '=', $item_id)->delete();
 
-    foreach ($data['tags'] as $content) {
-      //echo $tag;
-      if ($content == '') {
+    foreach ($data['tags'] as $tag) {
+      if ($tag == '') {
         continue;
       }
-      $tag_id = Tag::where('content', '=', $content)->get();
-      var_dump($tag_id);
-      //exit();
-      if ($tag_id) {
-        echo 'aaaaaaaa';
-        //exit();
-        //$DBtag = NULL;
-        $tag = new Tag;
-	$tag->content = $content;
-        $tag->save();
-
-        $tag_id = Tag::where('content', '=', $content)->get();
-
-        $tagmap = new Tagmaps;
-        $tagmap->item_id = $item_id;
-        $tagmap->tag_id = $tag_id->id;
-        $tagmap->save();
-
+      $result = DB::table('tags')->where('content', $tag)->get();
+      if (empty($result)) {
+        $tag_id = DB::table('tags')->insertGetId(
+          array(
+            'content' => $tag
+          )
+        );
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $tag_id
+          )
+        );
       } else {
-        $tagmap = new Tagmaps;
-        $tagmap->item_id = $item_id;
-        $tagmap->tag_id = $tag_id->id;
-        $tagmap->save();
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $result[0]->id
+          )
+        );
       }
     }
+
     return Redirect::to("/$screen_name/items/$item_id");
     exit();
   }

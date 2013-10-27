@@ -88,7 +88,8 @@
             <div id="tag-form-wrap">
               @foreach ($tags as $tag)
                 <div>{{ Form::text('tags[]', $tag, array('class' => 'form-control')) }}</div>
-              @endforeach 
+              @endforeach
+              <div>{{ Form::text('tags[]', '', array('class' => 'form-control')) }}</div> 
               <div class="btn btn-default" id="tag-plus"><span class="glyphicon glyphicon-plus"></span> タグを追加する
               </div>
             </div>
