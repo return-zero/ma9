@@ -17,6 +17,9 @@ class HomeController extends BaseController {
 
   public function showIndex()
   {
+    if (!Auth::check()) {
+      return View::make('login', array('title' => 'edison'));
+    }
     $category_names = array(
       'ent' => 'エンターテイメント',
       'music' => '音楽',
@@ -68,16 +71,13 @@ class HomeController extends BaseController {
     }
 
     $user = User::where('screen_name', '=', Auth::user()->screen_name)->get()[0];
-    Twitter::setOAuthToken($user->oauth_token);
-    Twitter::setOAuthTokenSecret($user->oauth_token_secret);
-    $timeline = Twitter::statusesUserTimeline($user->id);
 
     $data = array(
-      'title' => 'トップ',
+      'title' => 'edison',
+      'user' => $user,
       'all_items' => $all_items,
       'recent_works' => $recent_works,
       'categories' => $category_names,
-      'icon' => $timeline[0]['user']['profile_image_url'],
       'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
       'work_count' => Work::where('user_id', '=', Auth::user()->id)->count(),
     );

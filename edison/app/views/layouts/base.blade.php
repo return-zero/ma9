@@ -28,14 +28,13 @@
             {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
           </div>
           <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              @if (Auth::check())
-              <li class="active" id="js-notice" data-toggle="dropdown"><a href=""></a></li>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
-              <li role="presentation" class="notice-content"></li>
-            
-              </ul>
-              <li><a href="/new">投稿する</a></li>
+            @if (Auth::check())
+              <ul class="nav navbar-nav navbar-right">
+                <li class="active" id="js-notice" data-toggle="dropdown"><a href=""></a></li>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
+                  <li role="presentation" class="notice-content"></li>
+                </ul>
+                <li><a href="/new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
@@ -43,8 +42,11 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">ログアウト</a></li>
                   </ul>
                 </li>
+              </ul>
               @else
-                <li><a href="/login">ログイン</a></li>
+                {{ Form::open(array('url' => '/login', 'method' => 'POST', 'class' => 'navbar-form navbar-right')) }}
+                  <button type="submit" class="btn btn-success">ログイン</button>
+                {{ Form::close() }}
               @endif
             </ul>
           </div>

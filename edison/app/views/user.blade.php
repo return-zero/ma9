@@ -9,7 +9,7 @@
 @stop
 @section('content')
 <div class="col-lg-9 content-wrapper">
-	<h2>{{ $screen_name }} <a href="https://twitter.com/{{ $screen_name }}"><i class="fa fa-twitter"></i></a></h2>
+	<h2>{{ $user->screen_name }} <a href="https://twitter.com/{{ $user->screen_name }}">twitter logo</a></h2>
 	<hr>
 	<div class="tab-wrapper">
 		<ul id="stream-tab" class="nav nav-tabs">
@@ -24,7 +24,7 @@
 		        <div class="item-inner">
 		          <div class="item-content">
 		            <div class="item-title">
-		              <a href="{{ $screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+		              <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
 		            </div>
 		          </div>
 		        </div>
@@ -67,12 +67,11 @@
   <div class="content-wrapper">
     <div class="row">
       <div class="col-lg-4">
-        <img class="pull-left" src="{{ $icon }}">
+        <img class="pull-left" src="{{ $user->profile_image_url }}">
       </div>
       <div class="col-lg-8">
-        <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
-        <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
-        <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+        <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
+        <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
 
       </div>
     </div>

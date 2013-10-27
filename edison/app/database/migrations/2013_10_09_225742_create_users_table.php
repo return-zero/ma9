@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration {
 				$table->integer('id')->unsigned();
 				$table->primary('id');
 				$table->string('screen_name');
+				$table->string('profile_image_url');
 				$table->string('oauth_token');
 				$table->string('oauth_token_secret');
 				$table->datetime('created_at');
