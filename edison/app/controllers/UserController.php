@@ -50,18 +50,18 @@ class UserController extends BaseController {
     try {
       $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($items as &$item) {
+        $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
         $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }
-      $works = Work::where('user_id', '=', $user->id)->get();
+      $works = Work::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($works as &$work) {
-        $work['item_poster_screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
         $item = Item::where('id', '=', $work->item_id)->get()[0];
+        $work['item'] = $item;
+        $work['user'] = User::where('id', '=', $work->user_id)->get()[0];
         $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
-        $work['item_title'] = $item->title;
       }
       $twitter_profile = array(
         'user' => $user,
-        'screen_name' => $screen_name,
         'items' => $items,
         'title' => $screen_name,
         'stars' => $star_items,
@@ -127,25 +127,15 @@ class UserController extends BaseController {
   public function getStars($screen_name)
   {
     $user = User::where('screen_name','=',$screen_name)->first();
-    $star_lists = Starmap::where('user_id', '=', $user->id)->get();
+    $star_lists = Starmap::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
     $star_items = array();
-    foreach($star_lists as $star_list) {
-    	$poster_user_id = Item::where('id', '=', $star_list["attributes"]["item_id"])->get()[0]->user_id;
-    	$poster_screen_name = User::where('id', '=', $poster_user_id)->get()[0]->screen_name;
-      $item = Item::where('id', '=', $star_list["attributes"]["item_id"])->first();
-      $category_id = $item["attributes"]["category_id"];
-      $category_name = Category::where('id', '=', $category_id)->first()["attributes"]["content"];
-      $star_items[] = array(
-      	'poster_screen_name' => $poster_screen_name,
-        'category' => $category_name,
-        'content' => $item["attributes"]["content"],
-        'title' => $item["attributes"]["title"],
-        'type' => $item["attributes"]["type"],
-        'item_id' => $item["attributes"]["id"],
-      );
+    foreach($star_lists as &$star_list) {
+      $star_list['item'] = Item::where('id', '=', $star_list->item_id)->get()[0];
+      $star_list['item']['user'] = User::where('id', '=', $star_list->item->user_id)->get()[0];
+      $star_list['category_name'] = Category::where('id', '=', $star_list->item->category_id)->first()->content;
     }
-    
-    return $star_items; 
+
+    return $star_lists; 
   }
   
   /*

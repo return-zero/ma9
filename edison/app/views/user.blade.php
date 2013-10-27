@@ -23,7 +23,12 @@
 		        <div class="item-inner">
 		          <div class="item-content">
 		            <div class="item-title">
-		              <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                  <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                  @if ($item->type == 'video')
+                    <i class="fa fa-film"></i> 
+                  @else
+                    <i class="fa fa-picture-o"></i> 
+                  @endif
 		            </div>
 		          </div>
 		        </div>
@@ -35,14 +40,25 @@
 		      <div class="items">
 		        <div class="item-inner">
               <div class="item-content">
-                <div class="action">
-                  <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->item_title }}</a> への投稿
+                <div class="row">
+                  <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
+                  <div class="col-lg-10">
+                    <div class="item-title">
+                      <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
+                      <p>
+                        <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                        @if ($work->item->type == 'video')
+                          <i class="fa fa-film"></i> 
+                        @else
+                          <i class="fa fa-picture-o"></i> 
+                        @endif
+                      </p>
+                      <img src="{{ $work->user->profile_image_url }}">
+                      <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                    </div>
+                  </div>
                 </div>
-		            <div class="item-title">
-		              <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span></p>
-                  <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a>
-		            </div>
-		          </div>
+              </div>
 		        </div>
 		      </div>
 		    @endforeach
@@ -52,8 +68,13 @@
 		      <div class="items">
 		        <div class="item-inner">
 		          <div class="item-content">
-		            <div class="item-title">
-		              <a href="{{ $star['poster_screen_name'] }}/items/{{ $star['item_id'] }}">{{ $star['title'] }}</a><span class="catgory label label-default">{{ $categories[$star['category']] }}</span>
+                <div class="item-title">
+                  <a href="{{ $star->item->user->screen_name }}/items/{{ $star->item_id }}">{{ $star->item->title }}</a><span class="catgory label label-default">{{ $categories[$star->category_name] }}</span>
+                  @if ($work->item->type == 'video')
+                    <i class="fa fa-film"></i> 
+                  @else
+                    <i class="fa fa-picture-o"></i> 
+                  @endif
 		            </div>
 		          </div>
 		        </div>
@@ -72,7 +93,6 @@
       <div class="col-lg-8">
         <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
         <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
-
       </div>
     </div>
   </div>
