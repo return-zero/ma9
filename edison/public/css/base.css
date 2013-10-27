@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Righteous);
 /* ---------------
     Import
    --------------- */
@@ -10,13 +11,19 @@
 /* ---------------
     Scss
    --------------- */
-/* line 12, ../scss/base.scss */
+/* line 13, ../scss/base.scss */
 body {
   background-color: #f7f3e8;
   word-wrap: break-word;
 }
 
-/* line 17, ../scss/base.scss */
+/* line 18, ../scss/base.scss */
+#title-font {
+  font-family: 'Righteous', cursive;
+  font-size: x-large;
+}
+
+/* line 23, ../scss/base.scss */
 .content-wrapper {
   margin: 20px 0;
   padding: 20px;
@@ -31,18 +38,18 @@ body {
   background-color: #fff;
 }
 
-/* line 25, ../scss/base.scss */
+/* line 31, ../scss/base.scss */
 #profile {
   margin-top: 20px;
 }
 
-/* line 28, ../scss/base.scss */
+/* line 34, ../scss/base.scss */
 .left {
   display: inline-block;
   float: left;
 }
 
-/* line 33, ../scss/base.scss */
+/* line 39, ../scss/base.scss */
 .right {
   display: inline-block;
   margin-left: 10px;
