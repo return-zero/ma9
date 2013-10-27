@@ -126,6 +126,14 @@ class HomeController extends BaseController {
     );
     return View::make('new', $data);
   }
+  
+  public function show404()
+  {
+    $data = array(
+      'title' => '404 page',
+    );
+    return View::make('404',$data); 
+  }
 
   public function create()
   {

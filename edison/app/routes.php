@@ -49,6 +49,7 @@ Route::post('api/post/watched', 'ApiController@postWatched');
    HomeController
    -------------- */
 Route::get('/', 'HomeController@showIndex');
+Route::get('404','HomeController@show404');
 
 /* --------------
    ItemController
@@ -64,4 +65,3 @@ Route::get('login/callback', 'UserController@getCallback');
 Route::get('logout', 'UserController@getLogout');
 Route::get('{screen_name}', 'UserController@showUser');
 Route::get('{screen_name}/stars', 'UserController@showUserStars');
-

@@ -4,6 +4,11 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
+    if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+      
+    
     $category_names = array(
       'ent' => 'エンターテイメント',
       'music' => '音楽',
