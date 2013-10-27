@@ -10,7 +10,7 @@ class WorkController extends BaseController {
     $now = date("Y-m-d H:i:s");
 
     if ($item['type'] == 'video') {
-      $reg = '/^http:\/\/www\.nicovideo\.jp\/watch\/sm([0-9]+)/';
+      $reg = '/^http:\/\/www\.nicovideo\.jp\/watch\/(sm[0-9]+)/';
     } else {
       $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/im([0-9]+)/';
     }
