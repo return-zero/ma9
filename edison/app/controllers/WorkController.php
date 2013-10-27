@@ -23,6 +23,15 @@ class WorkController extends BaseController {
     preg_match($reg, $data['url'], $match);
     $nico_content = $match ? $match[1] : 0;
 
+    if ($item['type'] == 'video') {
+      $Niconico = new Niconico;
+      $ret = $Niconico->getThumbInfo($nico_content);
+      $title = $ret->title;
+      $thumbnail_url = $ret->thumbnail_url;
+    } else {
+      $title = '';
+      $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}i";
+    }
 
     if ( $nico_content && $not_found ) {
       $work = new Work;
@@ -30,6 +39,8 @@ class WorkController extends BaseController {
       $work->item_id = $item_id;
       $work->user_id = Auth::user()->id;
       $work->url = $data['url'];
+      $work->title = $title;
+      $work->thumbnail_url = $thumbnail_url;
       $work->comment = $data['comment'];
       $work->created_at = date("Y-m-d H:i:s");
       $work->updated_at = date("Y-m-d H:i:s");

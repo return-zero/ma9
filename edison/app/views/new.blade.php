@@ -30,7 +30,7 @@
           </div>
           <div class="col-lg-9">
             <div class="form-group">
-              {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '5')) }}
+              {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '10')) }}
             </div>
           </div>
         </div>

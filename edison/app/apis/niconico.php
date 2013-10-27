@@ -1,12 +1,13 @@
 <?php
 
-class NicoSugoiSearch {
+class Niconico {
   const NICONICO_SEARCH_URL = 'http://api.search.nicovideo.jp/api/';
+  const NICONICO_THUMBINFO_URL = 'http://ext.nicovideo.jp/api/getthumbinfo/';
 
   public function __construct() {
   }
 
-  public function search($service, $query) {
+  public function sugoiSearch($service, $query) {
     $post_data = array(
       'query' => $query,
       'service' => array($service),
@@ -40,5 +41,11 @@ class NicoSugoiSearch {
       return false;
     }
     return json_decode($ret[2]);
+  }
+
+  public function getThumbInfo($sm)
+  {
+    $content = file_get_contents(self::NICONICO_THUMBINFO_URL . $sm);
+    return simplexml_load_string($content)->thumb;
   }
 }

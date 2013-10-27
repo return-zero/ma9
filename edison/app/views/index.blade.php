@@ -65,12 +65,11 @@
     <div class="row">
       @if (Auth::check())
         <div class="col-lg-4">
-          <img class="pull-left" alt="{{ Auth::user()->screen_name }}" src="{{ $icon }}" title="{{ Auth::user()->screen_name }}">
+          <img class="pull-left" alt="{{ Auth::user()->screen_name }}" src="{{ $user->profile_image_url }}" title="{{ Auth::user()->screen_name }}">
         </div>
         <div class="col-lg-8">
             <p><a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a></p>
-            <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
-            <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+            <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       @endif
     </div>
