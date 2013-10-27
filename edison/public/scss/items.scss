@@ -10,10 +10,12 @@
 
 .item-date {
   font-weight: bold;
+  float: left;
 }
 
 .star-badge {
   margin-left: 20px;
+  float: left;
 }
 
 .item-content {
@@ -43,6 +45,15 @@
 
 hr {
   margin :30px 0;
+}
+
+.twitter-share-button {
+  margin-left: 20px;
+  float: left;
+}
+
+#js-delete-item {
+  margin-left: 20px;
 }
 
 ul.list {
