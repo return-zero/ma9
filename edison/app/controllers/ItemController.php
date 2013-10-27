@@ -167,10 +167,11 @@ class ItemController extends BaseController {
       $item->delete();
       Work::where('item_id', '=', $item_id)->delete();
       Comment::where('item_id', '=', $item_id)->delete();
+      Starmap::where('item_id', '=', $item_id)->delete();
       return Redirect::to("/$screen_name");
       exit;
     } else {
-      return Redirect::to("/$screen_name");      
+      return Redirect::to("/$screen_name");
     }
   }
 
