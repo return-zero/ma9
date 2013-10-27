@@ -27,7 +27,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            {{ HTML::link('/', 'edison', array('class'=>'navbar-brand', 'id'=>'title-font')) }}
+            {{ HTML::link('/', 'edison (α)', array('class'=>'navbar-brand', 'id'=>'title-font')) }}
           </div>
           <div class="collapse navbar-collapse">
             @if (Auth::check())

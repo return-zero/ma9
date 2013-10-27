@@ -8,6 +8,6 @@ $(".js-delete-comment").on("click", function() {
       url: location.href + "/comment/" + comment_id + "/delete",
       success: function(data) {}
     });
-    return location.href = location.href;
+    return location.href = "/";
   }
 });

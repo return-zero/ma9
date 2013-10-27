@@ -55,11 +55,20 @@ class ItemController extends BaseController {
     } else {
       $pattern= '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/(im[0-9]+)/';
     }
+    
+    $works = Work::where('item_id', '=', $item->id)->get();
+    foreach ($works as &$work) {
+      $item = Item::where('id', '=', $work->item_id)->get()[0];
+      $work['item'] = $item;
+      $work['screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
+      $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
+      $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+    }
 
     $data = array(
       'item' => $item,
       'user' => $user,
-      'works' => Work::where('item_id', '=', $item->id)->get(),
+      'works' => $works,
       'pattern' => $pattern,
       'title' => $item->title,
       'comments' => $comments,
@@ -158,6 +167,7 @@ class ItemController extends BaseController {
         );
       }
     }
+    return Redirect::to(Auth::user()->screen_name . "/items/{$item_id}");
   }
 
   public function delete($screen_name, $item_id) {
@@ -167,10 +177,11 @@ class ItemController extends BaseController {
       $item->delete();
       Work::where('item_id', '=', $item_id)->delete();
       Comment::where('item_id', '=', $item_id)->delete();
+      Starmap::where('item_id', '=', $item_id)->delete();
       return Redirect::to("/$screen_name");
       exit;
     } else {
-      return Redirect::to("/$screen_name");      
+      return Redirect::to("/$screen_name");
     }
   }
 

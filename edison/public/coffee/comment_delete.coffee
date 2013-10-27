@@ -6,4 +6,4 @@ $(".js-delete-comment").on "click", ->
       type: "post"
       url: location.href + "/comment/" + comment_id + "/delete"
       success: (data) ->
-    location.href = location.href 
+    location.href = "/"

@@ -58,14 +58,14 @@ class HomeController extends BaseController {
 
     $all_items = Item::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($all_items as &$item) {
-      $item['screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
+      $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
       $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
     $recent_works = Work::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($recent_works as &$work) {
       $item = Item::where('id', '=', $work->item_id)->get()[0];
       $work['item'] = $item;
-      $work['screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
+      $work['user'] = User::where('id', '=', $work->user_id)->get()[0];
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
@@ -82,5 +82,10 @@ class HomeController extends BaseController {
       'work_count' => Work::where('user_id', '=', Auth::user()->id)->count(),
     );
     return View::make('index', $data);
+  }
+
+  public function showLogin()
+  {
+    return View::make('login', array('title' => 'ログイン'));
   }
 }

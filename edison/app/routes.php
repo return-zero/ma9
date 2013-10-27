@@ -20,7 +20,7 @@ Route::group(array('before' => 'auth') ,function() {
   Route::post('/item/new', 'ItemController@create');
   Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
   Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
-  Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
+  Route::delete('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
   Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');
   Route::post('{screen_name}/items/{item_id}/unstar', 'ItemController@unstar');
   Route::get('{screen_name}/items/{item_id}/edit', 'ItemController@edit');
@@ -32,7 +32,7 @@ Route::group(array('before' => 'auth') ,function() {
    -------------- */
   Route::get('work/new', 'WorkController@new');
   Route::post('work/create/{item_id}', 'WorkController@create');
-  Route::post('work/delete/{work_id}', 'WorkController@delete');
+  Route::delete('work/delete/{work_id}', 'WorkController@delete');
 
 });
 
@@ -48,7 +48,7 @@ Route::post('api/post/watched', 'ApiController@postWatched');
    HomeController
    -------------- */
 Route::get('/', 'HomeController@showIndex');
-Route::get('404','HomeController@show404');
+Route::get('login', 'HomeController@showLogin');
 
 /* --------------
    ItemController
