@@ -53,8 +53,6 @@ class ItemController extends BaseController {
   public function createComment($screen_name, $id) {
     $data = Input::all();
 
-    $user = User::where('screen_name', '=', $screen_name)->first();    
-
     $comment = new Comment;
     
     $comment->user_id = Auth::user()->id;
@@ -68,14 +66,13 @@ class ItemController extends BaseController {
     return Redirect::to("/$screen_name/items/$id");
   }
 
-  public function deleteComment($screen_name, $id) {
-    $user = User::where('screen_name', '=', $screen_name)->first();
-    $comment = Comment::find($id);
+  public function deleteComment($screen_name, $item_id, $comment_id) {
+    $comment = Comment::find($comment_id);
 
     if (Auth::user()->id === $comment->user_id) {
-      Comment::destroy($id);
+      Comment::destroy($comment_id);
     } else {
-      return Redirect::to("/$screen_name/item/$id");      
+      return Redirect::to("/$screen_name/item/$item_id");      
     }
   }
   
