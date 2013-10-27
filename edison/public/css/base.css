@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Righteous);
 /* ---------------
-    Import
-   --------------- */
+Import
+--------------- */
 /* ---------------
     Color
    --------------- */
@@ -9,8 +9,8 @@
     Mixin
    --------------- */
 /* ---------------
-    Scss
-   --------------- */
+Scss
+--------------- */
 /* line 13, ../scss/base.scss */
 body {
   background-color: #f7f3e8;
@@ -20,10 +20,11 @@ body {
 /* line 18, ../scss/base.scss */
 #title-font {
   font-family: 'Righteous', cursive;
-  font-size: x-large;
+  font-size: 32px;
+  color: #fad67a;
 }
 
-/* line 23, ../scss/base.scss */
+/* line 24, ../scss/base.scss */
 .content-wrapper {
   margin: 20px 0;
   padding: 20px;
@@ -38,24 +39,26 @@ body {
   background-color: #fff;
 }
 
-/* line 31, ../scss/base.scss */
-#profile {
-  margin-top: 20px;
-}
-
-/* line 34, ../scss/base.scss */
-.left {
-  display: inline-block;
-  float: left;
-}
-
-/* line 39, ../scss/base.scss */
-.right {
-  display: inline-block;
-  margin-left: 10px;
-}
-
-/* line 44, ../scss/base.scss */
+/* line 32, ../scss/base.scss */
 #footer {
   border-top: solid 1px #ddd;
+}
+
+/* line 36, ../scss/base.scss */
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #fad67a;
+}
+
+/* line 42, ../scss/base.scss */
+.panel-primary {
+  border-color: #fad67a;
+}
+
+/* line 46, ../scss/base.scss */
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #fad67a;
+  border-color: #fad67a;
 }
