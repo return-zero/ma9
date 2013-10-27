@@ -1,0 +1,21 @@
+@import "compass";
+@import "config";
+@import "style";
+
+ul#stream-tab {
+  margin-top: 20px
+}
+
+.item-title span {
+  margin-left: 10px
+}
+
+.item-title a {
+  font-size: 16px;
+}
+
+
+.items {
+  border-bottom: thin dotted;
+  padding-bottom: 10px;
+}

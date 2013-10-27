@@ -1,0 +1,37 @@
+@import "compass";
+@import "config";
+@import "style";
+
+.tab-wrapper {
+	margin-top: 40px;
+}
+
+ul#stream-tab {
+  margin-top: 20px
+}
+
+.item-title span {
+  margin-left: 10px
+}
+
+.item-title a {
+  font-size: 16px;
+}
+
+#profile {
+  margin-top: 20px;
+}
+.left {
+  display: inline-block;
+  float: left;
+}
+
+.right {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.items {
+  border-bottom: thin dotted;
+  padding :20px 0;
+}

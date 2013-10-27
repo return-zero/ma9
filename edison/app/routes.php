@@ -11,7 +11,7 @@
 |
 */
 
-//Route::group(array('before' => 'auth') ,function() {
+Route::group(array('before' => 'auth') ,function() {
 	
 	/* --------------
    HomeController
@@ -22,25 +22,28 @@
 	/* --------------
    ItemController
    -------------- */
-  Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
-  Route::post('/{screen_name}/items/{id}/comment/new', 'ItemController@createComment');
-  Route::post('/{screen_name}/items/{item_id}/comments/{comment_id}/delete', 'ItemController@deleteComment');
-  Route::post('{screen_name}/items/{id}/star', 'ItemController@star');
-  Route::post('{screen_name}/items/{id}/unstar', 'ItemController@unstar');
+  Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
+  Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
+  Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
+  Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');
+  Route::post('{screen_name}/items/{item_id}/unstar', 'ItemController@unstar');
 
   /* --------------
    WorkController
    -------------- */
   Route::get('work/new', 'WorkController@new');
   Route::post('work/create/{item_id}', 'WorkController@create');
-  Route::post('work/delete/{item_id}', 'WorkController@delete');
+  Route::post('work/delete/{work_id}', 'WorkController@delete');
 
-//});
+});
 
 /* --------------
    ApiController
    -------------- */
 Route::get('api/get/notice/num', 'ApiController@getNoticeNum');
+Route::get('api/getcategories/{type}', 'ApiController@getCategories');
+Route::get('api/get/notice/contents', 'ApiController@getNoticeContents');
+Route::post('api/post/watched', 'ApiController@postWatched');
 
 /* --------------
    HomeController

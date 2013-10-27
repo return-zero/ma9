@@ -1,9 +1,9 @@
 chef-repo
 ma9
+.idea
 edison/public/css
 edison/public/dev-js
-edison/public/js/*.js
-edison/public/coffee/*.js
+edison/public/bower_components
 node_modules
 .sass-cache
 .vagrant

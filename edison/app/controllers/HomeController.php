@@ -39,7 +39,7 @@ class HomeController extends BaseController {
       'handcraft' => 'ニコニコ手芸部',
       'make' => '作ってみた',
       'anime' => 'アニメ',
-      'game' => 'toho',
+      'game' => 'ゲーム',
       'toho' => '東方',
       'imas' => 'アイドルマスター',
       'radio' => 'ラジオ',
@@ -47,10 +47,13 @@ class HomeController extends BaseController {
       'are' => '例のアレ',
       'diary' => '日記',
       'other' => 'その他',
-      'r18' => 'R-18'
+      'r18' => 'R-18',
+      'original' => 'オリジナル',
+      'portrait' => '似顔絵',
+      'character' => 'キャラクター'
     );
 
-    $all_items = Item::take(10)->get();
+    $all_items = Item::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($all_items as &$item) {
       $item['screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
@@ -58,21 +61,32 @@ class HomeController extends BaseController {
     $recent_works = Work::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($recent_works as &$work) {
       $item = Item::where('id', '=', $work->item_id)->get()[0];
+      $work['item'] = $item;
+      $work['screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
       $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
     }
+
+    $user = User::where('screen_name', '=', Auth::user()->screen_name)->get()[0];
+    Twitter::setOAuthToken($user->oauth_token);
+    Twitter::setOAuthTokenSecret($user->oauth_token_secret);
+    $timeline = Twitter::statusesUserTimeline($user->id);
+
     $data = array(
       'title' => 'トップ',
       'all_items' => $all_items,
       'recent_works' => $recent_works,
-      'categories' => $category_names
+      'categories' => $category_names,
+      'icon' => $timeline[0]['user']['profile_image_url'],
+      'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
+      'work_count' => Starmap::where('user_id', '=', Auth::user()->id)->count(),
     );
     return View::make('index', $data);
   }
 
   public function showNew()
   {
-    $categories = Category::all();
+    $categories = Category::where('type', '=', 'video')->get();
     $category_names = array(
       'ent' => 'エンターテイメント',
       'music' => '音楽',
@@ -103,7 +117,7 @@ class HomeController extends BaseController {
       'are' => '例のアレ',
       'diary' => '日記',
       'other' => 'その他',
-      'r18' => 'R-18'
+      'r18' => 'R-18',
     );
     $data = array(
       'title' => '新規投稿',

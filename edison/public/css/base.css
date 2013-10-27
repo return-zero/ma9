@@ -1,1 +1,49 @@
-body{}
+/* ---------------
+    Import
+   --------------- */
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* ---------------
+    Scss
+   --------------- */
+/* line 12, ../scss/base.scss */
+body {
+  background-color: #f7f3e8;
+  word-wrap: break-word;
+}
+
+/* line 17, ../scss/base.scss */
+.content-wrapper {
+  margin: 20px 0;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 3px #999999;
+  -moz-box-shadow: 0 0 3px #999999;
+  box-shadow: 0 0 3px #999999;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+/* line 25, ../scss/base.scss */
+#profile {
+  margin-top: 20px;
+}
+
+/* line 28, ../scss/base.scss */
+.left {
+  display: inline-block;
+  float: left;
+}
+
+/* line 33, ../scss/base.scss */
+.right {
+  display: inline-block;
+  margin-left: 10px;
+}

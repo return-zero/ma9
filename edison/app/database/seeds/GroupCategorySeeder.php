@@ -13,14 +13,15 @@ class GroupCategoryTableSeeder extends Seeder {
       'g_culture2',
       'g_other',
       'g_r18',
+      'g_creation',
+      'g_fanart',
+      'g_popular',
+      'g_adult'
     );
-    $now = date('Y-m-d H:i:s');
     
     foreach($group_categories as $group_category) {
       GroupCategory::create(array(
-        'content' => $group_category,
-        'created_at' => $now,
-        'updated_at' => $now,
+        'content' => $group_category
       ));
     }
     

@@ -4,32 +4,74 @@ class UserController extends BaseController {
 
   public function showUser($screen_name)
   {
-    $user = User::where('screen_name', '=', $screen_name)->first();
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'ゲーム',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18',
+      'original' => 'オリジナル',
+      'portrait' => '似顔絵',
+      'character' => 'キャラクター'
+    );
 
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    $star_items = $this->getStars($screen_name);
+    
     $twitter_id = $user->id;
 
     try {
       Twitter::setOAuthToken($user->oauth_token);
       Twitter::setOAuthTokenSecret($user->oauth_token_secret);
-
       $timeline = Twitter::statusesUserTimeline($twitter_id);
-      
-      $items = $this->showUserItems($screen_name);
-            
-
-      if (Auth::user()->screen_name === $screen_name) {
-        $title = "Mypage";
-      } else {
-        $title = 'About ' + $screen_name;
+      $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
+      foreach ($items as &$item) {
+        $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }
-
+      $works = Work::where('user_id', '=', $user->id)->get();
+      foreach ($works as &$work) {
+        $work['item_poster_screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
+        $item = Item::where('id', '=', $work->item_id)->get()[0];
+        $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+        $work['item_title'] = $item->title;
+      }
       $twitter_profile = array(
         'screen_name' => $screen_name,
         'name' => $timeline[0]["user"]["name"],
         'desc' => $timeline[0]["user"]["description"],
         'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items,
-        'title' => $title,
+        'title' => $screen_name,
+        'stars' => $star_items,
+        'works' => $works,
+        'categories' => $category_names,
+        'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
+        'work_count' => Work::where('user_id', '=', $user->id)->count()
       );
 
       return View::make('user', $twitter_profile); 
@@ -64,7 +106,52 @@ class UserController extends BaseController {
     echo "</pre>";
     exit;
   }
+  
+  public function getStarNum($screen_name)
+  {
+    $user_id = $this->getUserIdByScreenName($screen_name);
+    return Starmap::where('user_id', '=', $user_id)->count();
+  }
+  
+  public function getUserIdByScreenName($screen_name) {
+    $user = User::where('screen_name', '=', $screen_name)->first();
+    return $user->id;
+  }
 
+  public function showUserStars($screen_name)
+  {
+    $star_items = $this->getStars($screen_name);
+    $res = array("star_items" => $star_items,
+                 "title" => "Stars"
+           );
+    return View::make('stars', $res);
+  }
+  
+  public function getStars($screen_name)
+  {
+    $user = User::where('screen_name','=',$screen_name)->first();
+    $star_lists = Starmap::where('user_id', '=', $user->id)->get();
+    $star_items = array();
+    foreach($star_lists as $star_list) {
+    	$poster_user_id = Item::where('id', '=', $star_list["attributes"]["item_id"])->get()[0]->user_id;
+    	$poster_screen_name = User::where('id', '=', $poster_user_id)->get()[0]->screen_name;
+      $item = Item::where('id', '=', $star_list["attributes"]["item_id"])->first();
+      $category_id = $item["attributes"]["category_id"];
+      $category_name = Category::where('id', '=', $category_id)->first()["attributes"]["content"];
+      $star_items[] = array(
+      	'poster_screen_name' => $poster_screen_name,
+        'category' => $category_name,
+        'content' => $item["attributes"]["content"],
+        'title' => $item["attributes"]["title"],
+        'type' => $item["attributes"]["type"],
+        'item_id' => $item["attributes"]["id"],
+      );
+    }
+    
+    return $star_items; 
+  }
+  
+  /*
   public function showUserStars($screen_name)
   {
     $user = User::where('screen_name','=',$screen_name)->first();
@@ -97,6 +184,7 @@ class UserController extends BaseController {
     
     return View::make('stars', $res);
   }
+  */
 
   public function getLogin()
   {

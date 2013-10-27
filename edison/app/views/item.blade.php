@@ -1,59 +1,67 @@
 @extends('layouts.base')
 @section('header')
 @parent
+{{ HTML::style('css\items.css') }}
 @stop
 @section('content')
 
 <div class="row">
   <div class="col-lg-9">
-    <h1>{{ $title }}</h1>
-    <span>作成日 : {{ $created_at }}</span>
-    <span>更新日 : {{ $updated_at }}</span>
+    <p id="item_date"><strong>{{ $item->created_at }} 投稿</strong></p>
+    <p id="item_title">{{ $item->title }}</p>
+    <div id="content" class="well">
+      {{ $item->content }}
+    </div>
   </div>
   <div class="col-lg-3">
-    <div class="profile">
-      profile
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-lg-4">
+          <img src="http://api.osae.me/retwipi/{{ $screen_name }}">
+        </div>
+        <div class="col-lg-8">
+          <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+          <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+          <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="col-lg-2">
-      タグ
+    <div class="col-lg-1">
+      <span class="label label-default">登録タグ</span>
     </div>
     <div class="col-lg-8">
-      @foreach ($tags as $tag)
-        <div class="tag">{{ $tag }}</div>
-      @endforeach
+      <div id="tags">
+        <p>
+          @foreach ($tags as $tag)
+            <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
+          @endforeach
+        </p>
+      </div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-3">
     @if ($star_status == true)
-      {{ Form::open(array('url' => "$screen_name/items/$id/unstar", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-warning">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-warning" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @else
-      {{ Form::open(array('url' => "$screen_name/items/$id/star", 'method' => 'post')) }}
-        <button type="submit" class="btn btn-default">
-          <i class="glyphicon glyphicon-star"></i>
-        </button>
-      {{ Form::close() }}
+      <button class="btn btn-default" id="star">
+        <i class="glyphicon glyphicon-star"></i>
+      </button>
     @endif
-
     </div>
   </div>
 </div>
 
-{{ $star_status }}
-
-
-
-<div class="jumbotron">
-  {{ $content }}
-</div>
-<a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">作品を投稿する</a>
+@if ($item->type == 'video')
+  <a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">動画を投稿する</a>
+@else
+  <a href="#work-form" class="btn btn-primary btn-lg" data-toggle="modal">絵を投稿する</a>
+@endif
 
 <!-- Work Form Modal -->
   <div class="modal fade" id="work-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -63,34 +71,21 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">作品投稿</h4>
         </div>
-        
-          {{ Form::open(array('url' => "work/create/$id", 'method'=>'post')) }}
-          <div class="row">
-            <div class="col-lg-3">
-              <h3>URL</h3>
+        <div class="modal-body">
+          {{ Form::open(array('url' => "work/create/$item->id", 'method'=>'post', 'role' => 'form')) }}
+            <div class="form-group">
+              <label>作品のURL</label>
+              {{ Form::text('url', '', array('class' => 'form-control')) }}
+              <p class="help-box">投稿するニコニコ動画または静画のURLを入力して下さい</p>
             </div>
-            <div class="col-lg-9">
-              <div class="form-group">
-                {{ Form::text('url', '', array('class' => 'form-control', 'placeholder' => 'Enter URL')) }}
-              </div>
-            </div>
-          </div>
-           <div class="row">
-            <div class="col-lg-3">
-              <h3>Comment</h3>
-            </div>
-            <div class="col-lg-9">
-              <div class="form-group">
-                {{ Form::text('comment', '', array('class' => 'form-control', 'placeholder' => 'Enter Comment')) }}
-              </div>
+            <div class="form-group">
+              <label>コメント</label>
+              {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => 3)) }}
             </div>
           </div>
-        
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">投稿する</button>
+          </div>
         {{ Form::close() }}
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -104,38 +99,71 @@
 </div>
 
 <div class="row">
-  <h3>関連作品</h3>
+  <h3><span class="glyphicon glyphicon-chevron-right">関連作品</span></h3>
+  @if ($related_works)
+    <div class="relatedworks-body">
+      <ul class="list">
+        @foreach ($related_works as $related_work)
+          <li class="relatedwork">
+            <div class="relatedwork_thumb">
+              @if ($item->type == 'video')
+                <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+              @else
+                <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
+              @endif
+                  <img src="{{ $related_work['thumbnail_url'] }}" />
+                </a>
+            </div>
+            <div class="relatedwork_content">
+              <p class="relatedwork_title">
+                @if ($item->type == 'video')
+                  <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
+                @else
+                  <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
+                @endif
+              </p>
+            </div>
+          </li>
+        @endforeach
+      </ul>
+    </div>
+  @else
+    <p>関連作品はありません</p>
+  @endif
 </div>
 
-<div class="row">
-  {{ Form::open(array('url' => "$screen_name/items/$id/comment/new", 'method'=>'post')) }}
-    <div class="row">
-      <div class="col-lg-3">
-        <h3>Comment</h3>
-      </div>
-      <div class="col-lg-9">
-        <div class="form-group">
-          {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5', 'placeholder' => 'Enter comment')) }}
+<div class="row" id="comment_area">
+  <div class="comment_header">
+    <h3><span class="glyphicon glyphicon-comment"></span> コメント</h3>
+  </div>
+  @foreach ($comments as $comment)
+    <div class="comment row">
+      <div class="user_data pull-left col-lg-1">
+        <div class="user_icon">
+          <img src="http://api.osae.me/retwipi/{{ $comment->name->screen_name}}">
+        </div>
+        <div class="screen_name">
+          <a href="/{{ $comment->name->screen_name }}">{{ $comment->name->screen_name }}</a>
         </div>
       </div>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  {{ Form::close() }}
-  <h3>コメント</h3>
-  <div class="comments">
-    @foreach ($comments as $comment)
-      <div class="comment">
-        <div class="col-lg-12">{{ $comment->created_at}}</div>
-        <div class="col-lg-4">{{ $comment->name->screen_name}}</div>
-        <div class="col-lg-8">{{{ $comment->comment }}}</div>
-        @if ($comment->name->screen_name == Auth::user()->screen_name)
-          {{ Form::open(array('url' => "{$comment->name->screen_name}/items/{$id}/comments/{$comment->id}/delete", 'method'=>'post')) }}
-            <button type="submit">delete</button>
-          {{ Form::close() }}
-        @endif
+      <div class="comment_box well col-lg-11">
+        <div class="comment_text">{{{ $comment->comment }}}</div>
+        <div class="comment_status">{{ $comment->created_at }}</div>
       </div>
-    @endforeach
-  </div>
+    </div>
+  @endforeach
 </div>
-
+<div class="row">
+  <div class="comment_header">
+    <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
+  </div>
+  {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
+    <div class="form-group">
+      {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">コメントする</button>
+    </div>
+  {{ Form::close() }}
+</div>
 @stop

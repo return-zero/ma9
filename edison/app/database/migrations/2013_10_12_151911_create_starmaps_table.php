@@ -17,6 +17,7 @@ class CreateStarmapsTable extends Migration {
         $table->integer('user_id');
         $table->integer('item_id');
         $table->integer('watched_flag');
+        $table->integer('notice_flag');
         $table->datetime('created_at');
         $table->datetime('updated_at');
       });

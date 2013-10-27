@@ -1,0 +1,17 @@
+/* ---------------
+    Import
+   --------------- */
+@import "compass";
+@import "config";
+@import "style";
+
+/* ---------------
+    Scss
+   --------------- */
+
+.panel-wrapper {
+	margin :20px 0px;
+	@include box-shadow(0 0 3px #999);
+	background-color: #fff;
+}
+

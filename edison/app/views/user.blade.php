@@ -1,44 +1,80 @@
 @extends('layouts.base')
+@section('css')
+@parent
+{{ HTML::style('css\user.css') }}
+@stop
 @section('header')
 @parent
 @stop
 @section('content')
-<h1>{{ $screen_name }} さんのページ</h1>
-<div class="row">
-	<div class="col-lg-9" style="background:skyblue;">
-	  @foreach ($items as $item)
-	    <h3><a href="/{{ $screen_name }}/items/{{ $item['item_id'] }}">{{ $item['title'] }}</a></h3>
-	  @endforeach
-	</div>
-	<div class="col-lg-3" style="background:blue;">
-		<img src="{{ $icon }}">
-		<div class="row">
-			<div class="col-lg-3" style="background:yellow;">
-				<p>NAME:</p>
-			</div>
-			<div class="col-lg-9" style="background:orange;">
-				<p>{{ $name }}</p>
-			</div>
-		</div>
-		
+<div class="col-lg-9 content-wrapper">
+	<h2>{{ $screen_name }} <a href="https://twitter.com/{{ $screen_name }}">twitter logo</a></h2>
+	<hr>
+	<div class="tab-wrapper">
+		<ul id="stream-tab" class="nav nav-tabs">
+		  <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
+		  <li><a href="#works" data-toggle="tab">最近の作品</a></li>
+		  <li><a href="#stars" data-toggle="tab">スターした投稿</a></li>
+		</ul>
+		<div class="streams tab-content">
+		  <div class="tab-pane fade in active" id="items">
+		    @foreach ($items as $item)
+		      <div class="items">
+		        <div class="item-inner">
+		          <div class="item-content">
+		            <div class="item-title">
+		              <a href="{{ $screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    @endforeach
+		  </div>
+		  <div class="tab-pane fade" id="works">
+		    @foreach ($works as $work)
+		      <div class="items">
+		        <div class="item-inner">
+              <div class="item-content">
+                <div class="action">
+                  <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->item_title }}</a> への投稿
+                </div>
+		            <div class="item-title">
+		              <a href="{{ $work->url }}" target="_blank">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    @endforeach
+		  </div>
+		  <div class="tab-pane fade" id="stars">
+		    @foreach ($stars as $star)
+		      <div class="items">
+		        <div class="item-inner">
+		          <div class="item-content">
+		            <div class="item-title">
+		              <a href="{{ $star['poster_screen_name'] }}/items/{{ $star['item_id'] }}">{{ $star['title'] }}</a><span class="catgory label label-default">{{ $categories[$star['category']] }}</span>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    @endforeach
+		  </div>
+    </div>
 	</div>
 </div>
-<!-- /.row -->
-<hr>
-<p>screen_name: {{ $screen_name }}</p>
-<p>name: {{ $name }}</p>
-<p>description: {{ $desc }}</p>
-<img src="{{ $icon }}">
-@foreach ($items as $item)
-	<p>items: {{ $item['item_id'] }}</p>
-  <p>items: {{ $item['title'] }}</p>
-  @if ($screen_name == Auth::user()->screen_name)
-    <div>
-      {{ Form::open(array('url' => "/{$screen_name}/items/{$item['item_id']}/delete", 'method' => 'post')) }}
-        <button type="submit">delete</buton>
-      {{ Form::close() }}
-    </div>
-  @endif
-@endforeach
+<div class="col-lg-3">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="pull-left" src="{{ $icon }}">
+      </div>
+      <div class="col-lg-8">
+        <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+        <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+        <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
 
+      </div>
+    </div>
+  </div>
+</div>
 @stop

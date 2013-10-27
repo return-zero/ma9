@@ -1,0 +1,27 @@
+{
+  "name": "edison",
+  "version": "0.0.1",
+  "homepage": "https://github.com/tsuwatch/ma9",
+  "authors": [
+    "Wakayama Hyper Creators (Masaaki Morishita)"
+  ],
+  "description": "edison",
+  "keywords": [
+    "niconico",
+    "platform"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1",
+    "jquery-pjax": "~1.7.3",
+    "angular": "~1.0.8"
+  }
+}

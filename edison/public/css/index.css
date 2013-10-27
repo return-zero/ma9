@@ -1,0 +1,26 @@
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* line 5, ../scss/index.scss */
+ul#stream-tab {
+  margin-top: 20px;
+}
+
+/* line 9, ../scss/index.scss */
+.item-title span {
+  margin-left: 10px;
+}
+
+/* line 13, ../scss/index.scss */
+.item-title a {
+  font-size: 16px;
+}
+
+/* line 18, ../scss/index.scss */
+.items {
+  border-bottom: thin dotted;
+  padding-bottom: 10px;
+}

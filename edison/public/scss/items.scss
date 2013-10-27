@@ -1,0 +1,46 @@
+@import "compass";
+@import "config";
+@import "style";
+
+#item_title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#content {
+  background-color: white;
+}
+
+.glyphicon-comment {
+  color: white;
+}
+
+ul.list {
+  list-style: none;
+}
+li.relatedwork {
+  width: 130px;
+  float: left;
+  margin-right: 10px;
+  display: list-item;
+}
+.relatedwork_thumb img {
+  border: 1px solid black;
+}
+p.relatedwork_title {
+  display: block;
+  margin: 0;
+}
+
+.user_data {
+  display: block;
+}
+.comment_box {
+  background-color: white;
+}
+.screen_name {
+  display: block;
+}
+.comment_status {
+  font-size: 90%;
+}
