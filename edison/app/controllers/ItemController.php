@@ -191,11 +191,10 @@ class ItemController extends BaseController {
   }
 
   public function deleteComment($screen_name, $item_id, $comment_id) {
-    $comment = Comment::find($comment_id);
-    $item = Item::find($item_id);
+    $comment_user_id = Comment::where('id', '=', $comment_id)->get()[0]->user_id;
 
-    if (Auth::user()->id === $comment->user_id && $item->id === $comment->item_id) {
-      $comment->delete();
+    if (Auth::user()->id === $comment_user_id) {
+      Comment::where('id', '=', $comment_id)->delete();
       return Redirect::to("/$screen_name/items/$item_id");
     } else {
       return Redirect::to("/$screen_name/items/$item_id");
