@@ -38,6 +38,7 @@
       <div class="clearfix"></div>
       <div class="item-title">
         {{ $item->title }}
+      </div>
       
       <div class="row tags">
         <div class="col-lg-1">
