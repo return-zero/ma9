@@ -164,5 +164,7 @@ class HomeController extends BaseController {
         );
       }
     }
+    $screen_name = Auth::user()->screen_name;
+    return Redirect::to("/$screen_name/items/$item_id");
   }
 }
