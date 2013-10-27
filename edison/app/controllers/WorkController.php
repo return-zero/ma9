@@ -67,7 +67,7 @@ class WorkController extends BaseController {
       $work->delete();
       return Redirect::to("/$item_user_screen_name/items/$work_item_id");
     } else {
-      return Redirect::to("/")
+      return Redirect::to("/");
     }
   }
 

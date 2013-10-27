@@ -63,12 +63,26 @@
             <div class="item-content">
               <div class="row">
                 <div class="col-lg-2"><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a></div>
-                <div class="col-lg-10">
-                  <div class="item-title">
-                    <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
+                
+                @if (Auth::user()->screen_name === $work->screen_name)
+                  <div class="col-lg-9">
+                    <div class="item-title">
+                      <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
+                    </div>
+                    <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
                   </div>
-                  <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
-                </div>
+                  <div class="col-lg-1 work-delete">
+                    <button class="btn btn-danger btn-sm js-delete-work" data-work-id="{{$work->id}}">削除</button>
+                  </div>
+                @else
+                  <div class="col-lg-10">
+                    <div class="item-title">
+                      <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
+                    </div>
+                    <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
+                  </div>
+                @endif
+                
               </div>
             </div>
           </div>
@@ -81,7 +95,9 @@
           <a href="#work-form" class="btn btn-primary pull-right" data-toggle="modal">絵を投稿する</a>
         @endif
       </div>
+      <div class="clearfix"></div>
       
+      <hr>
       <h4><span class="glyphicon glyphicon-chevron-right"></span> 関連作品</h4>
       @if ($related_works)
         <div class="relatedworks-body">
@@ -114,7 +130,47 @@
         <p>関連作品はありません</p>
       @endif
       
+      <hr>
+      <h4><span class="glyphicon glyphicon-comment"></span> コメント</h4>
+      @foreach ($comments as $comment)
+        <div class="comment row">
+          <div class="user_data pull-left col-lg-2">
+            <div class="user_icon">
+              <img src="{{ $comment->user->profile_image_url }}">
+            </div>
+            <div class="screen_name">
+              <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
+            </div>
+          </div>
+          @if (Auth::user()->screen_name === $comment->user->screen_name)
+          <div class="comment_box well col-lg-9">
+            <div class="comment_text">{{{ $comment->comment }}}</div>
+            <div class="comment_status">{{ $comment->created_at }}</div>
+          </div>
+          <div class="col-lg-1 item-delete">
+            <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
+          </div>
+          @else
+          <div class="comment_box well col-lg-10">
+            <div class="comment_text">{{{ $comment->comment }}}</div>
+            <div class="comment_status">{{ $comment->created_at }}</div>
+          </div>
+          @endif
+        </div>
+      @endforeach
       
+      <div class="comment_header">
+        <h4><span class="glyphicon glyphicon-comment"></span> コメントを書く</h4>
+      </div>
+      {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post', 'name' => 'commentInfo')) }}
+        <div class="form-group">
+          <textarea name="comment" class="form-control" rows="5" ng-model="comment" ng-minlength="1" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary pull-right" ng-disabled="commentInfo.comment.$invalid">コメントする</button>
+        </div>
+      {{ Form::close() }}
+      <div class="clearfix"></div>
             
     </div>
   </div>
@@ -164,56 +220,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
-
-
-<div class="row">
-
-</div>
-
-<div class="row" id="comment_area">
-  <div class="comment_header">
-    <h3><span class="glyphicon glyphicon-comment"></span> コメント</h3>
-  </div>
-  @foreach ($comments as $comment)
-    <div class="comment row">
-      <div class="user_data pull-left col-lg-1">
-        <div class="user_icon">
-          <img src="{{ $comment->user->profile_image_url }}">
-        </div>
-        <div class="screen_name">
-          <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
-        </div>
-      </div>
-      @if (Auth::user()->screen_name === $comment->user->screen_name)
-      <div class="comment_box well col-lg-10">
-        <div class="comment_text">{{{ $comment->comment }}}</div>
-        <div class="comment_status">{{ $comment->created_at }}</div>
-      </div>
-      <div class="col-lg-1 item-delete">
-        <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
-      </div>
-      @else
-      <div class="comment_box well col-lg-11">
-        <div class="comment_text">{{{ $comment->comment }}}</div>
-        <div class="comment_status">{{ $comment->created_at }}</div>
-      </div>
-      @endif
-    </div>
-  @endforeach
-</div>
-<div class="row">
-  <div class="comment_header">
-    <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
-  </div>
-  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post', 'name' => 'commentInfo')) }}
-    <div class="form-group">
-      <textarea name="comment" class="form-control" rows="5" ng-model="comment" ng-minlength="1" required></textarea>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary" ng-disabled="commentInfo.comment.$invalid">コメントする</button>
-    </div>
-  {{ Form::close() }}
-</div>
 @stop
