@@ -158,6 +158,7 @@ class ItemController extends BaseController {
         );
       }
     }
+    return Redirect::to(Auth::user()->screen_name . "/items/{$item_id}");
   }
 
   public function delete($screen_name, $item_id) {
