@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     @section('css')
+    {{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css') }}
     {{ HTML::style('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css') }}
     <!--{{ HTML::style('css/edison-bootstrap-min.css') }}-->
     {{ HTML::style('http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css') }}

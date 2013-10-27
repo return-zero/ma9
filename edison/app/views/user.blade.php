@@ -2,7 +2,6 @@
 @section('css')
 @parent
 {{ HTML::style('css\user.css') }}
-{{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css') }}
 @stop
 @section('header')
 @parent

@@ -29,6 +29,11 @@
                 <a href="{{ $item->screen_name }}">{{ $item->screen_name }}</a> が{{ $item->created_at }}に投稿しました
               </div>
               <div class="item-title">
+                @if ($item->type == 'video')
+                  <i class="fa fa-film"></i> 
+                @else
+                  <i class="fa fa-picture-o"></i> 
+                @endif
                 <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
               </div>
             </div>
