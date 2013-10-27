@@ -40,7 +40,8 @@
                   <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->item_title }}</a> への投稿
                 </div>
 		            <div class="item-title">
-		              <a href="{{ $work->url }}" target="_blank">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+		              <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span></p>
+                  <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a>
 		            </div>
 		          </div>
 		        </div>
