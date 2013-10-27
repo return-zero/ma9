@@ -133,6 +133,7 @@
       @else
         <p>関連作品はありません</p>
       @endif
+      <div class="clearfix"></div>
       
       <hr>
       <h4><span class="glyphicon glyphicon-comment"></span> コメント</h4>
