@@ -83,6 +83,7 @@ class HomeController extends BaseController {
     );
     return View::make('index', $data);
   }
+<<<<<<< HEAD
 
   public function showNew()
   {
@@ -167,4 +168,6 @@ class HomeController extends BaseController {
     $screen_name = Auth::user()->screen_name;
     return Redirect::to("/$screen_name/items/$item_id");
   }
+=======
+>>>>>>> 9389788db030f04597931a39e6f291b1924d764d
 }

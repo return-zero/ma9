@@ -4,6 +4,7 @@ ma9
 edison/public/css
 edison/public/dev-js
 edison/public/bower_components
+edison/public/components
 node_modules
 .sass-cache
 .vagrant

@@ -4,6 +4,13 @@ class ItemController extends BaseController {
 
   public function showItem($screen_name, $id)
   {
+    if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    if (Item::where('id', '=', $id)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    
     $user = DB::table('users')->where('screen_name', '=', $screen_name)->get()[0];
     $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user->id)->get()[0];
     $tagmaps = DB::table('tagmaps')->where('item_id', $item->id)->get();
@@ -43,11 +50,17 @@ class ItemController extends BaseController {
         );
       }
     }
+    if ($item->type == 'video') {
+      $pattern = '/^http:\/\/www\.nicovideo\.jp\/watch\/(sm[0-9]+)/';
+    } else {
+      $pattern= '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/(im[0-9]+)/';
+    }
 
     $data = array(
       'item' => $item,
       'user' => $user,
       'works' => Work::where('item_id', '=', $item->id)->get(),
+      'pattern' => $pattern,
       'title' => $item->title,
       'comments' => $comments,
       'tags' => $tags,
@@ -61,7 +74,97 @@ class ItemController extends BaseController {
     return View::make('item', $data);
   }
 
+<<<<<<< HEAD
   public function delete($screen_name, $item_id) {
+=======
+  public function showNew()
+  {
+    $categories = Category::where('type', '=', 'video')->get();
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'toho',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18',
+    );
+    $data = array(
+      'title' => '新規投稿',
+      'categories' => $categories,
+      'names' => $category_names
+    );
+    return View::make('new', $data);
+  }
+
+
+  public function create()
+  {
+    $data = Input::all();
+    $item_id = DB::table('items')->insertGetId(
+      array(
+        'category_id' => $data['category_id'],
+        'user_id' => Auth::user()->id,
+        'title' => $data['title'],
+        'content' => $data['content'],
+        'type' => $data['type'],
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s"),
+      )
+    );
+    foreach ($data['tags'] as $tag) {
+      if ($tag == '') {
+        continue;
+      }
+      $result = DB::table('tags')->where('content', $tag)->get();
+      if (empty($result)) {
+        $tag_id = DB::table('tags')->insertGetId(
+          array(
+            'content' => $tag
+          )
+        );
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $tag_id
+          )
+        );
+      } else {
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $result[0]->id
+          )
+        );
+      }
+    }
+  }
+
+  public function delete($screen_name, $item_id, $comment_id) {
+>>>>>>> 9389788db030f04597931a39e6f291b1924d764d
     $item = Item::find($item_id);
     
     if (Auth::user()->id === $item->user_id) {
@@ -134,6 +237,12 @@ class ItemController extends BaseController {
   }
 
   public function stargazers($screen_name, $id) {
+    if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
+      return Redirect::to('/404');
+    }
+    if (Item::where('id', '=', $id)->first() == NULL) {
+      return Redirect::to('/404');
+    }
     $stargazers = Starmap::where('item_id', '=', $id)->get();
     $users = array();
     foreach ($stargazers as $stargazer) {

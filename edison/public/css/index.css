@@ -21,6 +21,6 @@ ul#stream-tab {
 
 /* line 18, ../scss/index.scss */
 .items {
-  border-bottom: thin dotted;
+  border-bottom: thin dotted #a9a9a9;
   padding-bottom: 10px;
 }
