@@ -43,12 +43,7 @@ class UserController extends BaseController {
     $user = User::where('screen_name', '=', $screen_name)->first();
     $star_items = $this->getStars($screen_name);
     
-    $twitter_id = $user->id;
-
     try {
-      Twitter::setOAuthToken($user->oauth_token);
-      Twitter::setOAuthTokenSecret($user->oauth_token_secret);
-      $timeline = Twitter::statusesUserTimeline($twitter_id);
       $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($items as &$item) {
         $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
@@ -61,10 +56,8 @@ class UserController extends BaseController {
         $work['item_title'] = $item->title;
       }
       $twitter_profile = array(
+        'user' => $user,
         'screen_name' => $screen_name,
-        'name' => $timeline[0]["user"]["name"],
-        'desc' => $timeline[0]["user"]["description"],
-        'icon' => $timeline[0]["user"]["profile_image_url"],
         'items' => $items,
         'title' => $screen_name,
         'stars' => $star_items,
@@ -210,7 +203,12 @@ class UserController extends BaseController {
         $user = new User;
         $user->id = $user_id;
       }
+      Twitter::setOAuthToken($accessToken['oauth_token']);
+      Twitter::setOAuthTokenSecret($accessToken['oauth_token_secret']);
+      $timeline = Twitter::statusesUserTimeline($user->id);
+       
       $user->screen_name = $accessToken['screen_name'];
+      $user->profile_image_url = $timeline[0]['user']['profile_image_url'];
       $user->oauth_token = $accessToken['oauth_token'];
       $user->oauth_token_secret = $accessToken['oauth_token_secret'];
       $user->save();

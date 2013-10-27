@@ -21,8 +21,7 @@
         </div>
         <div class="col-lg-8">
           <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
-          <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
-          <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+          <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       </div>
     </div>
@@ -48,6 +47,7 @@
       <button class="btn btn-warning" id="star">
         <i class="glyphicon glyphicon-star"></i>
       </button>
+        <a href="/{{ $screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
     @else
       <button class="btn btn-default" id="star">
         <i class="glyphicon glyphicon-star"></i>
@@ -95,6 +95,9 @@
 <div class="row">
   <h2>投稿作品</h2>
   <div class="job">
+    @foreach ($works as $work)
+      <img src="{{ $work->thumbnail_url }}" class="img-thumbnail">{{ $work->title }}
+    @endforeach
   </div>
 </div>
 
@@ -140,10 +143,10 @@
     <div class="comment row">
       <div class="user_data pull-left col-lg-1">
         <div class="user_icon">
-          <img src="http://api.osae.me/retwipi/{{ $comment->name->screen_name}}">
+          <img src="{{ $comment->user->profile_image_url }}">
         </div>
         <div class="screen_name">
-          <a href="/{{ $comment->name->screen_name }}">{{ $comment->name->screen_name }}</a>
+          <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
         </div>
       </div>
       <div class="comment_box well col-lg-11">

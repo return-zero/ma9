@@ -15,8 +15,8 @@ class ItemController extends BaseController {
     $comments = array();
     $cs = Comment::where('item_id', '=', $id)->get();
     foreach ($cs as $comment) {
-      $name = User::where('id', '=', $comment->user_id)->first();
-      $comment['name'] = $name;
+      $comment_user = User::where('id', '=', $comment->user_id)->first();
+      $comment['user'] = $comment_user;
       $comments[] = $comment;
     }
 
@@ -26,9 +26,9 @@ class ItemController extends BaseController {
       $star_status = $this->getStarStatus($auth_id,$id);
     }
 
-    $nico = new NicoSugoiSearch();
+    $Niconico = new Niconico();
     $query = implode(' | ', $tags);
-    $ret = $nico->search($item[0]->type, $query);
+    $ret = $Niconico->sugoiSearch($item[0]->type, $query);
     $related_works = array();
     if (isset($ret->values)) {
       foreach ($ret->values as $value) {
@@ -46,6 +46,7 @@ class ItemController extends BaseController {
 
     $data = array(
       'item' => $item[0],
+      'works' => Work::where('item_id', '=', $item[0]->id)->get(),
       'title' => $item[0]->title,
       'comments' => $comments,
       'tags' => $tags,
@@ -53,6 +54,7 @@ class ItemController extends BaseController {
       'star_status' => $star_status,
       'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
       'work_count' => Work::where('user_id', '=', $user->id)->count(),
+      'star_gazers_num' => Starmap::where('item_id', '=', $item[0]->id)->count()[0],
       'related_works' => $related_works
     );
 
@@ -129,14 +131,14 @@ class ItemController extends BaseController {
   }
 
   public function stargazers($screen_name, $id) {
-    $stargazers = Starmap::where('item_id', '=', 2)->get();
+    $stargazers = Starmap::where('item_id', '=', $id)->get();
     $users = array();
     foreach ($stargazers as $stargazer) {
-      $users[] = $stargazer->user_id;
+      $users[] = User::where('id', '=', $stargazer->user_id)->get();
     }
     $data = array(
       'title' => 'スターゲイザー',
-      'ids' => $users
+      'users' => $users
     );
     return View::make('stargazers', $data);
   }

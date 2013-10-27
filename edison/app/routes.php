@@ -59,7 +59,7 @@ Route::get('{screen_name}/items/{id}/stargazers', 'ItemController@stargazers');
 /* --------------
    UserController
    -------------- */
-Route::get('login', 'UserController@getLogin');
+Route::post('login', 'UserController@getLogin');
 Route::get('login/callback', 'UserController@getCallback');
 Route::get('logout', 'UserController@getLogout');
 Route::get('{screen_name}', 'UserController@showUser');
