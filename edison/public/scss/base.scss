@@ -4,6 +4,7 @@
 @import "compass";
 @import "config";
 @import "style";
+@import url(http://fonts.googleapis.com/css?family=Righteous);
 
 /* ---------------
     Scss
@@ -11,7 +12,12 @@
 
 body {
 	background-color: $background_color;
-	word-wrap: break-word;	
+	word-wrap: break-word;
+}
+
+#title-font {
+        font-family: 'Righteous', cursive;
+	font-size: x-large;
 }
 
 .content-wrapper {

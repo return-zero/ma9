@@ -10,6 +10,7 @@
     <!--{{ HTML::style('css/edison-bootstrap-min.css') }}-->
     {{ HTML::style('http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css') }}
     {{ HTML::style('css\base.css') }}
+    <link href='http://fonts.googleapis.com/css?family=Joti+One' rel='stylesheet' type='text/css'>
     @show
     @section('header')
     <title>{{ $title }} - edison</title>
@@ -25,7 +26,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            {{ HTML::link('/', 'えじそん', array('class'=>'navbar-brand')) }}
+            {{ HTML::link('/', 'edison', array('class'=>'navbar-brand', 'id'=>'title-font')) }}
           </div>
           <div class="collapse navbar-collapse">
             @if (Auth::check())
@@ -66,6 +67,7 @@
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
+    {{ HTML::script('bower_components/angular/angular.js') }}
     
     @show
   </body>
