@@ -64,7 +64,7 @@ class WorkController extends BaseController {
     $item_user_screen_name = User::where('id', '=', $item_user_id)->get()[0]->screen_name;
 
     if (Auth::user()->user_id === $work_user_id) {
-      $work->delete();
+      Work::where('id', '=', $work_id)->delete();
       return Redirect::to("/$item_user_screen_name/items/$work_item_id");
     } else {
       return Redirect::to("/");
