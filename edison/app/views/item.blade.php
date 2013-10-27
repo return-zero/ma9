@@ -14,7 +14,7 @@
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       @if (Auth::user()->screen_name === $user->screen_name)
         <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
-        <!-- <span class="item-update"><button class="btn btn-success btn-sm pull-right" id="js-update-item" style="margin-right: 5px;">この投稿を編集する</button></span> -->
+        <span class="item-update"><a href="/{{ $user->screen_name }}/items/{{ $item->id }}/edit" class="btn btn-success btn-sm pull-right" id="js-update-item" style="margin-right: 5px;">この投稿を編集する</a></span> 
       @endif
       
       @if (Auth::check())
@@ -38,8 +38,6 @@
       <div class="clearfix"></div>
       <div class="item-title">
         {{ $item->title }}
-      </div>
-      <span class="item-content">{{ $item->content }}</span>
       
       <div class="row tags">
         <div class="col-lg-1">
