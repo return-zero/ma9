@@ -15,11 +15,6 @@ class WorkController extends BaseController {
       $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/im([0-9]+)/';
     }
     
-    $not_found = false;
-    if (fopen($data['url'], 'r')) {
-      $not_found = true;
-    }
-    
     preg_match($reg, $data['url'], $match);
     $nico_content = $match ? $match[1] : 0;
 
@@ -33,7 +28,7 @@ class WorkController extends BaseController {
       $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}q";
     }
 
-    if ( $nico_content && $not_found ) {
+    if ( $nico_content ) {
       $work = new Work;
     
       $work->item_id = $item_id;
