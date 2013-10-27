@@ -68,24 +68,14 @@
               <div class="row">
                 <div class="col-lg-2"><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a></div>
                 
-                @if (Auth::user()->screen_name === $work->screen_name)
-                  <div class="col-lg-9">
-                    <div class="item-title">
-                      <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
-                    </div>
-                    <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
-                  </div>
-                  <div class="col-lg-1 work-delete">
-                    <button class="btn btn-danger btn-sm js-delete-work" data-work-id="{{$work->id}}">削除</button>
-                  </div>
-                @else
+               
                   <div class="col-lg-10">
                     <div class="item-title">
                       <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
                     </div>
                     <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
                   </div>
-                @endif
+                
                 
               </div>
             </div>
@@ -133,6 +123,7 @@
       @else
         <p>関連作品はありません</p>
       @endif
+      <div class="clearfix"></div>
       
       <hr>
       <h4><span class="glyphicon glyphicon-comment"></span> コメント</h4>

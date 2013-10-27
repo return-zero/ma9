@@ -53,14 +53,16 @@ class WorkController extends BaseController {
   }
 
   public function delete($work_id) {
+  
+    
     $work_user_id = Work::where('id', '=', $work_id)->get()[0]->user_id;
-    $work_item_id = Work::where('id', '=', $work_id)->get()[0]->item_id;
-    $item_user_id = Item::where('id', '=', $work_item_id)->get()[0]->user_id;
-    $item_user_screen_name = User::where('id', '=', $item_user_id)->get()[0]->screen_name;
+    // $work_item_id = Work::where('id', '=', $work_id)->get()[0]->item_id;
+    // $item_user_id = Item::where('id', '=', $work_item_id)->get()[0]->user_id;
+    // $item_user_screen_name = User::where('id', '=', $item_user_id)->get()[0]->screen_name;
 
-    if (Auth::user()->user_id === $work_user_id) {
+    if (Auth::user()->id === $work_user_id) {
       Work::where('id', '=', $work_id)->delete();
-      return Redirect::to("/$item_user_screen_name/items/$work_item_id");
+      return Redirect::to("/");
     } else {
       return Redirect::to("/");
     }

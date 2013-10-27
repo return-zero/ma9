@@ -16,6 +16,8 @@ class CreateTagmapsTable extends Migration {
         $table->increments('id');
         $table->integer('item_id');
         $table->integer('tag_id');
+        $table->datetime('created_at');
+        $table->datetime('updated_at');
       });
     }
   }
