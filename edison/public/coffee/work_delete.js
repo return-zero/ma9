@@ -3,11 +3,13 @@ $(".js-delete-work").on("click", function() {
   var work_id;
   if (window.confirm("削除するで？")) {
     work_id = $(".js-delete-work").data('work-id');
-    $.ajax({
+    return $.ajax({
       type: "post",
-      url: location.href + "/work/" + work_id + "/delete",
-      success: function(data) {}
+      url: "/work/delete/" + work_id,
+      success: function(data) {},
+      error: function(data) {
+        return console.log(data);
+      }
     });
-    return location.href = "/";
   }
 });

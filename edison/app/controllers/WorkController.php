@@ -15,11 +15,6 @@ class WorkController extends BaseController {
       $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/im([0-9]+)/';
     }
     
-    $not_found = false;
-    if (fopen($data['url'], 'r')) {
-      $not_found = true;
-    }
-    
     preg_match($reg, $data['url'], $match);
     $nico_content = $match ? $match[1] : 0;
 
@@ -33,7 +28,7 @@ class WorkController extends BaseController {
       $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}q";
     }
 
-    if ( $nico_content && $not_found ) {
+    if ( $nico_content ) {
       $work = new Work;
     
       $work->item_id = $item_id;
@@ -58,14 +53,16 @@ class WorkController extends BaseController {
   }
 
   public function delete($work_id) {
+  
+    
     $work_user_id = Work::where('id', '=', $work_id)->get()[0]->user_id;
-    $work_item_id = Work::where('id', '=', $work_id)->get()[0]->item_id;
-    $item_user_id = Item::where('id', '=', $work_item_id)->get()[0]->user_id;
-    $item_user_screen_name = User::where('id', '=', $item_user_id)->get()[0]->screen_name;
+    // $work_item_id = Work::where('id', '=', $work_id)->get()[0]->item_id;
+    // $item_user_id = Item::where('id', '=', $work_item_id)->get()[0]->user_id;
+    // $item_user_screen_name = User::where('id', '=', $item_user_id)->get()[0]->screen_name;
 
-    if (Auth::user()->user_id === $work_user_id) {
+    if (Auth::user()->id === $work_user_id) {
       Work::where('id', '=', $work_id)->delete();
-      return Redirect::to("/$item_user_screen_name/items/$work_item_id");
+      return Redirect::to("/");
     } else {
       return Redirect::to("/");
     }
