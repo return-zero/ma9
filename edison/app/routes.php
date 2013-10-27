@@ -22,11 +22,11 @@ Route::group(array('before' => 'auth') ,function() {
 	/* --------------
    ItemController
    -------------- */
-  Route::post('{screen_name}/items/{id}/delete', 'ItemController@delete');
-  Route::post('/{screen_name}/items/{id}/comment/new', 'ItemController@createComment');
-  Route::post('/{screen_name}/items/{id}/comment/delete', 'ItemController@deleteComment');
-  Route::post('{screen_name}/items/{id}/star', 'ItemController@star');
-  Route::post('{screen_name}/items/{id}/unstar', 'ItemController@unstar');
+  Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
+  Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
+  Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
+  Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');
+  Route::post('{screen_name}/items/{item_id}/unstar', 'ItemController@unstar');
 
   /* --------------
    WorkController

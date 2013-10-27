@@ -57,13 +57,15 @@ class ItemController extends BaseController {
     return View::make('item', $data);
   }
 
-  public function delete($screen_name, $id) {
-    $item = Item::find($id);
+  public function delete($screen_name, $item_id, $comment_id) {
+    $item = Item::find($item_id);
+    $comment = Comment::find($comment_id);
 
-    if (Auth::user()->id == $item->user_id) {
-      Item::destroy($id);
+    if (Auth::user()->id === $comment->user_id && $item->id === $comment->item_id) {
+      $item->delete();
+      return Redirect::to("/$screen_name");
     } else {
-      return Redirect::to("/");      
+      return Redirect::to("/$screen_name");      
     }
   }
 
@@ -90,7 +92,7 @@ class ItemController extends BaseController {
     $comment = Comment::find($id);
 
     if (Auth::user()->id === $comment->user_id) {
-      Comment::destroy($id);
+      $comment->delete();
     } else {
       return Redirect::to("/$screen_name/item/$id");      
     }
