@@ -53,10 +53,10 @@
             </div>
             <div class="item-content">
               <div class="row">
-                <div class="col-lg-2"><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a></div>
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
                 <div class="col-lg-10">
                   <div class="item-title">
-                    <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
+                    <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
                     <p><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span></p>
                     <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
                   </div>
