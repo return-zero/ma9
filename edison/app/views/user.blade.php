@@ -2,13 +2,14 @@
 @section('css')
 @parent
 {{ HTML::style('css\user.css') }}
+{{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css') }}
 @stop
 @section('header')
 @parent
 @stop
 @section('content')
 <div class="col-lg-9 content-wrapper">
-	<h2>{{ $screen_name }} <a href="https://twitter.com/{{ $screen_name }}">twitter logo</a></h2>
+	<h2>{{ $screen_name }} <a href="https://twitter.com/{{ $screen_name }}"><i class="fa fa-twitter"></i></a></h2>
 	<hr>
 	<div class="tab-wrapper">
 		<ul id="stream-tab" class="nav nav-tabs">
