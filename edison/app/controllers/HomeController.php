@@ -79,7 +79,7 @@ class HomeController extends BaseController {
       'recent_works' => $recent_works,
       'categories' => $category_names,
       'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
-      'work_count' => Starmap::where('user_id', '=', Auth::user()->id)->count(),
+      'work_count' => Work::where('user_id', '=', Auth::user()->id)->count(),
     );
     return View::make('index', $data);
   }

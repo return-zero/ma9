@@ -43,15 +43,24 @@
       </div>
     </div>
     <div class="col-lg-3">
-    @if ($star_status == true)
-      <button class="btn btn-warning" id="star">
-        <i class="glyphicon glyphicon-star"></i>
-      </button>
+    @if (Auth::check())
+      @if ($star_status == true)
+        <button class="btn btn-warning" id="star">
+          <i class="glyphicon glyphicon-star"></i>
+        </button>
         <a href="/{{ $screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
+      @else
+        <button class="btn btn-default" id="star">
+          <i class="glyphicon glyphicon-star"></i>
+        </button>
+        <a href="/{{ $screen_name }}/items/{{ $item->id }}/stargazers"><span class="badge"> {{ $star_gazers_num }}</span></a>
+      @endif
     @else
+      <a href="/">
       <button class="btn btn-default" id="star">
         <i class="glyphicon glyphicon-star"></i>
       </button>
+      </a>
     @endif
     </div>
   </div>

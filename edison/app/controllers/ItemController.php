@@ -61,20 +61,20 @@ class ItemController extends BaseController {
     return View::make('item', $data);
   }
 
-  public function delete($screen_name, $id) {
-    $item = Item::find($id);
+  public function delete($screen_name, $item_id, $comment_id) {
+    $item = Item::find($item_id);
+    $comment = Comment::find($comment_id);
 
-    if (Auth::user()->id == $item->user_id) {
-      Item::destroy($id);
+    if (Auth::user()->id === $comment->user_id && $item->id === $comment->item_id) {
+      $item->delete();
+      return Redirect::to("/$screen_name");
     } else {
-      return Redirect::to("/");      
+      return Redirect::to("/$screen_name");      
     }
   }
 
   public function createComment($screen_name, $id) {
     $data = Input::all();
-
-    $user = User::where('screen_name', '=', $screen_name)->first();    
 
     $comment = new Comment;
 
@@ -89,14 +89,13 @@ class ItemController extends BaseController {
     return Redirect::to("/$screen_name/items/$id");
   }
 
-  public function deleteComment($screen_name, $id) {
-    $user = User::where('screen_name', '=', $screen_name)->first();
-    $comment = Comment::find($id);
+  public function deleteComment($screen_name, $item_id, $comment_id) {
+    $comment = Comment::find($comment_id);
 
     if (Auth::user()->id === $comment->user_id) {
-      Comment::destroy($id);
+      $comment->delete();
     } else {
-      return Redirect::to("/$screen_name/item/$id");      
+      return Redirect::to("/$screen_name/item/$item_id");      
     }
   }
 
