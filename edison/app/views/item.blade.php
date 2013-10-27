@@ -8,7 +8,8 @@
 <div class="row">
   <div class="col-lg-9">
     <div class="content-wrapper">
-      <span class="item-date">{{ $item->created_at }}</span> 投稿 <a class="star-badge" href="/{{ $user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $star_gazers_num }}</span></a>
+      <span class="item-date">{{ $item->created_at }} 投稿</span>
+      <a class="star-badge" href="/{{ $user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $star_gazers_num }}</span></a>
       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="edisoso">ツイート</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       @if (Auth::user()->screen_name === $user->screen_name)
@@ -34,6 +35,7 @@
         </a>
       @endif
       
+      <div class="clearfix"></div>
       <div class="item-title">
         {{ $item->title }}
       </div>
@@ -121,6 +123,7 @@
       @else
         <p>関連作品はありません</p>
       @endif
+      <div class="clearfix"></div>
       
       <hr>
       <h4><span class="glyphicon glyphicon-comment"></span> コメント</h4>

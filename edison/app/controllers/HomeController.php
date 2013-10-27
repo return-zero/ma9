@@ -83,4 +83,9 @@ class HomeController extends BaseController {
     );
     return View::make('index', $data);
   }
+
+  public function showLogin()
+  {
+    return View::make('login', array('title' => 'ログイン'));
+  }
 }
