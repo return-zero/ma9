@@ -3,8 +3,9 @@
 @import "style";
 
 #item_title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 #content {
@@ -43,4 +44,7 @@ p.relatedwork_title {
 }
 .comment_status {
   font-size: 90%;
+}
+.item-delete {
+  margin-top: 25px; 
 }

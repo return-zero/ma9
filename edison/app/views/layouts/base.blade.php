@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     @section('css')
+    {{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css') }}
     {{ HTML::style('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css') }}
     <!--{{ HTML::style('css/edison-bootstrap-min.css') }}-->
     {{ HTML::style('http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css') }}
@@ -35,7 +36,7 @@
                 <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
                   <li role="presentation" class="notice-content"></li>
                 </ul>
-                <li><a href="/new">投稿する</a></li>
+                <li><a href="/item/new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop">
@@ -67,6 +68,7 @@
     {{ HTML::script('http://code.jquery.com/jquery-1.10.1.min.js') }}
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
+    {{ HTML::script('bower_components/angular/angular.js') }}
     
     @show
   </body>

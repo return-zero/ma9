@@ -12,7 +12,7 @@ class WorkController extends BaseController {
     if ($item['type'] == 'video') {
       $reg = '/^http:\/\/www\.nicovideo\.jp\/watch\/(sm[0-9]+)/';
     } else {
-      $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/(im[0-9]+)\?.*/';
+      $reg = '/^http:\/\/seiga\.nicovideo\.jp\/seiga\/im([0-9]+)/';
     }
     
     $not_found = false;
@@ -30,7 +30,7 @@ class WorkController extends BaseController {
       $thumbnail_url = $ret->thumbnail_url;
     } else {
       $title = '';
-      $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}i";
+      $thumbnail_url = "http://lohas.nicoseiga.jp/thumb/{$nico_content}q";
     }
 
     if ( $nico_content && $not_found ) {

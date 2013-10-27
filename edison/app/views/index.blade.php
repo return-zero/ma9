@@ -10,7 +10,7 @@
 <div class="col-lg-9 content-wrapper">
   <div class="header">
     <h3>ほしい動画、絵をお願いしてみよう。</h3>
-    <a class="btn btn-primary" href="new">ほしいもの・アイデアを投稿する</a>
+    <a class="btn btn-primary" href="/item/new">ほしいもの・アイデアを投稿する</a>
   </div>
   <ul id="stream-tab" class="nav nav-tabs">
     <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
@@ -29,6 +29,11 @@
                 <a href="{{ $item->screen_name }}">{{ $item->screen_name }}</a> が{{ $item->created_at }}に投稿しました
               </div>
               <div class="item-title">
+                @if ($item->type == 'video')
+                  <i class="fa fa-film"></i> 
+                @else
+                  <i class="fa fa-picture-o"></i> 
+                @endif
                 <a href="{{ $item->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
               </div>
             </div>
@@ -47,11 +52,15 @@
               <img src="">
             </div>
             <div class="item-content">
-              <div class="action">
-                <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
-              </div>
-              <div class="item-title">
-                <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+              <div class="row">
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
+                <div class="col-lg-10">
+                  <div class="item-title">
+                    <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
+                    <p><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span></p>
+                    <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -8,7 +8,15 @@
 <div class="row">
   <div class="col-lg-9">
     <p id="item_date"><strong>{{ $item->created_at }} 投稿</strong></p>
-    <p id="item_title">{{ $item->title }}</p>
+    <div class="title-delete">
+      <div id="item_title">
+        {{ $item->title }}
+        @if (Auth::user()->screen_name === $user->screen_name)
+          <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
+          <!-- <span class="item-update"><button class="btn btn-success btn-sm pull-right" id="js-update-item" style="margin-right: 5px;">この投稿を編集する</button></span> -->
+        @endif
+      </div>
+    </div>
     <div id="content" class="well">
       {{ $item->content }}
     </div>
@@ -81,11 +89,13 @@
           <h4 class="modal-title">作品投稿</h4>
         </div>
         <div class="modal-body">
-          {{ Form::open(array('url' => "work/create/$item->id", 'method'=>'post', 'role' => 'form')) }}
+          {{ Form::open(array('url' => "work/create/$item->id", 'method'=>'post', 'role' => 'form', 'name' => 'workInfo')) }}
             <div class="form-group">
               <label>作品のURL</label>
-              {{ Form::text('url', '', array('class' => 'form-control')) }}
-              <p class="help-box">投稿するニコニコ動画または静画のURLを入力して下さい</p>
+              <input type="text" name="url" class="form-control" ng-model="url" ng-pattern="{{ $pattern }}" required>
+              <p class="help-block">投稿するニコニコ動画または静画のURLを入力して下さい</p>
+              <p class="help-block">http://www.nicovideo.jp/watch/sm***</p>
+              <p class="help-block">http://seiga.nicovideo.jp/seiga/im***</p>
             </div>
             <div class="form-group">
               <label>コメント</label>
@@ -93,7 +103,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">投稿する</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="workInfo.$invalid">投稿する</button>
           </div>
         {{ Form::close() }}
       </div><!-- /.modal-content -->
@@ -158,10 +168,20 @@
           <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
         </div>
       </div>
+      @if (Auth::user()->screen_name === $comment->user->screen_name)
+      <div class="comment_box well col-lg-10">
+        <div class="comment_text">{{{ $comment->comment }}}</div>
+        <div class="comment_status">{{ $comment->created_at }}</div>
+      </div>
+      <div class="col-lg-1 item-delete">
+        <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
+      </div>
+      @else
       <div class="comment_box well col-lg-11">
         <div class="comment_text">{{{ $comment->comment }}}</div>
         <div class="comment_status">{{ $comment->created_at }}</div>
       </div>
+      @endif
     </div>
   @endforeach
 </div>
@@ -169,12 +189,12 @@
   <div class="comment_header">
     <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
   </div>
-  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
+  {{ Form::open(array('url' => "$user->screen_name/items/$item->id/comment/new", 'method'=>'post', 'name' => 'commentInfo')) }}
     <div class="form-group">
-      {{ Form::textarea('comment', '', array('class' => 'form-control', 'rows' => '5')) }}
+      <textarea name="comment" class="form-control" rows="5" ng-model="comment" ng-minlength="1" required></textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">コメントする</button>
+      <button type="submit" class="btn btn-primary" ng-disabled="commentInfo.comment.$invalid">コメントする</button>
     </div>
   {{ Form::close() }}
 </div>

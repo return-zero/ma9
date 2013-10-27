@@ -14,14 +14,10 @@
 Route::group(array('before' => 'auth') ,function() {
 	
 	/* --------------
-   HomeController
-   -------------- */
-  Route::get('new', 'HomeController@showNew');
-  Route::post('new', 'HomeController@create');
-	
-	/* --------------
    ItemController
    -------------- */
+  Route::get('/item/new', 'ItemController@showNew');
+  Route::post('/item/new', 'ItemController@create');
   Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
   Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
   Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
@@ -49,6 +45,7 @@ Route::post('api/post/watched', 'ApiController@postWatched');
    HomeController
    -------------- */
 Route::get('/', 'HomeController@showIndex');
+Route::get('404','HomeController@show404');
 
 /* --------------
    ItemController
@@ -63,5 +60,4 @@ Route::post('login', 'UserController@getLogin');
 Route::get('login/callback', 'UserController@getCallback');
 Route::get('logout', 'UserController@getLogout');
 Route::get('{screen_name}', 'UserController@showUser');
-Route::get('{screen_name}/stars', 'UserController@showUserStars');
-
+//Route::get('{screen_name}/stars', 'UserController@showUserStars');
