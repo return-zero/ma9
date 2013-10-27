@@ -63,12 +63,15 @@ class ItemController extends BaseController {
 
   public function delete($screen_name, $item_id) {
     $item = Item::find($item_id);
-
+    
     if (Auth::user()->id === $item->user_id) {
       $item->delete();
+      Work::where('item_id', '=', $item_id)->delete();
+      Comment::where('item_id', '=', $item_id)->delete();
       return Redirect::to("/$screen_name");
+      exit;
     } else {
-      return Redirect::to("/$screen_name/items/$item_id");      
+      return Redirect::to("/$screen_name");      
     }
   }
 

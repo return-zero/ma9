@@ -13,6 +13,7 @@
         {{ $item->title }}
         @if (Auth::user()->screen_name === $user->screen_name)
           <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
+          <!-- <span class="item-update"><button class="btn btn-success btn-sm pull-right" id="js-update-item" style="margin-right: 5px;">この投稿を編集する</button></span> -->
         @endif
       </div>
     </div>

@@ -22,7 +22,7 @@ Route::group(array('before' => 'auth') ,function() {
 	/* --------------
    ItemController
    -------------- */
-  Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
+  Route::post('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
   Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
   Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
   Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');
