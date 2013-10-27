@@ -39,6 +39,7 @@
       <div class="item-title">
         {{ $item->title }}
       </div>
+      <span class="item-content">{{ $item->content }}</span>
       
       <div class="row tags">
         <div class="col-lg-1">
