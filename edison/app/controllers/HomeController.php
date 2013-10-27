@@ -79,7 +79,7 @@ class HomeController extends BaseController {
       'categories' => $category_names,
       'icon' => $timeline[0]['user']['profile_image_url'],
       'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
-      'work_count' => Starmap::where('user_id', '=', Auth::user()->id)->count(),
+      'work_count' => Work::where('user_id', '=', Auth::user()->id)->count(),
     );
     return View::make('index', $data);
   }
