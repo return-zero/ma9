@@ -38,6 +38,7 @@
       <div class="clearfix"></div>
       <div class="item-title">
         {{ $item->title }}
+      </div>
       
       <div class="row tags">
         <div class="col-lg-1">
@@ -68,10 +69,11 @@
                 
                
                   <div class="col-lg-10">
-                    <div class="item-title">
-                      <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
+                    <div class="work-title">
+                      <p>{{ $work->title }}</p>
                     </div>
                     <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
+                    <p>{{ $work->comment }}</p>
                   </div>
                 
                 
