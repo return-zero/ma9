@@ -16,13 +16,9 @@ Route::group(array('before' => 'auth') ,function() {
 	/* --------------
    ItemController
    -------------- */
-<<<<<<< HEAD
-  Route::post('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
-=======
   Route::get('/item/new', 'ItemController@showNew');
   Route::post('/item/new', 'ItemController@create');
   Route::delete('{screen_name}/items/{item_id}/delete', 'ItemController@delete');
->>>>>>> 9389788db030f04597931a39e6f291b1924d764d
   Route::post('{screen_name}/items/{item_id}/comment/new', 'ItemController@createComment');
   Route::post('{screen_name}/items/{item_id}/comment/{comment_id}/delete', 'ItemController@deleteComment');
   Route::post('{screen_name}/items/{item_id}/star', 'ItemController@star');

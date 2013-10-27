@@ -74,9 +74,6 @@ class ItemController extends BaseController {
     return View::make('item', $data);
   }
 
-<<<<<<< HEAD
-  public function delete($screen_name, $item_id) {
-=======
   public function showNew()
   {
     $categories = Category::where('type', '=', 'video')->get();
@@ -163,8 +160,7 @@ class ItemController extends BaseController {
     }
   }
 
-  public function delete($screen_name, $item_id, $comment_id) {
->>>>>>> 9389788db030f04597931a39e6f291b1924d764d
+  public function delete($screen_name, $item_id) {
     $item = Item::find($item_id);
     
     if (Auth::user()->id === $item->user_id) {
