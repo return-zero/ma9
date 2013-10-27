@@ -160,41 +160,45 @@ class ItemController extends BaseController {
     }
   }
 
-  public function delete($screen_name, $item_id, $comment_id) {
+  public function delete($screen_name, $item_id) {
     $item = Item::find($item_id);
-    $comment = Comment::find($comment_id);
-
-    if (Auth::user()->id === $comment->user_id && $item->id === $comment->item_id) {
+    
+    if (Auth::user()->id === $item->user_id) {
       $item->delete();
+      Work::where('item_id', '=', $item_id)->delete();
+      Comment::where('item_id', '=', $item_id)->delete();
       return Redirect::to("/$screen_name");
+      exit;
     } else {
       return Redirect::to("/$screen_name");      
     }
   }
 
-  public function createComment($screen_name, $id) {
+  public function createComment($screen_name, $item_id) {
     $data = Input::all();
 
     $comment = new Comment;
 
     $comment->user_id = Auth::user()->id;
-    $comment->item_id = $id;
+    $comment->item_id = $item_id;
     $comment->comment = $data['comment'];
     $comment->created_at = date("Y-m-d H:i:s");
     $comment->updated_at = date("Y-m-d H:i:s");
 
     $comment->save();
 
-    return Redirect::to("/$screen_name/items/$id");
+    return Redirect::to("/$screen_name/items/$item_id");
   }
 
   public function deleteComment($screen_name, $item_id, $comment_id) {
     $comment = Comment::find($comment_id);
+    $item = Item::find($item_id);
 
-    if (Auth::user()->id === $comment->user_id) {
+    if (Auth::user()->id === $comment->user_id && $item->id === $comment->item_id) {
       $comment->delete();
+      return Redirect::to("/$screen_name/items/$item_id");
     } else {
-      return Redirect::to("/$screen_name/item/$item_id");      
+      return Redirect::to("/$screen_name/items/$item_id");
     }
   }
 
