@@ -71,6 +71,21 @@ App::down(function()
 
 /*
 |--------------------------------------------------------------------------
+| 404 page
+|--------------------------------------------------------------------------
+|
+*/
+
+App::missing(function($exception)
+{
+  $data = array(
+    'title' => '404 page',
+  );
+  return View::make('404',$data); 
+});
+
+/*
+|--------------------------------------------------------------------------
 | Require The Filters File
 |--------------------------------------------------------------------------
 |
@@ -79,12 +94,5 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
-App::missing(function($exception)
-{
-  $data = array(
-    'title' => '404 page',
-  );
-  return View::make('404',$data); 
-});
 
 require app_path().'/filters.php';
