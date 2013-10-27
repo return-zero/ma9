@@ -21,6 +21,8 @@
         </div>
         <div class="col-lg-8">
           <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+          <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+          <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
         </div>
       </div>
     </div>
@@ -36,7 +38,7 @@
       <div id="tags">
         <p>
           @foreach ($tags as $tag)
-            <nobr>{{ $tag }}</nobr>
+            <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
           @endforeach
         </p>
       </div>
@@ -132,11 +134,11 @@
 
 <div class="row" id="comment_area">
   <div class="comment_header">
-    <h3><span class="glyphicon glyphicon-chevron-right">コメント</span></h3>
+    <h3><span class="glyphicon glyphicon-comment"></span> コメント</h3>
   </div>
   @foreach ($comments as $comment)
-    <div class="comment">
-      <div class="user_data">
+    <div class="comment row">
+      <div class="user_data pull-left col-lg-1">
         <div class="user_icon">
           <img src="http://api.osae.me/retwipi/{{ $comment->name->screen_name}}">
         </div>
@@ -144,7 +146,7 @@
           <a href="/{{ $comment->name->screen_name }}">{{ $comment->name->screen_name }}</a>
         </div>
       </div>
-      <div class="comment_box well">
+      <div class="comment_box well col-lg-11">
         <div class="comment_text">{{{ $comment->comment }}}</div>
         <div class="comment_status">{{ $comment->created_at }}</div>
       </div>
@@ -153,7 +155,7 @@
 </div>
 <div class="row">
   <div class="comment_header">
-    コメントを書く
+    <h3><span class="glyphicon glyphicon-comment"></span> コメントを書く</h3>
   </div>
   {{ Form::open(array('url' => "$screen_name/items/$item->id/comment/new", 'method'=>'post')) }}
     <div class="form-group">

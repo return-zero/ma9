@@ -41,16 +41,16 @@
     </div>
     <div class="recent-stream tab-pane fade" id="works">
       @foreach ($recent_works as $work)
-        <div class="works">
-          <div class="work-inner">
+        <div class="items">
+          <div class="item-inner">
             <div class="icon">
               <img src="">
             </div>
-            <div class="work-content">
+            <div class="item-content">
               <div class="action">
-                <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が{{ $work->created_at }}に投稿しました
+                <a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
               </div>
-              <div class="work-title">
+              <div class="item-title">
                 <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->url }}</a><span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
               </div>
             </div>
@@ -69,6 +69,8 @@
         </div>
         <div class="col-lg-8">
             <p><a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a></p>
+            <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+            <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
         </div>
       @endif
     </div>

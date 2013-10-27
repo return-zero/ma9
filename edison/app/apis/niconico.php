@@ -20,7 +20,7 @@ class NicoSugoiSearch {
       'from' => 0,
       'size' => 5,
       'sort_by' => 'view_counter',
-      'issuer' => 'apiguide',
+      'issuer' => 'http://github.com/tsuwatch/ma9',
       'reason' => 'ma9'
     );
 

@@ -4,8 +4,8 @@ class ItemController extends BaseController {
 
   public function showItem($screen_name, $id)
   {
-    $user = DB::table('users')->where('screen_name', '=', $screen_name)->get();
-    $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user[0]->id)->get();
+    $user = DB::table('users')->where('screen_name', '=', $screen_name)->get()[0];
+    $item = DB::table('items')->where('id', '=', $id)->where('user_id', '=', $user->id)->get();
     $tagmaps = DB::table('tagmaps')->where('item_id', $item[0]->id)->get();
     $tags = array();
     foreach ($tagmaps as $tagmap) {
@@ -51,6 +51,8 @@ class ItemController extends BaseController {
       'tags' => $tags,
       'screen_name' => $screen_name,
       'star_status' => $star_status,
+      'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
+      'work_count' => Work::where('user_id', '=', $user->id)->count(),
       'related_works' => $related_works
     );
 

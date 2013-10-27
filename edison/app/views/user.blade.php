@@ -11,12 +11,12 @@
 	<h2>{{ $screen_name }} <a href="https://twitter.com/{{ $screen_name }}">twitter logo</a></h2>
 	<hr>
 	<div class="tab-wrapper">
-		<ul class="nav nav-tabs">
+		<ul id="stream-tab" class="nav nav-tabs">
 		  <li class="active"><a href="#items" data-toggle="tab">最近の投稿</a></li>
 		  <li><a href="#works" data-toggle="tab">最近の作品</a></li>
 		  <li><a href="#stars" data-toggle="tab">スターした投稿</a></li>
 		</ul>
-		<div id="stream-tab" class="streams tab-content">
+		<div class="streams tab-content">
 		  <div class="tab-pane fade in active" id="items">
 		    @foreach ($items as $item)
 		      <div class="items">
@@ -70,6 +70,9 @@
       </div>
       <div class="col-lg-8">
         <p><a href="/{{ $screen_name }}">{{ $screen_name }}</a></p>
+        <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} stars</p>
+        <p><span class="glyphicon glyphicon-file"></span> {{ $work_count }} works</p>
+
       </div>
     </div>
   </div>

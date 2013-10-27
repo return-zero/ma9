@@ -70,6 +70,8 @@ class UserController extends BaseController {
         'stars' => $star_items,
         'works' => $works,
         'categories' => $category_names,
+        'star_count' => Starmap::where('user_id', '=', $user->id)->count(),
+        'work_count' => Work::where('user_id', '=', $user->id)->count()
       );
 
       return View::make('user', $twitter_profile); 
