@@ -81,7 +81,7 @@ App::missing(function($exception)
   $data = array(
     'title' => '404 page',
   );
-  return Response::view('404',$data, 404); 
+  return Response::view('404',$data, '404');
 });
 
 /*

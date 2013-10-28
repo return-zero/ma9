@@ -70,7 +70,7 @@
                     <div class="work-title">
                       <p>{{ $work->title }}</p>
                     </div>
-                    <p><a href="/{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
+                    <p><img src="{{ $work->user->profile_image_url }}"><a href="/{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が投稿しました</p>
                     <p>{{ $work->comment }}</p>
                   </div>
                 
