@@ -1,6 +1,6 @@
 $(".js-delete-comment").on "click", ->
  
-  if window.confirm("削除するで？")
+  if window.confirm("このコメントを削除しますか？")
     comment_id = $(".js-delete-comment").data('comment-id')
     $.ajax
       type: "post"
