@@ -70,7 +70,7 @@
 		          <div class="item-content">
                 <div class="item-title">
                   <a href="{{ $star->item->user->screen_name }}/items/{{ $star->item_id }}">{{ $star->item->title }}</a><span class="catgory label label-default">{{ $categories[$star->category_name] }}</span>
-                  @if ($work->item->type == 'video')
+                  @if ($star->item->type == 'video')
                     <i class="fa fa-film"></i> 
                   @else
                     <i class="fa fa-picture-o"></i> 
