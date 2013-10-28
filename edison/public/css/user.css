@@ -1,0 +1,48 @@
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* line 5, ../scss/user.scss */
+.tab-wrapper {
+  margin-top: 40px;
+}
+
+/* line 9, ../scss/user.scss */
+ul#stream-tab {
+  margin-top: 20px;
+}
+
+/* line 13, ../scss/user.scss */
+.item-title span {
+  margin-left: 10px;
+}
+
+/* line 17, ../scss/user.scss */
+.item-title a {
+  font-size: 16px;
+}
+
+/* line 21, ../scss/user.scss */
+#profile {
+  margin-top: 20px;
+}
+
+/* line 24, ../scss/user.scss */
+.left {
+  display: inline-block;
+  float: left;
+}
+
+/* line 29, ../scss/user.scss */
+.right {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* line 34, ../scss/user.scss */
+.items {
+  border-bottom: thin dotted #a9a9a9;
+  padding: 20px 0;
+}

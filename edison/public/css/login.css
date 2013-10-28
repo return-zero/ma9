@@ -1,0 +1,20 @@
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* line 5, ../scss/login.scss */
+h2 {
+  margin: 100px 100px 100px 100px;
+}
+
+/* line 9, ../scss/login.scss */
+#support {
+  margin: 50px 0;
+}
+
+/* line 13, ../scss/login.scss */
+.twitter-share-button {
+  margin-top: 30px;
+}
