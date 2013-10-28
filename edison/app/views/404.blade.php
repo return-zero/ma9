@@ -5,7 +5,8 @@
 @section('content')
 <div class="row">
   <div class="content-wrapper">
-    <h3>そのページは存在しません</h3>
+    <h3>そのページは存在しませんよ。ごめんなさい！</h3>
+    <img src="/img/edisontan.png" width="300">
   </div>
 </div>
 @stop
