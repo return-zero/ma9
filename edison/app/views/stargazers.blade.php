@@ -8,7 +8,7 @@
     @for ($j=$k; $j < ($i+1)*4; $j++,$k=$j)
       @if (isset($users[$j][0]))
         <div class="col-lg-3">
-          <div class="well">
+          <div class="content-wrapper">
             <img src="{{ $users[$j][0]->profile_image_url }}">
             <a href="/{{ $users[$j][0]->screen_name }}">{{ $users[$j][0]->screen_name }}</a>
           </div>
