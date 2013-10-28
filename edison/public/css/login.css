@@ -5,16 +5,80 @@
     Mixin
    --------------- */
 /* line 5, ../scss/login.scss */
-h2 {
-  margin: 100px 100px 100px 100px;
+.catch-copy {
+  margin: 100px 50px;
+}
+/* line 7, ../scss/login.scss */
+.catch-copy h1 {
+  font-size: 50px;
+  font-family: 'Righteous', cursive;
+}
+/* line 11, ../scss/login.scss */
+.catch-copy span {
+  font-size: large;
 }
 
-/* line 9, ../scss/login.scss */
+/* line 16, ../scss/login.scss */
 #support {
   margin: 50px 0;
 }
 
-/* line 13, ../scss/login.scss */
-.twitter-share-button {
-  margin-top: 30px;
+/* line 20, ../scss/login.scss */
+.share-wrapper {
+  margin-bottom: 40px;
+}
+
+/* line 24, ../scss/login.scss */
+.catch-copy-wrapper {
+  margin-bottom: 50px;
+}
+
+/* line 28, ../scss/login.scss */
+.idea-wrapper {
+  margin: -20px -20px 50px -20px;
+  padding: 40px 20px;
+  background: #f8f8f8;
+}
+/* line 32, ../scss/login.scss */
+.idea-wrapper .idea-content {
+  margin-top: 50px;
+}
+/* line 35, ../scss/login.scss */
+.idea-wrapper h2 {
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+/* line 39, ../scss/login.scss */
+.idea-wrapper p {
+  font-size: medium;
+}
+
+/* line 44, ../scss/login.scss */
+.img-bulb {
+  margin: 0 50px;
+}
+
+/* line 48, ../scss/login.scss */
+.work-wrapper {
+  margin: -20px -20px 50px -20px;
+  padding: 40px 20px;
+}
+/* line 51, ../scss/login.scss */
+.work-wrapper .work-content {
+  margin: 50px 0 0 50px;
+}
+/* line 54, ../scss/login.scss */
+.work-wrapper h2 {
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+/* line 58, ../scss/login.scss */
+.work-wrapper p {
+  font-size: medium;
+}
+
+/* line 63, ../scss/login.scss */
+h5 {
+  font-size: medium;
+  font-weight: bold;
 }
