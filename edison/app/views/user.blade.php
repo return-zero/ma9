@@ -8,7 +8,7 @@
 @stop
 @section('content')
 <div class="col-lg-9 content-wrapper">
-	<h2>{{ $user->screen_name }} <a href="https://twitter.com/{{ $user->screen_name }}" about="_blank"><i class="fa fa-twitter"></i></a></h2>
+	<h2>{{ $user->screen_name }} <a href="https://twitter.com/{{ $user->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a></h2>
 	<hr>
 	<div class="tab-wrapper">
 		<ul id="stream-tab" class="nav nav-tabs">
