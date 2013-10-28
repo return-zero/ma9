@@ -54,7 +54,7 @@
                         @endif
                       </p>
                       <img src="{{ $work->user->profile_image_url }}">
-                      <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->user->screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                      <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item->user->screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
                     </div>
                   </div>
                 </div>

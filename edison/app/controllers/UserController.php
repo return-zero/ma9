@@ -58,6 +58,7 @@ class UserController extends BaseController {
         $item = Item::where('id', '=', $work->item_id)->get()[0];
         $work['item'] = $item;
         $work['user'] = User::where('id', '=', $work->user_id)->get()[0];
+        $work['item']['user'] = User::where('id', '=', $work->item->user_id)->get()[0];
         $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }
       $twitter_profile = array(

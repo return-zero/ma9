@@ -65,14 +65,12 @@
             </div>
             <div class="item-content">
               <div class="row">
-                <div class="col-lg-2"><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a></div>
-                
-               
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
                   <div class="col-lg-10">
                     <div class="work-title">
                       <p>{{ $work->title }}</p>
                     </div>
-                    <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
+                    <p><a href="/{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
                     <p>{{ $work->comment }}</p>
                   </div>
                 
