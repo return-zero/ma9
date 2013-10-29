@@ -137,7 +137,7 @@
           </div>
           @if (Auth::user()->screen_name === $comment->user->screen_name)
           <div class="comment_box well col-lg-9">
-            <div class="comment_text">{{ $comment->comment }}</div>
+            <div class="comment_text">{{{ $comment->comment }}}</div>
             <div class="comment_status">{{ $comment->created_at }}</div>
           </div>
           <div class="col-lg-1 item-delete">
@@ -145,7 +145,7 @@
           </div>
           @else
           <div class="comment_box well col-lg-10">
-            <div class="comment_text">{{ $comment->comment }}</div>
+            <div class="comment_text">{{{ $comment->comment }}}</div>
             <div class="comment_status">{{ $comment->created_at }}</div>
           </div>
           @endif
