@@ -4,4 +4,4 @@ $("#js-delete-item").on "click", ->
       type: "post"
       url: location.href + "/delete"
       success: (data) ->
-    location.href = "/"
+        location.href = "/"
