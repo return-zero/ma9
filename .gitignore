@@ -4,6 +4,8 @@ ma9
 edison/public/dev-js
 edison/public/bower_components
 edison/public/components
+edison/app/config/packages/philo/twitter/config.php
+edison/app/config/database.php
 node_modules
 .sass-cache
 .vagrant
