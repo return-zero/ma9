@@ -134,8 +134,8 @@ class ItemController extends BaseController {
       array(
         'category_id' => $data['category_id'],
         'user_id' => Auth::user()->id,
-        'title' => $data['title'],
-        'content' => $data['content'],
+        'title' => htmlspecialchars($data['title']),
+        'content' => htmlspecialchars($data['content']),
         'type' => $data['type'],
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s"),
@@ -192,7 +192,7 @@ class ItemController extends BaseController {
 
     $comment->user_id = Auth::user()->id;
     $comment->item_id = $item_id;
-    $comment->comment = $data['comment'];
+    $comment->comment = nl2br(htmlspecialchars($data['comment']));
     $comment->created_at = date("Y-m-d H:i:s");
     $comment->updated_at = date("Y-m-d H:i:s");
 

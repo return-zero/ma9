@@ -36,7 +36,7 @@ class WorkController extends BaseController {
       $work->url = $data['url'];
       $work->title = $title;
       $work->thumbnail_url = $thumbnail_url;
-      $work->comment = $data['comment'];
+      $work->comment = nl2br(htmlspecialchars($data['comment']));
       $work->created_at = date("Y-m-d H:i:s");
       $work->updated_at = date("Y-m-d H:i:s");
 
