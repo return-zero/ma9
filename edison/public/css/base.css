@@ -22,10 +22,11 @@ body {
 #title-font {
   font-family: 'Righteous', cursive;
   font-size: 32px;
-  color: #fad67a;
+  color: #F2C922;
+  text-shadow: -1px 1px 0 white;
 }
 
-/* line 25, ../scss/base.scss */
+/* line 26, ../scss/base.scss */
 .content-wrapper {
   margin: 20px 0;
   padding: 20px;
@@ -40,24 +41,24 @@ body {
   background-color: #fff;
 }
 
-/* line 33, ../scss/base.scss */
+/* line 34, ../scss/base.scss */
 #footer {
   border-top: solid 1px #ddd;
 }
 
-/* line 37, ../scss/base.scss */
+/* line 38, ../scss/base.scss */
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   color: #fff;
   text-decoration: none;
   background-color: #fad67a;
 }
 
-/* line 43, ../scss/base.scss */
+/* line 44, ../scss/base.scss */
 .panel-primary {
   border-color: #fad67a;
 }
 
-/* line 47, ../scss/base.scss */
+/* line 48, ../scss/base.scss */
 .panel-primary > .panel-heading {
   color: #fff;
   background-color: #fad67a;
