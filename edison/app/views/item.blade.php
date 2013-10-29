@@ -108,9 +108,9 @@
                 <div class="relatedwork_content">
                   <p class="relatedwork_title">
                     @if ($item->type == 'video')
-                      <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
+                      <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                     @else
-                      <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
+                      <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                     @endif
                   </p>
                 </div>
