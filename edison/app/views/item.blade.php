@@ -48,7 +48,7 @@
           <div id="tags">
             <p>
               @foreach ($tags as $tag)
-                <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
+                <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}" target="_blank"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
               @endforeach
             </p>
           </div>
