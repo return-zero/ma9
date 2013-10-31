@@ -88,4 +88,9 @@ class HomeController extends BaseController {
   {
     return View::make('login', array('title' => 'ログイン'));
   }
+
+  public function showAbout()
+  {
+    return View::make('about', array('title' => 'edisonについて'));
+  }
 }

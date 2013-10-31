@@ -1,0 +1,11 @@
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* line 5, ../scss/about.scss */
+h2 {
+  border-bottom: solid 1px #d9d9d9;
+  font-size: 22px;
+}

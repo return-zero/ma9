@@ -48,6 +48,7 @@ Route::post('api/post/watched', 'ApiController@postWatched');
    HomeController
    -------------- */
 Route::get('/', 'HomeController@showIndex');
+Route::get('about', 'HomeController@showAbout');
 Route::get('login', 'HomeController@showLogin');
 
 /* --------------

@@ -65,7 +65,8 @@
     
     <div id="footer">
     	<div class="container">
-      	<p class="text-muted credit">WHC <a href="http://ma9.mashupaward.jp">Mashup Awards 9</a></p>
+      	<p class="text-muted credit"><a href="about">edisonとは</a></p>
+      	<p class="text-muted credit">Copyright <span class="glyphicon glyphicon-copyright-mark"></span>2013 WHC</p>
       </div>
 		</div>
     @section('js')
