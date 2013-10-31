@@ -19,8 +19,14 @@ ul#stream-tab {
   font-size: 16px;
 }
 
-/* line 18, ../scss/index.scss */
-.items {
+/* line 17, ../scss/index.scss */
+.items, .works {
   border-bottom: thin dotted #a9a9a9;
   padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+/* line 23, ../scss/index.scss */
+.action {
+  color: #555;
 }

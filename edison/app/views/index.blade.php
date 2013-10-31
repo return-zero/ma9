@@ -21,21 +21,22 @@
       @foreach ($all_items as $item)
         <div class="items">
           <div class="item-inner">
-            <div class="icon">
-              <img src="">
-            </div>
             <div class="item-content">
-              <div class="action">
-                <img src="{{ $item->user->profile_image_url }}">
-                <a href="{{ $item->user->screen_name }}">{{ $item->user->screen_name }}</a> が{{ $item->created_at }}に投稿しました
-              </div>
-              <div class="item-title">
-                <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
-                @if ($item->type == 'video')
-                  <i class="fa fa-film"></i> 
-                @else
-                  <i class="fa fa-picture-o"></i> 
-                @endif
+              <div class="row">
+                <div class="col-lg-1"><img src="{{ $item->user->profile_image_url }}"></div>
+                <div class="col-lg-11">
+                  <div class="action">
+                    <a href="{{ $item->user->screen_name }}">{{ $item->user->screen_name }}</a> が{{ $item->created_at }}に投稿しました
+                  </div>
+                  <div class="item-title">
+                    <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                    @if ($item->type == 'video')
+                      <i class="fa fa-film"></i> 
+                    @else
+                      <i class="fa fa-picture-o"></i> 
+                    @endif
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -47,27 +48,25 @@
     </div>
     <div class="recent-stream tab-pane fade" id="works">
       @foreach ($recent_works as $work)
-        <div class="items">
-          <div class="item-inner">
+        <div class="works">
+          <div class="work-inner">
             <div class="icon">
               <img src="">
             </div>
-            <div class="item-content">
+            <div class="work-content">
               <div class="row">
                 <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
                 <div class="col-lg-10">
-                  <div class="item-title">
+                  <div class="work-title">
                     <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
-                    <p>
-                      <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
-                      @if ($work->item->type == 'video')
-                        <i class="fa fa-film"></i> 
-                      @else
-                        <i class="fa fa-picture-o"></i> 
-                      @endif
-                    </p>
                     <img src="{{ $work->user->profile_image_url }}">
                     <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                    <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                    @if ($work->item->type == 'video')
+                      <i class="fa fa-film"></i> 
+                    @else
+                      <i class="fa fa-picture-o"></i> 
+                    @endif
                   </div>
                 </div>
               </div>
