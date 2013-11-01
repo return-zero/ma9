@@ -59,14 +59,20 @@
                 <div class="col-lg-10">
                   <div class="work-title">
                     <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
-                    <img src="{{ $work->user->profile_image_url }}">
-                    <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
-                    <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
-                    @if ($work->item->type == 'video')
-                      <i class="fa fa-film"></i> 
-                    @else
-                      <i class="fa fa-picture-o"></i> 
-                    @endif
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-1">
+                      <img src="{{ $work->user->profile_image_url }}">
+                    </div>
+                    <div class="col-lg-11">
+                      <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                      <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                      @if ($work->item->type == 'video')
+                        <i class="fa fa-film"></i> 
+                      @else
+                        <i class="fa fa-picture-o"></i> 
+                      @endif
+                    </div>
                   </div>
                 </div>
               </div>
