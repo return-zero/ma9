@@ -92,31 +92,29 @@
       <hr>
       <h4><span class="glyphicon glyphicon-chevron-right"></span> 関連作品</h4>
       @if ($related_works)
-        <div class="relatedworks-body">
-          <ul class="list">
-            @foreach ($related_works as $related_work)
-              <li class="relatedwork">
-                <div class="relatedwork_thumb">
+        <div class="row">
+          @foreach ($related_works as $related_work)
+            <div class="col-lg-2">
+              <div class="related_work_thumb" style="overflow: hidden">
+                @if ($item->type == 'video')
+                  <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+                @else
+                  <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
+                @endif
+                    <img src="{{ $related_work['thumbnail_url'] }}" />
+                  </a>
+              </div>
+              <div class="relatedwork_content">
+                <p class="relatedwork_title">
                   @if ($item->type == 'video')
-                    <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+                    <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                   @else
-                    <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
+                    <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                   @endif
-                      <img src="{{ $related_work['thumbnail_url'] }}" />
-                    </a>
-                </div>
-                <div class="relatedwork_content">
-                  <p class="relatedwork_title">
-                    @if ($item->type == 'video')
-                      <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
-                    @else
-                      <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
-                    @endif
-                  </p>
-                </div>
-              </li>
-            @endforeach
-          </ul>
+                </p>
+              </div>
+            </div>
+          @endforeach
         </div>
       @else
         <p>関連作品はありません</p>
