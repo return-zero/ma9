@@ -97,7 +97,10 @@
           <img class="pull-left" alt="{{ Auth::user()->screen_name }}" src="{{ $user->profile_image_url }}" title="{{ Auth::user()->screen_name }}">
         </div>
         <div class="col-lg-8">
-            <p><a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a></p>
+            <p>
+              <a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a>
+              <a href="https://twitter.com/{{ Auth::user()->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a>
+            </p>
             <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       @endif

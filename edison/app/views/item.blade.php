@@ -174,7 +174,10 @@
           <img src="{{ $user->profile_image_url }}">
         </div>
         <div class="col-lg-8">
-          <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
+          <p>
+            <a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a>
+            <a href="https://twitter.com/{{ $user->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a>
+          </p>
           <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       </div>

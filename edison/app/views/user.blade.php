@@ -8,8 +8,14 @@
 @parent
 @stop
 @section('content')
-<div class="col-lg-9 content-wrapper">
-	<h2>{{ $user->screen_name }} <a href="https://twitter.com/{{ $user->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a></h2>
+<div class="content-wrapper">
+  <div class="header">
+    <h2>
+      <img class="" src="{{ $user->profile_image_url }}">
+      {{ $user->screen_name }} <a href="https://twitter.com/{{ $user->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a>
+    </h2>
+    <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
+  </div>
 	<hr>
 	<div class="tab-wrapper">
 		<ul id="stream-tab" class="nav nav-tabs">
@@ -91,18 +97,5 @@
 		  </div>
     </div>
 	</div>
-</div>
-<div class="col-lg-3">
-  <div class="content-wrapper">
-    <div class="row">
-      <div class="col-lg-4">
-        <img class="pull-left" src="{{ $user->profile_image_url }}">
-      </div>
-      <div class="col-lg-8">
-        <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
-        <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
-      </div>
-    </div>
-  </div>
 </div>
 @stop
