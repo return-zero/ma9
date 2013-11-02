@@ -2,6 +2,7 @@
 @section('css')
 @parent
 {{ HTML::style('css\index.css') }}
+{{ HTML::style('css\stream.css') }}
 @stop
 @section('header')
 @parent
@@ -29,7 +30,10 @@
                     <a href="{{ $item->user->screen_name }}">{{ $item->user->screen_name }}</a> が{{ $item->created_at }}に投稿しました
                   </div>
                   <div class="item-title">
-                    <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                    <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a>
+                    @if ($item->category)
+                      <span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                    @endif
                     @if ($item->type == 'video')
                       <i class="fa fa-film"></i> 
                     @else

@@ -59,7 +59,9 @@ class HomeController extends BaseController {
     $all_items = Item::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($all_items as &$item) {
       $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
-      $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      if ($item->category_id != 0) {
+        $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      }
     }
     $recent_works = Work::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($recent_works as &$work) {
@@ -71,7 +73,7 @@ class HomeController extends BaseController {
     }
 
     $user = User::where('screen_name', '=', Auth::user()->screen_name)->get()[0];
-
+    
     $data = array(
       'title' => 'edison',
       'user' => $user,

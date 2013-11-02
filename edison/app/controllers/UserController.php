@@ -51,7 +51,9 @@ class UserController extends BaseController {
       $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($items as &$item) {
         $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
-        $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+        if ($item->category_id != 0) {
+          $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+        }
       }
       $works = Work::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($works as &$work) {

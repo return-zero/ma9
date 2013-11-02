@@ -2,6 +2,7 @@
 @section('css')
 @parent
 {{ HTML::style('css\user.css') }}
+{{ HTML::style('css\stream.css') }}
 @stop
 @section('header')
 @parent
@@ -23,7 +24,10 @@
 		        <div class="item-inner">
 		          <div class="item-content">
 		            <div class="item-title">
-                  <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                  <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a>
+                  @if ($item->category)
+                    <span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                  @endif
                   @if ($item->type == 'video')
                     <i class="fa fa-film"></i> 
                   @else

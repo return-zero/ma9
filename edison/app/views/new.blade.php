@@ -13,8 +13,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-3">
-            <p>本文（150文字以内）</p>
-            <span class="help-block">150文字以上必要な方は、以下の追記欄を使用して下さい</span>
+            <p>本文<span class="text-danger">※</span></p>
           </div>
           <div class="col-lg-9">
             <div class="form-group">
@@ -27,11 +26,11 @@
         
         <div class="row">
           <div class="col-lg-3">
-            <p>追記欄（2000文字以内）</p>
+            <p>（追記・補足）</p>
           </div>
           <div class="col-lg-9">
             <div class="form-group">
-              {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '10', 'ng-model' => 'content', 'ng-minlength' => '0', 'ng-maxlength' => '2000')) }}
+              {{ Form::textarea('content', '', array('class' => 'form-control', 'rows' => '4', 'ng-model' => 'content', 'ng-minlength' => '0', 'ng-maxlength' => '2000')) }}
               <p class="text-danger" ng-show="itemInfo.content.$error.maxlength"><ng-show="itemInfo.content.$error.maxlength" class="error">20000文字以内で入力して下さい</p>
             </div>
           </div>
@@ -40,7 +39,7 @@
         
         <div class="row">
           <div class="col-lg-3">
-            <p>タイプ</p>
+            <p>タイプ<span class="text-danger">※</span></p>
           </div>
           <div class="col-lg-9">
             <label class="radio-inline">
@@ -61,6 +60,7 @@
           </div>
           <div class="col-lg-9">
             <select class="form-control" name="category_id" id="category">
+              <option value="0">選択...</option>
               @foreach ($categories as $category)
                 <option value="{{ $category['id'] }}">{{ $names[$category['content']] }}</option>
               @endforeach
@@ -75,7 +75,6 @@
           </div>
           <div class="col-lg-9">
             <div id="tag-form-wrap">
-              <div>{{ Form::text('tags[]', '', array('class' => 'form-control')) }}</div>
               <div>{{ Form::text('tags[]', '', array('class' => 'form-control')) }}</div>
               <div class="btn btn-default" id="tag-plus"><span class="glyphicon glyphicon-plus"></span> タグを追加する
               </div>
