@@ -25,6 +25,8 @@
 		          <div class="item-content">
 		            <div class="item-title">
                   <a href="{{ $user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a>
+                  <span class="pull-right"><span class="glyphicon glyphicon-comment"></span> {{ $item->comment_count }}</span>
+                  <a class="star-badge pull-right" href="/{{ $item->user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $item->star_count }}</span></a>
                   @if ($item->category)
                     <span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
                   @endif
@@ -70,7 +72,12 @@
 		        <div class="item-inner">
 		          <div class="item-content">
                 <div class="item-title">
-                  <a href="{{ $star->item->user->screen_name }}/items/{{ $star->item_id }}">{{ $star->item->title }}</a><span class="catgory label label-default">{{ $categories[$star->category_name] }}</span>
+                  <a href="{{ $star->item->user->screen_name }}/items/{{ $star->item_id }}">{{ $star->item->title }}</a>
+                  <span class="pull-right"><span class="glyphicon glyphicon-comment"></span> {{ $star->item->comment_count }}</span>
+                    <a class="star-badge pull-right" href="/{{ $star->item->user->screen_name }}/items/{{ $star->item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $star->item->star_count }}</span></a>
+                  @if ($item->category)
+                    <span class="catgory label label-default">{{ $categories[$star->category_name] }}</span>
+                  @endif
                   @if ($star->item->type == 'video')
                     <i class="fa fa-film"></i> 
                   @else

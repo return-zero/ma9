@@ -59,6 +59,8 @@ class HomeController extends BaseController {
     $all_items = Item::orderBy('created_at', 'desc')->take(10)->get();
     foreach ($all_items as &$item) {
       $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
+      $item['star_count'] = Starmap::where('item_id', '=', $item->id)->count();
+      $item['comment_count'] = Comment::where('item_id', '=', $item->id)->count();
       if ($item->category_id != 0) {
         $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
       }

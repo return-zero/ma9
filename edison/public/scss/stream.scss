@@ -6,7 +6,7 @@ ul#stream-tab {
   margin-top: 20px
 }
 
-.item-title span {
+.item-title > .category {
   margin-left: 10px;
 }
 .item-title {
@@ -17,4 +17,8 @@ ul#stream-tab {
   border-bottom: thin dotted #a9a9a9;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.pull-right {
+  margin-left: 5px;
 }

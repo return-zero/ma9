@@ -10,7 +10,7 @@ ul#stream-tab {
 }
 
 /* line 9, ../scss/stream.scss */
-.item-title span {
+.item-title > .category {
   margin-left: 10px;
 }
 
@@ -24,4 +24,9 @@ ul#stream-tab {
   border-bottom: thin dotted #a9a9a9;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+/* line 22, ../scss/stream.scss */
+.pull-right {
+  margin-left: 5px;
 }

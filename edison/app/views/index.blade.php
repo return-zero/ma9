@@ -31,6 +31,8 @@
                   </div>
                   <div class="item-title">
                     <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a>
+                    <span class="pull-right"><span class="glyphicon glyphicon-comment"></span> {{ $item->comment_count }}</span>
+                    <a class="star-badge pull-right" href="/{{ $item->user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $item->star_count }}</span></a>
                     @if ($item->category)
                       <span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
                     @endif

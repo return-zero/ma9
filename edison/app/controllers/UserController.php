@@ -51,6 +51,8 @@ class UserController extends BaseController {
       $items = Item::where('user_id', '=', $user->id)->orderby('created_at', 'desc')->take(10)->get();
       foreach ($items as &$item) {
         $item['user'] = User::where('id', '=', $item->user_id)->get()[0];
+        $item['star_count'] = Starmap::where('item_id', '=', $item->id)->count();
+        $item['comment_count'] = Comment::where('item_id', '=', $item->id)->count();
         if ($item->category_id != 0) {
           $item['category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
         }
@@ -135,6 +137,8 @@ class UserController extends BaseController {
     foreach($star_lists as &$star_list) {
       $star_list['item'] = Item::where('id', '=', $star_list->item_id)->get()[0];
       $star_list['item']['user'] = User::where('id', '=', $star_list->item->user_id)->get()[0];
+      $star_list['item']['star_count'] = Starmap::where('id', '=', $star_list->item_id)->count();
+      $star_list['item']['comment_count'] = Comment::where('id', '=', $star_list->item_id)->count();
       $star_list['category_name'] = Category::where('id', '=', $star_list->item->category_id)->first()->content;
     }
 
