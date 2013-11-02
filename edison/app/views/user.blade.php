@@ -53,13 +53,15 @@
 		        <div class="work-inner">
               <div class="work-content">
                 <div class="row">
-                  <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
+                  <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img class="img-thumbnail" src="{{ $work->thumbnail_url }}"></a></div>
                   <div class="col-lg-10">
                     <div class="work-title">
                       <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
                     </div>
                     <a href="{{ $work->item->user->screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
-                    <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                    @if ($work->item_category)
+                      <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                    @endif
                     @if ($work->item->type == 'video')
                       <i class="fa fa-film"></i> 
                     @else
