@@ -1,0 +1,20 @@
+@import "compass";
+@import "config";
+@import "style";
+
+ul#stream-tab {
+  margin-top: 20px
+}
+
+.item-title span {
+  margin-left: 10px;
+}
+.item-title {
+  margin-top: 3px;
+}
+
+.items, .works {
+  border-bottom: thin dotted #a9a9a9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
