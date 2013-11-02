@@ -19,7 +19,7 @@ class Niconico {
         'value' => false
       )),
       'from' => 0,
-      'size' => 5,
+      'size' => 6,
       'sort_by' => 'view_counter',
       'issuer' => 'http://github.com/tsuwatch/ma9',
       'reason' => 'ma9'

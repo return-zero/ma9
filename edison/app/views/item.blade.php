@@ -65,16 +65,14 @@
             </div>
             <div class="item-content">
               <div class="row">
-                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
-                  <div class="col-lg-10">
-                    <div class="work-title">
-                      <p>{{ $work->title }}</p>
-                    </div>
-                    <p><img src="{{ $work->user->profile_image_url }}"><a href="/{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が投稿しました</p>
-                    <p>{{ $work->comment }}</p>
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img class="img-thumbnail" src="{{ $work->thumbnail_url }}"></a></div>
+                <div class="col-lg-10">
+                  <div class="work-title">
+                    <p><a href="{{ $work->url }}">{{ $work->title }}</a></p>
                   </div>
-                
-                
+                  <p><img src="{{ $work->user->profile_image_url }}"><a href="/{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が投稿しました</p>
+                  <p>{{ $work->comment }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -101,7 +99,7 @@
                 @else
                   <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
                 @endif
-                    <img src="{{ $related_work['thumbnail_url'] }}" />
+                    <img class="img-thumbnail" src="{{ $related_work['thumbnail_url'] }}" />
                   </a>
               </div>
               <div class="relatedwork_content">

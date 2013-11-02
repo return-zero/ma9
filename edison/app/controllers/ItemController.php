@@ -62,7 +62,9 @@ class ItemController extends BaseController {
       $work['item'] = $item;
       $work['user'] = User::where('id', '=', $work->user_id)->get()[0];
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
-      $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      if ($item->category_id != 0) {
+        $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      }
     }
 
     $data = array(

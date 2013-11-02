@@ -7,3 +7,8 @@
 h2 {
   margin: 0 0 0 0;
 }
+
+/* line 8, ../scss/user.scss */
+p.header {
+  margin-top: 10px;
+}
