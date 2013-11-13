@@ -130,19 +130,26 @@
               <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
             </div>
           </div>
-          @if (Auth::user()->screen_name === $comment->user->screen_name)
-          <div class="comment_box well col-lg-9">
-            <div class="comment_text">{{ $comment->comment }}</div>
-            <div class="comment_status">{{ $comment->created_at }}</div>
-          </div>
-          <div class="col-lg-1 item-delete">
-            <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
-          </div>
+          @if (Auth::check())
+            @if (Auth::user()->screen_name === $comment->user->screen_name)
+            <div class="comment_box well col-lg-9">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
+            <div class="col-lg-1 item-delete">
+              <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
+            </div>
+            @else
+            <div class="comment_box well col-lg-10">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
+            @endif
           @else
-          <div class="comment_box well col-lg-10">
-            <div class="comment_text">{{ $comment->comment }}</div>
-            <div class="comment_status">{{ $comment->created_at }}</div>
-          </div>
+            <div class="comment_box well col-lg-10">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
           @endif
         </div>
       @endforeach
