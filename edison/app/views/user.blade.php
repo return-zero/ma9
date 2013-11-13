@@ -83,7 +83,7 @@
                   <a href="{{ $star->item->user->screen_name }}/items/{{ $star->item_id }}">{{ $star->item->title }}</a>
                   <span class="pull-right"><span class="glyphicon glyphicon-comment"></span> {{ $star->item->comment_count }}</span>
                     <a class="star-badge pull-right" href="/{{ $star->item->user->screen_name }}/items/{{ $star->item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $star->item->star_count }}</span></a>
-                  @if ($item->category)
+                  @if ($star->item->category)
                     <span class="catgory label label-default">{{ $categories[$star->category_name] }}</span>
                   @endif
                   @if ($star->item->type == 'video')
