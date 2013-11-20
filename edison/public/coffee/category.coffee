@@ -37,6 +37,7 @@ category_names =
 
 $("input:radio").change ->
   $("select#category > option").remove()
+  $("select#category").append $("<option>").html('選択...').val(0)
   $.get "/api/getcategories/" + $(this).val(), (response) ->
     data = JSON.parse(response)
     i = 0

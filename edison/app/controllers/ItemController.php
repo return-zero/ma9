@@ -5,10 +5,10 @@ class ItemController extends BaseController {
   public function showItem($screen_name, $id)
   {
     if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
-      return Response::view('404', array('title' => '404 page', 404));
+      return Response::view('404', array('title' => '404 page'), 404);
     }
     if (Item::where('id', '=', $id)->first() == NULL) {
-      return Response::view('404', array('title' => '404 page', 404));
+      return Response::view('404', array('title' => '404 page'), 404);
     }
     
     $user = DB::table('users')->where('screen_name', '=', $screen_name)->get()[0];
@@ -60,9 +60,11 @@ class ItemController extends BaseController {
     foreach ($works as &$work) {
       $item = Item::where('id', '=', $work->item_id)->get()[0];
       $work['item'] = $item;
-      $work['screen_name'] = User::where('id', '=', $work->user_id)->get()[0]->screen_name;
+      $work['user'] = User::where('id', '=', $work->user_id)->get()[0];
       $work['item_poster_screen_name'] = User::where('id', '=', $item->user_id)->get()[0]->screen_name;
-      $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      if ($item->category_id != 0) {
+        $work['item_category'] = Category::where('id', '=', $item->category_id)->get()[0]->content;
+      }
     }
 
     $data = array(
@@ -108,7 +110,7 @@ class ItemController extends BaseController {
       'handcraft' => 'ニコニコ手芸部',
       'make' => '作ってみた',
       'anime' => 'アニメ',
-      'game' => 'toho',
+      'game' => 'ゲーム',
       'toho' => '東方',
       'imas' => 'アイドルマスター',
       'radio' => 'ラジオ',
@@ -134,8 +136,8 @@ class ItemController extends BaseController {
       array(
         'category_id' => $data['category_id'],
         'user_id' => Auth::user()->id,
-        'title' => $data['title'],
-        'content' => $data['content'],
+        'title' => htmlspecialchars($data['title']),
+        'content' => htmlspecialchars($data['content']),
         'type' => $data['type'],
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s"),
@@ -192,7 +194,7 @@ class ItemController extends BaseController {
 
     $comment->user_id = Auth::user()->id;
     $comment->item_id = $item_id;
-    $comment->comment = $data['comment'];
+    $comment->comment = nl2br(htmlspecialchars($data['comment']));
     $comment->created_at = date("Y-m-d H:i:s");
     $comment->updated_at = date("Y-m-d H:i:s");
 
@@ -244,10 +246,10 @@ class ItemController extends BaseController {
 
   public function stargazers($screen_name, $id) {
     if (User::where('screen_name', '=', $screen_name)->first() == NULL) {
-      return Response::view('404', array('title' => '404 page', 404));
+      return Response::view('404', array('title' => '404 page'), 404);
     }
     if (Item::where('id', '=', $id)->first() == NULL) {
-      return Response::view('404', array('title' => '404 page', 404));
+      return Response::view('404', array('title' => '404 page'), 404);
     }
     $stargazers = Starmap::where('item_id', '=', $id)->get();
     $users = array();
@@ -259,6 +261,108 @@ class ItemController extends BaseController {
       'users' => $users
     );
     return View::make('stargazers', $data);
+  }
+
+  public function edit($screen_name, $item_id) {
+    $item = Item::find($item_id);
+    $categories = Category::where('type', '=', 'video')->get();
+    $category_names = array(
+      'ent' => 'エンターテイメント',
+      'music' => '音楽',
+      'sing' => '歌ってみた',
+      'play' => '演奏してみた',
+      'dance' => '踊ってみた',
+      'vocaloid' => 'VOCALOID',
+      'nicoindies' => 'ニコニコインディーズ',
+      'animal' => '動物',
+      'cooking' => '料理',
+      'nature' => '自然',
+      'travel' => '旅行',
+      'sport' => 'スポーツ',
+      'lecture' => 'ニコニコ動画講座',
+      'drive' => '車載動画',
+      'history' => '歴史',
+      'politics' => '政治',
+      'science' => '科学',
+      'tech' => 'ニコニコ技術部',
+      'handcraft' => 'ニコニコ手芸部',
+      'make' => '作ってみた',
+      'anime' => 'アニメ',
+      'game' => 'toho',
+      'toho' => '東方',
+      'imas' => 'アイドルマスター',
+      'radio' => 'ラジオ',
+      'draw' => '描いてみた',
+      'are' => '例のアレ',
+      'diary' => '日記',
+      'other' => 'その他',
+      'r18' => 'R-18',
+    );
+    $tagmaps = DB::table('tagmaps')->where('item_id', $item->id)->get();
+    $tags = array();
+    foreach ($tagmaps as $tagmap) {
+      $tags[] = DB::table('tags')->select('content')->where('id', $tagmap->tag_id)->get()[0]->content;
+    }
+    
+    $data = array(
+      'title' => '投稿編集',
+      'tags' => $tags,
+      'item' => $item,
+      'categories' => $categories,
+      'names' => $category_names,
+      'screen_name' => $screen_name,
+      'item_id' => $item_id
+    );
+
+    return View::make('update', $data);
+  }
+
+  public function update($screen_name, $item_id) {
+    $data = Input::all();
+    $item = Item::find($item_id);
+
+    if (Auth::user()->id !== $item->user_id) {
+      return Redirect::to("/$screen_name/items/$item_id");
+    }
+
+    $item->category_id = $data['category_id'];
+    $item->title = $data['title'];
+    $item->content = $data['content'];
+    $item->type = $data['type'];
+    $item->updated_at = date("Y-m-d H:i:s");
+    $item->save();
+
+    Tagmaps::where('item_id', '=', $item_id)->delete();
+
+    foreach ($data['tags'] as $tag) {
+      if ($tag == '') {
+        continue;
+      }
+      $result = DB::table('tags')->where('content', $tag)->get();
+      if (empty($result)) {
+        $tag_id = DB::table('tags')->insertGetId(
+          array(
+            'content' => $tag
+          )
+        );
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $tag_id
+          )
+        );
+      } else {
+        DB::table('tagmaps')->insert(
+          array(
+            'item_id' =>  $item_id,
+            'tag_id' => $result[0]->id
+          )
+        );
+      }
+    }
+
+    return Redirect::to("/$screen_name/items/$item_id");
+    exit();
   }
 
   private function getStarStatus($auth_id, $item_id) {

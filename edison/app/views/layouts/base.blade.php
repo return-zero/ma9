@@ -32,10 +32,14 @@
           <div class="collapse navbar-collapse">
             @if (Auth::check())
               <ul class="nav navbar-nav navbar-right">
-                <li class="active" id="js-notice" data-toggle="dropdown"><a href=""></a></li>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
-                  <li role="presentation" class="notice-content"></li>
-                </ul>
+                <!--
+                <li id="js-notice" class="dropdown active">
+                  <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="js-drop">
+                    <li role="presentation" class="notice-content"></li>
+                  </ul>
+                </li>
+                -->
                 <li><a href="/item/new">投稿する</a></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->screen_name }}<b class="caret"></b></a>
@@ -61,7 +65,8 @@
     
     <div id="footer">
     	<div class="container">
-      	<p class="text-muted credit">WHC <a href="http://ma9.mashupaward.jp">Mashup Awards 9</a></p>
+      	<p class="text-muted credit"><a href="about">edisonとは</a></p>
+      	<p class="text-muted credit">Copyright <span class="glyphicon glyphicon-copyright-mark"></span>2013 WHC</p>
       </div>
 		</div>
     @section('js')
@@ -72,5 +77,16 @@
     {{ HTML::script('js/notice.js') }}
     
     @show
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-45494277-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   </body>
 </html>

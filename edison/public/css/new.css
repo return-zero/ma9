@@ -1,0 +1,20 @@
+/* ---------------
+    Import
+   --------------- */
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* ---------------
+    Scss
+   --------------- */
+/* line 12, ../scss/new.scss */
+.panel-wrapper {
+  margin: 20px 0px;
+  -webkit-box-shadow: 0 0 3px #999999;
+  -moz-box-shadow: 0 0 3px #999999;
+  box-shadow: 0 0 3px #999999;
+  background-color: #fff;
+}

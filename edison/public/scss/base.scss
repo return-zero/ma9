@@ -1,46 +1,52 @@
 /* ---------------
-    Import
-   --------------- */
+Import
+--------------- */
 @import "compass";
 @import "config";
 @import "style";
 @import url(http://fonts.googleapis.com/css?family=Righteous);
 
 /* ---------------
-    Scss
-   --------------- */
+Scss
+--------------- */
 
 body {
-	background-color: $background_color;
-	word-wrap: break-word;
+  background-color: $background_color;
+  background-image: url("/img/background.png");
+  word-wrap: break-word;
 }
 
 #title-font {
-        font-family: 'Righteous', cursive;
-	font-size: x-large;
+  font-family: 'Righteous', cursive;
+  font-size: 32px;
+  color: $title_color;
+  text-shadow: -1px 1px 0 rgba(255, 255, 255, 1);
 }
 
 .content-wrapper {
-	margin :20px 0;
-	padding :20px;
-	@include box-shadow(0 0 3px #999);
-	@include border-radius(3px);
-	background-color: #fff;
-}
-
-#profile {
-  margin-top: 20px;
-}
-.left {
-  display: inline-block;
-  float: left;
-}
-
-.right {
-  display: inline-block;
-  margin-left: 10px;
+  margin :20px 0;
+  padding :20px;
+  @include box-shadow(0 0 3px #999);
+  @include border-radius(3px);
+  background-color: #fff;
 }
 
 #footer {
   border-top: solid 1px #ddd;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: $main_color;
+}
+
+.panel-primary {
+  border-color: $main_color;
+}
+
+.panel-primary>.panel-heading {
+  color: #fff;
+  background-color: $main_color;
+  border-color: $main_color;
 }

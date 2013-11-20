@@ -1,93 +1,125 @@
-@import "compass";
-@import "config";
-@import "style";
-
+/* ---------------
+    Color
+   --------------- */
+/* ---------------
+    Mixin
+   --------------- */
+/* line 5, ../scss/items.scss */
 .item-title {
   font-size: x-large;
   font-weight: bold;
   margin: 15px 0;
 }
 
+/* line 11, ../scss/items.scss */
 .item-date {
   font-weight: bold;
   float: left;
 }
 
+/* line 16, ../scss/items.scss */
 .star-badge {
   margin-left: 20px;
   float: left;
 }
 
+/* line 21, ../scss/items.scss */
 .item-content {
   font-size: small;
 }
 
+/* line 25, ../scss/items.scss */
 .tags {
   margin-top: 20px;
 }
 
+/* line 29, ../scss/items.scss */
 .item-title span {
-  margin-left: 10px
+  margin-left: 10px;
 }
 
+/* line 33, ../scss/items.scss */
 .work-title {
   font-size: large;
 }
 
+/* line 37, ../scss/items.scss */
 .items {
   border-bottom: thin dotted #a9a9a9;
   padding-bottom: 10px;
 }
 
+/* line 42, ../scss/items.scss */
 .submit-button-wrapper {
   margin-top: 20px;
 }
 
+/* line 46, ../scss/items.scss */
 hr {
-  margin :30px 0;
+  margin: 30px 0;
 }
 
+/* line 50, ../scss/items.scss */
 .twitter-share-button {
   margin-left: 20px;
   float: left;
 }
 
+/* line 55, ../scss/items.scss */
 #js-delete-item {
   margin-left: 10px;
 }
 
+/* line 59, ../scss/items.scss */
 ul.list {
   list-style: none;
 }
+
+/* line 62, ../scss/items.scss */
 li.relatedwork {
   width: 130px;
   float: left;
   margin-right: 10px;
   display: list-item;
 }
+
+/* line 68, ../scss/items.scss */
 .relatedwork_thumb img {
   border: 1px solid black;
 }
+
+/* line 71, ../scss/items.scss */
 p.relatedwork_title {
   display: block;
   margin: 0;
 }
 
+/* line 76, ../scss/items.scss */
 .user_data {
   display: block;
 }
+
+/* line 79, ../scss/items.scss */
 .comment_box {
   background-color: white;
 }
+
+/* line 82, ../scss/items.scss */
 .screen_name {
   display: block;
 }
+
+/* line 85, ../scss/items.scss */
 .comment_status {
   font-size: 90%;
 }
+
+/* line 88, ../scss/items.scss */
 .item-delete {
-  margin-top: 25px; 
+  margin-top: 25px;
 }
+
+/* line 91, ../scss/items.scss */
 #js-update-item {
-  margin-left: 10px; 
+  margin-left: 10px;
 }

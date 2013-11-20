@@ -2,6 +2,7 @@
 @section('css')
 @parent
 {{ HTML::style('css\index.css') }}
+{{ HTML::style('css\stream.css') }}
 @stop
 @section('header')
 @parent
@@ -21,21 +22,27 @@
       @foreach ($all_items as $item)
         <div class="items">
           <div class="item-inner">
-            <div class="icon">
-              <img src="">
-            </div>
             <div class="item-content">
-              <div class="action">
-                <img src="{{ $item->user->profile_image_url }}">
-                <a href="{{ $item->user->screen_name }}">{{ $item->user->screen_name }}</a> が{{ $item->created_at }}に投稿しました
-              </div>
-              <div class="item-title">
-                <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a><span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
-                @if ($item->type == 'video')
-                  <i class="fa fa-film"></i> 
-                @else
-                  <i class="fa fa-picture-o"></i> 
-                @endif
+              <div class="row">
+                <div class="col-lg-1"><img src="{{ $item->user->profile_image_url }}"></div>
+                <div class="col-lg-11">
+                  <div class="action">
+                    <a href="{{ $item->user->screen_name }}">{{ $item->user->screen_name }}</a> が{{ $item->created_at }}に投稿しました
+                  </div>
+                  <div class="item-title">
+                    <a href="{{ $item->user->screen_name }}/items/{{ $item->id }}">{{ $item->title }}</a>
+                    <span class="pull-right"><span class="glyphicon glyphicon-comment"></span> {{ $item->comment_count }}</span>
+                    <a class="star-badge pull-right" href="/{{ $item->user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $item->star_count }}</span></a>
+                    @if ($item->category)
+                      <span class="catgory label label-default">{{ $categories["$item->category"]}}</span>
+                    @endif
+                    @if ($item->type == 'video')
+                      <i class="fa fa-film"></i> 
+                    @else
+                      <i class="fa fa-picture-o"></i> 
+                    @endif
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -47,27 +54,33 @@
     </div>
     <div class="recent-stream tab-pane fade" id="works">
       @foreach ($recent_works as $work)
-        <div class="items">
-          <div class="item-inner">
+        <div class="works">
+          <div class="work-inner">
             <div class="icon">
               <img src="">
             </div>
-            <div class="item-content">
+            <div class="work-content">
               <div class="row">
-                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img src="{{ $work->thumbnail_url }}"></a></div>
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img class="img-thumbnail" src="{{ $work->thumbnail_url }}"></a></div>
                 <div class="col-lg-10">
-                  <div class="item-title">
+                  <div class="work-title">
                     <p><a href="{{ $work->url }}" target="_blank">{{ $work->title }}</a></p>
-                    <p>
-                      <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-1">
+                      <img src="{{ $work->user->profile_image_url }}">
+                    </div>
+                    <div class="col-lg-11">
+                      <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                      @if ($work->item_category) 
+                        <span class="catgory label label-default">{{ $categories["$work->item_category"] }}</span>
+                      @endif
                       @if ($work->item->type == 'video')
                         <i class="fa fa-film"></i> 
                       @else
                         <i class="fa fa-picture-o"></i> 
                       @endif
-                    </p>
-                    <img src="{{ $work->user->profile_image_url }}">
-                    <a href="{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が <a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item->id }}">{{ $work->item->title }}</a> に投稿しました
+                    </div>
                   </div>
                 </div>
               </div>
@@ -86,7 +99,10 @@
           <img class="pull-left" alt="{{ Auth::user()->screen_name }}" src="{{ $user->profile_image_url }}" title="{{ Auth::user()->screen_name }}">
         </div>
         <div class="col-lg-8">
-            <p><a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a></p>
+            <p>
+              <a href="{{ Auth::user()->screen_name }}">{{ Auth::user()->screen_name }}</a>
+              <a href="https://twitter.com/{{ Auth::user()->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a>
+            </p>
             <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       @endif

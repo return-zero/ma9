@@ -12,12 +12,10 @@
       <a class="star-badge" href="/{{ $user->screen_name }}/items/{{ $item->id }}/stargazers"><span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{ $star_gazers_num }}</span></a>
       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="edisoso">ツイート</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-      @if (Auth::user()->screen_name === $user->screen_name)
-        <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
-        <!-- <span class="item-update"><button class="btn btn-success btn-sm pull-right" id="js-update-item" style="margin-right: 5px;">この投稿を編集する</button></span> -->
-      @endif
-      
       @if (Auth::check())
+        @if (Auth::user()->screen_name === $user->screen_name)
+          <span class="item-delete"><button class="btn btn-danger btn-sm pull-right" id="js-delete-item">この投稿を削除する</button></span>
+        @endif
         @if ($star_status == true)
           <button class="btn btn-warning btn-sm pull-right" id="star">
             <i class="glyphicon glyphicon-star"></i> スターしない
@@ -49,7 +47,7 @@
           <div id="tags">
             <p>
               @foreach ($tags as $tag)
-                <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
+                <nobr>{{ $tag }}<a href="http://dic.nicovideo.jp/a/{{ $tag }}" target="_blank"><img src="http://nicotrends.net/images/dic.png"></a></nobr>
               @endforeach
             </p>
           </div>
@@ -66,17 +64,14 @@
             </div>
             <div class="item-content">
               <div class="row">
-                <div class="col-lg-2"><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}"><img src="{{ $work->thumbnail_url }}"></a></div>
-                
-               
-                  <div class="col-lg-10">
-                    <div class="item-title">
-                      <p><a href="{{ $work->item_poster_screen_name }}/items/{{ $work->item_id }}">{{ $work->title }}</a></p>
-                    </div>
-                    <p><a href="{{ $work->screen_name }}">{{ $work->screen_name }}</a> が投稿しました</p>
+                <div class="col-lg-2"><a href="{{ $work->url }}" target="_blank"><img class="img-thumbnail" src="{{ $work->thumbnail_url }}"></a></div>
+                <div class="col-lg-10">
+                  <div class="work-title">
+                    <p><a href="{{ $work->url }}">{{ $work->title }}</a></p>
                   </div>
-                
-                
+                  <p><img src="{{ $work->user->profile_image_url }}"><a href="/{{ $work->user->screen_name }}">{{ $work->user->screen_name }}</a> が投稿しました</p>
+                  <p>{{ $work->comment }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -94,31 +89,29 @@
       <hr>
       <h4><span class="glyphicon glyphicon-chevron-right"></span> 関連作品</h4>
       @if ($related_works)
-        <div class="relatedworks-body">
-          <ul class="list">
-            @foreach ($related_works as $related_work)
-              <li class="relatedwork">
-                <div class="relatedwork_thumb">
+        <div class="row">
+          @foreach ($related_works as $related_work)
+            <div class="col-lg-2">
+              <div class="related_work_thumb" style="overflow: hidden">
+                @if ($item->type == 'video')
+                  <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+                @else
+                  <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
+                @endif
+                    <img class="img-thumbnail" src="{{ $related_work['thumbnail_url'] }}" />
+                  </a>
+              </div>
+              <div class="relatedwork_content">
+                <p class="relatedwork_title">
                   @if ($item->type == 'video')
-                    <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">
+                    <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                   @else
-                    <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">
+                    <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}" target="_blank">{{ $related_work['title'] }}</a>
                   @endif
-                      <img src="{{ $related_work['thumbnail_url'] }}" />
-                    </a>
-                </div>
-                <div class="relatedwork_content">
-                  <p class="relatedwork_title">
-                    @if ($item->type == 'video')
-                      <a href="http://www.nicovideo.jp/watch/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
-                    @else
-                      <a href="http://seiga.nicovideo.jp/seiga/{{ $related_work['cmsid'] }}">{{ $related_work['title'] }}</a>
-                    @endif
-                  </p>
-                </div>
-              </li>
-            @endforeach
-          </ul>
+                </p>
+              </div>
+            </div>
+          @endforeach
         </div>
       @else
         <p>関連作品はありません</p>
@@ -137,19 +130,26 @@
               <a href="/{{ $comment->user->screen_name }}">{{ $comment->user->screen_name }}</a>
             </div>
           </div>
-          @if (Auth::user()->screen_name === $comment->user->screen_name)
-          <div class="comment_box well col-lg-9">
-            <div class="comment_text">{{{ $comment->comment }}}</div>
-            <div class="comment_status">{{ $comment->created_at }}</div>
-          </div>
-          <div class="col-lg-1 item-delete">
-            <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
-          </div>
+          @if (Auth::check())
+            @if (Auth::user()->screen_name === $comment->user->screen_name)
+            <div class="comment_box well col-lg-9">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
+            <div class="col-lg-1 item-delete">
+              <button class="btn btn-danger btn-sm js-delete-comment" data-comment-id="{{$comment->id}}">削除</button>
+            </div>
+            @else
+            <div class="comment_box well col-lg-10">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
+            @endif
           @else
-          <div class="comment_box well col-lg-10">
-            <div class="comment_text">{{{ $comment->comment }}}</div>
-            <div class="comment_status">{{ $comment->created_at }}</div>
-          </div>
+            <div class="comment_box well col-lg-10">
+              <div class="comment_text">{{ $comment->comment }}</div>
+              <div class="comment_status">{{ $comment->created_at }}</div>
+            </div>
           @endif
         </div>
       @endforeach
@@ -176,7 +176,10 @@
           <img src="{{ $user->profile_image_url }}">
         </div>
         <div class="col-lg-8">
-          <p><a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a></p>
+          <p>
+            <a href="/{{ $user->screen_name }}">{{ $user->screen_name }}</a>
+            <a href="https://twitter.com/{{ $user->screen_name }}" target="_blank"><i class="fa fa-twitter"></i></a>
+          </p>
           <p><span class="glyphicon glyphicon-star"></span> {{ $star_count }} <span class="glyphicon glyphicon-file"></span> {{ $work_count }}</p>
         </div>
       </div>

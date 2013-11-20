@@ -2,14 +2,66 @@
 @import "config";
 @import "style";
 
-h2 {
-  margin: 100px 100px 100px 100px;
+.catch-copy {
+  margin: 100px 50px;
+  h1 {
+    font-size:50px;
+    font-family: 'Righteous', cursive;
+  }
+  span {
+    font-size: large;
+  }
 }
 
 #support {
   margin: 50px 0;
 }
 
-.twitter-share-button {
-  margin-top: 30px;
+.share-wrapper {
+  margin-bottom: 40px;
 }
+
+.catch-copy-wrapper {
+  margin-bottom: 50px;
+}
+
+.idea-wrapper {
+  margin: -20px -20px 50px -20px;
+  padding: 40px 20px;
+  background: #f8f8f8;
+  .idea-content {
+    margin-top: 50px;
+  }
+  h2 {
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  p {
+    font-size: medium;
+  }
+}
+
+.img-bulb {
+  margin: 0 50px;
+}
+
+.work-wrapper {
+  margin: -20px -20px 50px -20px;
+  padding: 40px 20px;
+  .work-content {
+    margin: 30px 0 0 30px;
+  }
+  h2 {
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  p {
+    font-size: medium;
+  }
+}
+
+h5 {
+  font-size: medium;
+  font-weight: bold;
+}
+

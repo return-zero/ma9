@@ -1,10 +1,14 @@
+/* line 1, ../scss/user.scss */
 .tab-wrapper {
   margin-top: 40px;
 }
+
+/* line 4, ../scss/user.scss */
 h2 {
   margin: 0 0 0 0;
 }
 
+/* line 8, ../scss/user.scss */
 p.header {
   margin-top: 10px;
 }
