@@ -184,6 +184,8 @@ class UserController extends BaseController {
     exit;
   }
 
+//  public function loginByMail
+
   public function getCallback()
   {
     $token = Input::get('oauth_token');

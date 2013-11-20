@@ -69,6 +69,7 @@
     {{ HTML::script('http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js') }}
     {{ HTML::script('js/app.min.js') }}
     {{ HTML::script('bower_components/angular/angular.js') }}
+    {{ HTML::script('js/notice.js') }}
     
     @show
   </body>

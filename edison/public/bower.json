@@ -22,6 +22,7 @@
   "dependencies": {
     "jquery": "1",
     "jquery-pjax": "~1.7.3",
-    "angular": "~1.0.8"
+    "angular": "*",
+    "parsleyjs": "~1.1.18"
   }
 }
